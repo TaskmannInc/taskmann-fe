@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "topic": "Varish",
+        "image": "/others/varish.jpeg"
+    },
+    {
+        "id": 2,
+        "topic": "James",
+        "image": "/others/james.jpeg"
+    },
+    {
+        "id": 3,
+        "topic": "Shaun Ni",
+        "image": "/others/shaun-profile pic.jpg"
+    }
+]

@@ -1,0 +1,837 @@
+.landingContainer {
+  margin: 1rem 0;
+  width: 100vw;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.2rem;
+}
+
+/* Stationary carousel*/
+.carousel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 1rem;
+  align-items: center;
+  height: 35rem;
+  background-image: url("/assets/backgrounds/home-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--dark-overlay);
+  background-blend-mode: overlay;
+}
+
+.carousel h2 {
+  text-shadow: 1px solid var(--black);
+  color: rgb(237, 237, 237);
+  font-size: 3rem;
+  font-style: italic;
+  font-family: "Amita";
+  text-shadow: var(--text-shadow-2);
+}
+
+.carousel p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.2rem;
+  margin: 0;
+  padding: 2rem;
+  font-size: var(--text-heading-1);
+  /* background: #c5c5c5ca; */
+  color: var(--white);
+  border-radius: var(--radius-sm);
+}
+
+.carousel span i {
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: "Cedarville Cursive";
+}
+
+.carousel .gotoServices {
+  margin: 1rem 0 0 0;
+  border: 1px solid var(--white);
+  border-radius: var(--radius-min);
+  padding: 0.8rem 3rem;
+  color: var(--black);
+  font-weight: 700;
+  color: var(--white);
+}
+
+.carousel .gotoServices:hover {
+  background-color: var(--green-darker);
+  border: none;
+}
+
+/*Testimonials*/
+.landingTestimonials {
+  padding: 3rem 0.5rem;
+  width: 98%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 2.5rem;
+  border-top: 1pt solid var(--green-darker);
+  border-bottom: 1pt solid var(--green-darker);
+}
+
+.landingTestimonials h4 {
+  font-weight: 600;
+}
+
+.testimonialColumns {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.testimonialDescription {
+  color: var(--white);
+  background-color: var(--green-darker);
+  padding: 1.5rem 2rem;
+  width: 50%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: var(--radius-md);
+  row-gap: 2.5rem;
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.testimonialDescription p {
+  margin: 0;
+  text-align: left;
+}
+
+.testimonialSlider {
+  background-color: var();
+  width: 40%;
+  padding-right: 3rem;
+  height: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  border-left: 1px solid var(--dark);
+}
+
+.testimonialsLink {
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  border: 1pt solid var(--green-darker);
+}
+
+.testimonialsLink:hover {
+  background-color: var(--green-darker);
+  color: var(--white);
+  border-radius: var(--radius-md);
+}
+
+.testimonialsLink span {
+  font-size: var(--text-heading-3);
+}
+
+/*Featured tasks*/
+.featuredTasksContainer {
+  margin: 2rem 0 0 0;
+  width: 98%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: center;
+  row-gap: 1rem;
+}
+
+.featuredTasksContainer .sectionTitle {
+  width: 99%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.sectionTitle h2 {
+  font-weight: 700;
+}
+
+.sectionTitle .moreTasklink {
+  padding: 0.65rem 1.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-md);
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+.moreTasklink:hover {
+  filter: brightness(1.1);
+  background-color: var(--green-darker);
+}
+
+.tasksContainer {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 3rem;
+  row-gap: 2.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem 0 5rem 0;
+  border-bottom: 1px solid var(--gray-2);
+}
+
+.taskCard,
+.taskCardLoading {
+  padding: 0;
+  height: 18rem;
+  width: 22%;
+  background: var(--white);
+  box-shadow: var(--cards-shadow);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskCardLoading {
+  filter: blur(25px);
+}
+
+.taskCard .ImageContainer,
+.taskCardLoading .ImageContainer {
+  background-color: var(--black);
+  width: 100%;
+  height: 70%;
+  object-fit: fill;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.taskCard .featuredImg,
+.taskCardLoading .featuredImg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.taskCard .ImageContainer .fallBackImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.taskCard .taskDescription,
+.taskCardLoading .taskDescription {
+  width: 99%;
+  height: 30%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.5rem;
+}
+
+.taskDescription .serviceTitle {
+  text-transform: capitalize !important;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-md);
+  background-color: var(--green-dark);
+  color: var(--white);
+  font-size: var(--text-normal);
+}
+
+.taskDescription span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-md);
+}
+
+.moreTasks {
+  width: 100%;
+  text-align: right;
+}
+
+/*about summary*/
+.summaryAbout {
+  background: var(--gray-2);
+  width: 100%;
+  padding: 0.5rem;
+  height: 30rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 2rem;
+}
+.taskMannGeneral,
+.secureService,
+.expertService {
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  box-shadow: var(--cards-shadow);
+  row-gap: 3rem;
+  height: 80%;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.secureService {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.taskMannGeneral p,
+.secureService p,
+.expertService p {
+  width: 70%;
+  line-height: 1.5rem;
+  margin: 0;
+  font-size: var(--text-md);
+}
+
+.careerAds {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30rem;
+}
+
+.leftSection,
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 2rem;
+  align-items: flex-start;
+  height: 100%;
+  width: 50%;
+  padding: 1.5rem 0.75rem;
+}
+
+.leftSection {
+  background-color: var(--black);
+  color: var(--white);
+}
+.leftSection h2 {
+  font-size: var(--text-heading-3);
+}
+.leftSection h3 {
+  font-size: var(--text-heading-2);
+  margin-left: 3rem;
+}
+
+.leftSection h5 {
+  font-size: var(--text-heading-1);
+  margin-left: 5rem;
+}
+
+.leftSection .taskmannBenefits {
+  border-top: 1px solid var(--dark);
+  padding-top: 3rem;
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 2rem 0 0 0;
+  row-gap: 2rem;
+}
+
+.leftSection .taskmannBenefits span {
+  width: 95%;
+  display: flex;
+  justify-content: flex-start;
+  color: var(--white);
+}
+.careerAds .rightSection {
+  background: url("../../public/others/pexelscottonbrostudio.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.careerAds .rightSection .taskerAuthLink {
+  padding: 0.75rem 1.2rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-normal);
+  border: 1px solid var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  font-weight: 600;
+}
+
+.careerAds .rightSection .taskerAuthLink:hover {
+  border: none;
+  background-color: var(--white);
+  color: var(--black);
+  font-weight: 700;
+}
+.container h2 {
+  text-align: center;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons button {
+  font-size: 16px;
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  width: auto;
+}
+
+.buttons button:hover {
+  background-color: #0062cc;
+}
+.column {
+  flex: column;
+  padding: 20px;
+}
+
+/* Product card */
+.card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  height: 100%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card h3 {
+  margin-top: 20px;
+}
+
+.card p {
+  margin: 10px 0;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  background-color: forestgreen;
+  color: #fff;
+  justify-content: center;
+  align-self: center;
+  padding: 40px;
+  margin: 0 15%;
+  border-radius: 20px;
+}
+.col {
+  padding: 20px 20px;
+  width: 50%;
+}
+.col h2 {
+  font-size: 28px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+.col h3 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 200;
+  padding: 10px;
+}
+.col ul {
+  font-size: 18px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0 40px;
+  line-height: 40px;
+}
+
+/*Mobile responsive styles*/
+@media (min-width: 250px) and (max-width: 720px) {
+  .landingContainer h2 {
+    font-size: var(--text-heading-1);
+  }
+  /* Stationary carousel*/
+  .carousel {
+    width: 100%;
+    background-color: #141414d5;
+  }
+
+  .carousel h2 {
+    text-align: center;
+    font-size: var(--text-heading-5);
+  }
+
+  .carousel p {
+    width: 95%;
+    padding: 0;
+    font-size: var(--text-md);
+    text-align: center;
+    word-spacing: 0.15rem;
+  }
+
+  .carousel span i {
+    font-size: var(--text-heading-2);
+    margin: 0 0.5rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: var(--radius-md);
+    background-color: var(--green-darker);
+  }
+
+  .landingTestimonials h4 {
+    font-weight: 600;
+  }
+
+  .testimonialColumns {
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .testimonialDescription {
+    width: 100%;
+  }
+
+  .testimonialDescription p {
+    margin: 0;
+    text-align: left;
+  }
+
+  .testimonialSlider {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    border-left: none;
+    padding: 0;
+  }
+
+  .testimonialsLink {
+    align-self: center;
+  }
+
+  /*Featured tasks*/
+  .featuredTasksContainer {
+    height: max-content;
+  }
+  .featuredTasksContainer .sectionTitle {
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+
+  .sectionTitle h2 {
+    font-weight: 700;
+  }
+
+  .sectionTitle .moreTasklink {
+    font-size: var(--text-md);
+    padding: 0.45rem 1rem;
+  }
+
+  .tasksContainer {
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 0.75rem;
+    row-gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 0.75rem;
+  }
+
+  .taskCard,
+  .taskCardLoading {
+    height: 15rem;
+    width: 100%;
+  }
+
+  .taskCard .taskDescription,
+  .taskCardLoading .taskDescription {
+    padding: 0.25rem;
+  }
+
+  .taskDescription .serviceTitle {
+    padding: 0.25rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+
+  .taskDescription span {
+    font-size: var(--text-sm);
+  }
+
+  .moreTasks {
+    width: 100%;
+    text-align: right;
+  }
+
+  /*about summary*/
+  .summaryAbout {
+    padding: 0.5rem 0.25rem;
+    height: max-content;
+    flex-direction: column;
+    column-gap: 0;
+    row-gap: 2rem;
+  }
+
+  .taskMannGeneral,
+  .secureService,
+  .expertService {
+    width: 100%;
+    height: max-content;
+  }
+
+  .secureService {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .careerAds {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: max-content;
+  }
+
+  .leftSection,
+  .rightSection {
+    width: 100%;
+  }
+
+  .leftSection h3,
+  .leftSection h5 {
+    font-size: var(--text-heading-2);
+    margin-left: 0;
+  }
+
+  .rightSection {
+    align-items: center;
+  }
+
+  .careerAds .rightSection .taskerAuthLink {
+    background-color: var(--white);
+    align-items: center;
+  }
+}
+
+/*Tablet responsive styles*/
+@media (min-width: 724px) and (max-width: 1024px) {
+  .landingContainer h2 {
+    font-size: var(--text-heading-1);
+  }
+  /* Stationary carousel*/
+  .carousel {
+    width: 100%;
+    background-color: #141414d5;
+  }
+
+  .carousel h2 {
+    text-align: center;
+    font-size: var(--text-heading-5);
+  }
+
+  .carousel p {
+    width: 95%;
+    padding: 0;
+    font-size: var(--text-md);
+    text-align: center;
+    word-spacing: 0.15rem;
+  }
+
+  .carousel span i {
+    font-size: var(--text-heading-2);
+    margin: 0 0.5rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: var(--radius-md);
+    background-color: var(--green-darker);
+  }
+
+  .landingTestimonials h4 {
+    font-weight: 600;
+  }
+
+  .testimonialColumns {
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .testimonialDescription {
+    width: 100%;
+  }
+
+  .testimonialDescription p {
+    margin: 0;
+    text-align: left;
+  }
+
+  .testimonialSlider {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    border-left: none;
+    padding: 0;
+  }
+
+  .testimonialsLink {
+    align-self: center;
+  }
+
+  /*Featured tasks*/
+  .featuredTasksContainer {
+    height: max-content;
+  }
+  .featuredTasksContainer .sectionTitle {
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+
+  .sectionTitle h2 {
+    font-weight: 700;
+  }
+
+  .sectionTitle .moreTasklink {
+    font-size: var(--text-md);
+    padding: 0.45rem 1rem;
+  }
+
+  .tasksContainer {
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 0.75rem;
+    row-gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 0.75rem;
+  }
+
+  .taskCard,
+  .taskCardLoading {
+    height: 15rem;
+    width: 100%;
+  }
+
+  .taskCard .taskDescription,
+  .taskCardLoading .taskDescription {
+    padding: 0.25rem;
+  }
+
+  .taskDescription .serviceTitle {
+    padding: 0.25rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+
+  .taskDescription span {
+    font-size: var(--text-sm);
+  }
+
+  .moreTasks {
+    width: 100%;
+    text-align: right;
+  }
+
+  /*about summary*/
+  .summaryAbout {
+    padding: 0.5rem 0.25rem;
+    height: max-content;
+    flex-direction: column;
+    column-gap: 0;
+    row-gap: 2rem;
+  }
+
+  .taskMannGeneral,
+  .secureService,
+  .expertService {
+    width: 100%;
+    height: max-content;
+  }
+
+  .secureService {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .careerAds {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: max-content;
+  }
+
+  .leftSection,
+  .rightSection {
+    width: 100%;
+  }
+
+  .leftSection h3,
+  .leftSection h5 {
+    font-size: var(--text-heading-2);
+    margin-left: 0;
+  }
+
+  .rightSection {
+    align-items: center;
+  }
+
+  .careerAds .rightSection .taskerAuthLink {
+    background-color: var(--white);
+    align-items: center;
+  }
+}

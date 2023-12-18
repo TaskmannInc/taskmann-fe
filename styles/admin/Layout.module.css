@@ -1,0 +1,115 @@
+.adminWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: var(--white);
+  background-image: url("../../public/assets/backgrounds/adminBg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: var(--global-font);
+}
+
+.header {
+  width: 100%;
+  height: max-content;
+  padding: 0.15rem 0.5rem;
+  position: fixed;
+  top: 0;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background-color: var(--white);
+  color: var(--black);
+  border-bottom: 1px solid var(--gray-3);
+  box-shadow: var(--tamed-shadows);
+}
+
+.logoWrapper {
+  text-align: left;
+}
+
+.ProfileOptions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+  width: 100%;
+  column-gap: 1rem;
+}
+
+.profileImage {
+  border-radius: 99px;
+  border: 1px solid var(--dark);
+  width: 3rem;
+  height: 3rem;
+}
+
+.adminLayout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 6% 92%;
+  justify-items: flex-start;
+  align-items: center;
+}
+
+.sideNavigation {
+  width: 100%;
+  height: 100vh;
+  color: var(--white);
+  padding: 1rem 0.8rem;
+  background: var(--green-darker);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.5rem;
+}
+
+.adminLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.1rem;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.adminnavIcon {
+  margin: 0;
+  width: max-content;
+  padding: 0.3rem 0.5rem;
+}
+
+.adminnavIconActive {
+  margin: 0;
+  width: max-content;
+  padding: 0.3rem 0.5rem;
+  border: 2pt solid var(--white);
+  border-radius: var(--radius-circular);
+  border-width: thin;
+}
+
+.footer {
+  font-weight: 600;
+  font-size: 1rem;
+
+  width: 100%;
+  height: max-content;
+  padding: 0.5rem 0rem;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  background: var(--linear-corporate-dark);
+}
+
+.viewButton,
+.editButton,
+.deleteButton {
+}

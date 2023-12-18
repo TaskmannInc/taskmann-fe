@@ -1,0 +1,103 @@
+/*policies page banner*/
+.policiesBanner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30rem;
+  background: url("/assets/backgrounds/policies-banner.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #434343ae;
+  background-blend-mode: overlay;
+}
+
+.policiesBanner .policiesHeading {
+  font-size: 3rem;
+  color: var(--white);
+  text-shadow: var(--text-shadow-2);
+}
+
+.policiesBanner .tagLine {
+  color: var(--white);
+  text-shadow: var(--text-shadow-1);
+  font-size: var(--text-heading-2);
+  width: 60%;
+  text-align: center;
+}
+
+/*Site policies*/
+
+.policiesSection {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2.5rem 1.5rem;
+  row-gap: 2rem;
+}
+
+.policiesSection h3 {
+  font-size: var(--text-heading-1);
+  color: var(--black);
+}
+.policiesSection h3 i {
+  color: var(--green-dark);
+  font-size: var(--text-heading-2);
+}
+
+.policiesAccordionsContainer {
+  width: 95%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: center;
+  background-color: var(--gray-2);
+  border-radius: var(--radius-min);
+}
+
+.accordianItem {
+  height: max-content;
+  border-radius: var(--radius-lg);
+  border-bottom: 1px solid var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.65rem 0.8rem;
+}
+
+.accordianItem:hover {
+  transform: scale(1.01);
+}
+
+.accordianItem .heading {
+  font-size: var(--text-lg);
+}
+.accordianItem .icon {
+  color: var(--dark);
+}
+
+.accordianContent {
+  /* letter-spacing: 0.5rem; */
+  word-spacing: 0.4rem;
+  line-height: 1.5rem;
+  font-size: var(--text-md);
+  background-color: var(--white);
+  color: #0e0e0e;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+}

@@ -1,0 +1,414 @@
+/*about banner*/
+.aboutBanner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30rem;
+  background: url("/assets/backgrounds/revolutionising-lifestyle.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--dark-overlay);
+  background-blend-mode: overlay;
+  text-align: center;
+}
+
+.aboutBanner .aboutHeading {
+  font-size: 3rem;
+  color: var(--white);
+  text-shadow: var(--text-shadow-2);
+  text-align: center;
+}
+
+.aboutBanner .tagLine {
+  color: var(--white);
+  text-shadow: var(--text-shadow-1);
+  font-size: var(--text-heading-2);
+  width: 60%;
+  text-align: center;
+}
+
+/*about content*/
+.aboutContent {
+  height: max-content;
+  padding: 2rem 0 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Vision */
+.aboutContent .vision {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 1.2rem;
+  padding: 0.5rem 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--gray-2);
+}
+
+.vision .mainVisionText {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 1.2rem;
+}
+
+.vision .mainVisionText p {
+  margin: 0;
+  width: 60%;
+  letter-spacing: 0.05rem;
+  line-height: 1.8rem;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-min);
+  background-color: var(--green-darker);
+  color: var(--white);
+}
+
+.vision .mainVisionText .visionAnimation {
+  color: var(--black);
+  font-size: 3rem;
+  padding: 2rem 2rem;
+  margin-left: 5rem;
+  text-align: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  font-family: var(--cursvie-4);
+}
+
+/* Founders message */
+.foundersLetter {
+  width: 100%;
+  height: 25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--linear-corporate-dark);
+  color: var(--white);
+}
+
+.foundersLetter .leftSection {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  row-gap: 3rem;
+  border-right: 1px solid var(--dark);
+}
+
+.foundersLetter .leftSection h3 {
+  font-size: 1.8rem;
+}
+.foundersLetter .leftSection p {
+  width: 70%;
+  letter-spacing: 0.15rem;
+  line-height: 1.5rem;
+}
+.foundersLetter .leftSection .founderBlogLink {
+  /* font-size: 1.8rem; */
+  width: max-content;
+  margin-left: 0.2rem;
+  border: 1px solid var(--white);
+  padding: 0.65rem 1.5rem;
+}
+
+.foundersLetter .leftSection .founderBlogLink:hover {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.foundersLetter .rightSection {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.foundersLetter .companyLogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/*service reasons*/
+.braggingRights {
+  width: 100%;
+  height: max-content;
+  padding: 0.5rem 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.5rem;
+}
+
+.braggingRights .braggingContainer {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  align-items: center;
+  border-bottom: 1px solid var(--gray);
+  padding: 2.5rem 0;
+}
+
+.braggingRights .braggingContainer .leftSection,
+.braggingRights .braggingContainer .rightSection {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+}
+
+.braggingRights .braggingContainer .leftSection h2,
+.braggingRights .braggingContainer .rightSection h2 {
+  font-size: 1.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--gray-2);
+  margin-bottom: 0.5rem;
+}
+
+.braggingRights .braggingContainer .leftSection p,
+.braggingRights .braggingContainer .rightSection p {
+  font-size: var(--text-lg);
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.illustrationImage {
+  object-fit: fill;
+}
+
+/* Company culture, team, etc */
+.companyInfo,
+.teamInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--gray);
+  row-gap: 1.2rem;
+  padding: 2.5rem 1.5rem;
+  height: max-content;
+}
+
+.teamInfo {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.companyInfo .infoItems,
+.teamInfo .teamMembers {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  column-gap: 1%;
+  justify-items: center;
+  align-items: center;
+  height: max-content;
+}
+
+.companyInfo .infoItems .infoItem,
+.teamInfo .teamMembers .teamMember {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 1.5rem;
+}
+.infoItem .infoImage {
+  object-fit: fill;
+  border-radius: var(--radius-min);
+}
+.teamMember .memberImage {
+  object-fit: cover;
+  border-radius: var(--radius-circular);
+}
+
+.companyInfo .infoItems .infoItem p {
+  width: 80%;
+  font-size: var(--text-md);
+  line-height: 1.2rem;
+}
+
+.teamInfo .teamMembers .teamMember h4 {
+  width: 80%;
+  font-size: var(--text-md);
+  line-height: 1.2rem;
+  text-align: center;
+}
+
+@media (min-width: 250px) and (max-width: 720px) {
+  .aboutBanner .aboutHeading {
+    font-size: var(--text-heading-2);
+    text-shadow: var(--text-shadow-1);
+  }
+
+  .aboutBanner .tagLine {
+    font-size: var(--text-nm);
+    width: 80%;
+  }
+
+  /*about content*/
+
+  .vision .mainVisionText {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1.2rem;
+  }
+
+  .vision .mainVisionText .visionArrow {
+    display: none;
+  }
+
+  .vision .mainVisionText p {
+    width: 97%;
+    padding: 2rem 1.5rem;
+  }
+
+  .vision .visionAnimation {
+    margin-left: 0;
+    padding: 0 0;
+    font-size: 3rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Founders message */
+  .foundersLetter {
+    width: 100%;
+    height: max-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .foundersLetter .leftSection {
+    width: 95%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .foundersLetter .rightSection {
+    display: none;
+  }
+
+  /*service reasons*/
+  .braggingRights {
+    width: 100%;
+    height: max-content;
+    padding: 0.5rem 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1.5rem;
+  }
+
+  .braggingRights .braggingContainer {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0.5rem;
+  }
+
+  .braggingRights .braggingContainer .leftSection,
+  .braggingRights .braggingContainer .rightSection {
+    width: 100%;
+  }
+
+  .illustrationImage {
+    object-fit: fill;
+  }
+
+  /* Company culture, team, etc */
+  .companyInfo,
+  .teamInfo {
+    justify-items: center;
+    align-items: center;
+  }
+
+  .companyInfo .infoItems,
+  .teamInfo .teamMembers {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2rem;
+  }
+
+  .companyInfo .infoItems .infoItem,
+  .teamInfo .teamMembers .teamMember {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 0.5rem;
+  }
+  .infoItem .infoImage {
+    object-fit: fill;
+    border-radius: var(--radius-min);
+  }
+  .teamMember .memberImage {
+    object-fit: cover;
+    border-radius: var(--radius-circular);
+  }
+
+  .companyInfo .infoItems .infoItem p {
+    width: 99%;
+    font-size: var(--text-md);
+    line-height: 1.2rem;
+  }
+
+  .teamInfo .teamMembers .teamMember h4 {
+    width: 100%;
+    font-size: var(--text-md);
+    line-height: 1.2rem;
+    text-align: center;
+  }
+}
+
+/*Tablet responsive styles*/
+@media (min-width: 724px) and (max-width: 1024px) {
+  .aboutBanner .aboutHeading {
+    font-size: 2rem;
+  }
+  .aboutBanner .tagLine {
+    font-size: var(--text-heading-1);
+  }
+  /* Company culture, team, etc */
+
+  .teamInfo {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .companyInfo .infoItems,
+  .teamInfo .teamMembers {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1.2rem;
+  }
+}

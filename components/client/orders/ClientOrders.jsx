@@ -1,0 +1,563 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { LoaderIcon } from "react-hot-toast";
+import { BsFillArrowLeftCircleFill, BsThreeDots } from "react-icons/bs";
+import { FaArrowRight, FaBullseye, FaLongArrowAltRight } from "react-icons/fa";
+import { GrFormClose } from "react-icons/gr";
+import { MdOutlinePayments } from "react-icons/md";
+import styles from "../../../styles/client/Orders.module.css";
+import {
+  ClientDownTime,
+  NoOrderData,
+} from "../../ui-fragments/dataInteractions";
+import { primaryCurrency } from "../../utils/constants/constants";
+import {
+  GetLoggedInUserOrders,
+  MakePaymentHook,
+} from "../../utils/hooks/orderHook";
+
+import Cookies from "universal-cookie";
+import { useEffect } from "react";
+import { AiFillCodeSandboxCircle } from "react-icons/ai";
+export default function SessionOrders() {
+  //initializations
+  const cookie = new Cookies();
+  const router = useRouter();
+  const sessionAuth = cookie.get("TM_AC_TK");
+
+  //redirect to login on unauthorization.
+  useEffect(() => {
+    if (!sessionAuth) {
+      router.push("/auth/login");
+    }
+  }, []);
+
+  //component states
+  const [paymentURL, setPaymentURL] = useState("");
+  const [orderInfo, setOrderInfo] = useState({});
+  const [orderItems, setOrderItem] = useState([]);
+
+  //get logged in user session order(s) info
+  const onGetOrderSuccess = (data) => {
+    setOrderInfo(data?.data?.data);
+    setOrderItem(data?.data?.data);
+    console.info("orders", data?.data?.data);
+  };
+
+  const onGetOrderError = (error) => {
+    console.error(error);
+  };
+
+  const {
+    isSuccess: getOrderSuccess,
+    isError: getOrderError,
+    isLoading: orderIsLoading,
+    refetch,
+  } = GetLoggedInUserOrders(onGetOrderSuccess, onGetOrderError);
+
+  //make payment for selected order item request
+  const triggerOrderItemsPayment = (data) => {
+    makePayment(data);
+  };
+
+  const onPaymentTriggerSuccess = (data) => {
+    setPaymentURL(data?.data?.data?.payment_details?.url);
+  };
+
+  const onPaymentTriggerError = (error) => {
+    console.error("payment error", error);
+  };
+
+  const {
+    mutate: makePayment,
+    error: orderProcessingError,
+    isLoading: orderPaymentLoading,
+    isError: orderPaymentIsError,
+    isSuccess: onTriggerSuccess,
+  } = MakePaymentHook(onPaymentTriggerSuccess, onPaymentTriggerError);
+
+  // if (onTriggerSuccess) {
+  //   setPaymentURL;
+  //   router?.push(paymentURL, "_blank");
+  // }
+  return (
+    <div className={styles.orderContainer}>
+      <div className={styles.orderHeader}>
+        <h1>My orders</h1>
+        {orderPaymentLoading ? (
+          <span className="processing-order">
+            Please wait while we process your order. You may be redirected&nbsp;
+            &nbsp; &nbsp;
+            <LoaderIcon />
+          </span>
+        ) : orderPaymentIsError ? (
+          <span className="processing-order">
+            An error occured while processing your order. Error:{" "}
+            {orderProcessingError?.error ??
+              orderProcessingError?.error?.message}
+            <LoaderIcon />
+          </span>
+        ) : onTriggerSuccess ? (
+          <span className="processing-order">
+            Your order processing was successful. You will be redirected...
+            <LoaderIcon />
+          </span>
+        ) : null}
+        <Link href={"/services/all-services"} className={styles.backLink}>
+          <BsFillArrowLeftCircleFill size={20} />
+          &nbsp;&nbsp; Back to services
+        </Link>
+      </div>
+      {orderIsLoading ? (
+        <>
+          <div className={`${styles.orderBody} blurred`}>
+            <div className={styles.orderItemsHeader}>
+              <span>Service</span>
+              <span>Package pricing</span>
+              <span>Total packages</span>
+              <span></span>
+            </div>
+            {[...Array(2)]?.map((_, i) => {
+              return (
+                <div className={styles.orderItemsBody} key={i + 1}>
+                  <div className={styles.serviceDetails}>
+                    <FaBullseye size={10} />
+                    <MdOutlinePayments
+                      size={25}
+                      style={{ color: `var(--green-primary)` }}
+                    />
+                    <div className={styles.serviceDetSub}>
+                      <span
+                        style={{
+                          fontSize: `var(--text-lg)`,
+                          fontWeight: "600",
+                        }}
+                      >
+                        xxxxx ***** xxxx
+                      </span>
+                      <small style={{ color: `var(--dark-2)` }}>
+                        xxxxx ***** xxxx
+                      </small>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "flex-start",
+                      alignItems: "flex-start",
+                      rowGap: "0.45rem",
+                    }}
+                  >
+                    {[...Array(2)]?.map((_, index) => (
+                      <span
+                        className={styles.packagePricing}
+                        style={{ fontWeight: "semi-bold" }}
+                        key={index + 1}
+                      >
+                        <span> xxxxx ***** xxxx</span>-
+                        <span>xxxxx ***** xxxx</span>
+                      </span>
+                    ))}
+                  </div>
+                  <div> xxxxx ***** xxxx</div>
+
+                  <GrFormClose size={25} />
+                </div>
+              );
+            })}
+          </div>
+          <div
+            className={`${styles.orderBodyMobileTab} blurred`}
+            style={{
+              height: "5rem",
+              width: "98%",
+              backgroundColor: "var(--green-primary)",
+            }}
+          >
+            Loading order items ...
+          </div>
+        </>
+      ) : getOrderSuccess && orderItems?.length > 0 ? (
+        <>
+          <div className={styles.orderBody}>
+            <div className={styles.orderItemsHeader}>
+              <span>Order ID</span>
+              <span>Order Items</span>
+              <span>Total items</span>
+              <span>Cost</span>
+              <span>Codes</span>
+              <span>Task status</span>
+              <span style={{ textAlign: "center" }} title="Payment actions">
+                <BsThreeDots size={25} />
+              </span>
+            </div>
+            <>
+              {orderItems?.map((order, i) => {
+                return (
+                  <div className={styles.orderItemsBody} key={i + 1}>
+                    <div>
+                      <span
+                        style={{
+                          fontWeight: 600,
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          alignItems: "center",
+                          fontSize: "0.75rem",
+                        }}
+                      >
+                        <AiFillCodeSandboxCircle size={20} />
+                        ****-{order?._id?.split("-")[4]}
+                      </span>
+                    </div>
+                    <div className={styles.orderDetails}>
+                      {order?.cart?.line_items?.map((orderItem, index) => (
+                        <span
+                          className={styles.orderPackage}
+                          style={{ fontWeight: "semi-bold" }}
+                          key={index + 1}
+                        >
+                          <span>
+                            {orderItem?.service_name?.length > 100
+                              ? orderItem?.service_name?.slice(0, 99)
+                              : orderItem?.service_name}
+                          </span>{" "}
+                          <FaLongArrowAltRight size={15} />
+                          <small
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              rowGap: "0.5rem",
+                            }}
+                          >
+                            Service date:&nbsp;
+                            <b>
+                              {new Date(
+                                orderItem?.service_date
+                              )?.toLocaleDateString()}
+                            </b>
+                            <b>{orderItem?.service_date?.split("T")[1]}</b>
+                          </small>
+                        </span>
+                      ))}
+                    </div>
+                    <div>{order?.cart?.line_items?.length}</div>
+                    <div>
+                      {primaryCurrency} &nbsp;
+                      {order?.cart?.total_price}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        rowGap: "0.25rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <small
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          alignItems: "center",
+                        }}
+                      >
+                        progress&nbsp;
+                        <FaArrowRight size={15} /> &nbsp;
+                        {order?.inprogress_code ?? "none"}
+                      </small>
+                      <small
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          alignItems: "center",
+                        }}
+                      >
+                        completion&nbsp;
+                        <FaArrowRight size={15} /> &nbsp;
+                        {order?.completed_code ?? "none"}
+                      </small>
+                      <small
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-start",
+                          alignItems: "center",
+                        }}
+                      >
+                        cancellation&nbsp;
+                        <FaArrowRight size={15} /> &nbsp;
+                        {order?.cancellation_code ?? "none"}
+                      </small>
+                    </div>
+                    <div>
+                      <span
+                        style={{
+                          width: "70%",
+                          textAlig: "center",
+                          borderRadius: `var(--radius-min)`,
+                          padding: "0.35rem 0.5rem",
+                          color: `${
+                            order?.status == "PENDING"
+                              ? "var(--dark-2)"
+                              : order?.status == "PAID"
+                              ? "var(--success)"
+                              : "var(--danger)"
+                          }`,
+                          background: `var(--white)`,
+                          boxShadow: `var(--cards-shadow-2)`,
+                        }}
+                      >
+                        {order?.status ?? "Unavailable"}
+                      </span>
+                    </div>
+                    <div style={{ textAlign: "center" }}>
+                      {order?.payment?.status == "PAID" ? (
+                        <span
+                          style={{
+                            width: "70%",
+                            textAlig: "center",
+                            borderRadius: `var(--radius-min)`,
+                            padding: "0.35rem 0.5rem",
+                            color: `var(--success)`,
+                            background: `var(--white)`,
+                            boxShadow: `var(--cards-shadow-2)`,
+                          }}
+                        >
+                          PAID
+                        </span>
+                      ) : order?.payment?.status == "CANCELLED" ? (
+                        <span
+                          style={{
+                            width: "70%",
+                            textAlig: "center",
+                            borderRadius: `var(--radius-min)`,
+                            padding: "0.35rem 0.5rem",
+                            color: `var(--danger)`,
+                            background: `var(--white)`,
+                            boxShadow: `var(--cards-shadow-2)`,
+                          }}
+                        >
+                          CANCELLED
+                        </span>
+                      ) : (
+                        <Link
+                          style={{
+                            width: "70%",
+                            fontWeight: 700,
+                            height: "max-content",
+                            padding: "0.75rem 1.5rem",
+                            borderRadius: "var(--radius-min)",
+                            backgroundColor: `var(--green-primary)`,
+                            textAlign: "center",
+                            color: `var(--white)`,
+                          }}
+                          disabled={orderPaymentLoading}
+                          type="button"
+                          className={styles.paymentBtn}
+                          title="Pay for order"
+                          target="_blank"
+                          href={`${order?.payment?.payment_details?.url}`}
+                          // onClick={() => triggerOrderItemsPayment(order?._id)}
+                        >
+                          PAY
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          </div>
+          <div className={styles.orderBodyMobileTab}>
+            <>
+              {orderItems?.map((order, i) => {
+                return (
+                  <div className={styles.orderItem} key={i + 1}>
+                    <span className={styles.orderId}>
+                      <AiFillCodeSandboxCircle size={25} />
+                      Order ****-{order?._id?.split("-")[4]}
+                    </span>
+                    <div className={styles.orderCartItems}>
+                      {order?.cart?.line_items?.map((orderItem, index) => (
+                        <div
+                          className={styles.orderPackage}
+                          style={{ fontWeight: "semi-bold" }}
+                          key={index + 1}
+                        >
+                          <span style={{ float: "right", width: "100%" }}>
+                            {orderItem?.service_name?.length > 30
+                              ? orderItem?.service_name?.slice(0, 30)
+                              : orderItem?.service_name}
+                          </span>
+                          <small className={styles.serviceDate}>
+                            <span>Service date:</span>
+
+                            <b>
+                              {new Date(
+                                orderItem?.service_date
+                              )?.toLocaleDateString()}
+                              &nbsp;at&nbsp;
+                              {new Date(
+                                orderItem?.service_date
+                              )?.toLocaleTimeString()}
+                            </b>
+                          </small>
+                        </div>
+                      ))}
+                    </div>
+                    <hr></hr>
+                    <div className={styles.orderPricing}>
+                      <span>Order amount:</span>
+                      <span>
+                        {primaryCurrency} &nbsp;
+                        {order?.cart?.total_price}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
+                        alignItems: "flex-start",
+                        rowGap: "0.25rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <small
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span>progress code:</span>
+                        <FaArrowRight size={15} />
+                        {order?.inprogress_code ?? "none"}
+                      </small>
+                      <small
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span>completion code:</span>
+                        <FaArrowRight size={15} />
+                        {order?.completed_code ?? "none"}
+                      </small>
+                      <small
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span>cancellation code:</span>
+                        <FaArrowRight size={15} />
+                        {order?.cancellation_code ?? "none"}
+                      </small>
+                    </div>
+                    <span
+                      style={{
+                        width: "100%",
+                        textAlig: "center",
+                        borderRadius: `var(--radius-min)`,
+                        padding: "0.35rem 0.5rem",
+                        color: `${
+                          order?.status == "PENDING"
+                            ? "var(--dark-2)"
+                            : order?.status == "PAID"
+                            ? "var(--success)"
+                            : "var(--danger)"
+                        }`,
+                        background: `var(--white)`,
+                        boxShadow: `var(--cards-shadow-1)`,
+                      }}
+                    >
+                      <span>Task status:</span>{" "}
+                      <span>{order?.status ?? "Unavailable"}</span>
+                    </span>
+                    {order?.payment?.status == "PAID" ? (
+                      <span
+                        style={{
+                          width: "100%",
+                          textAlig: "center",
+                          borderRadius: `var(--radius-min)`,
+                          padding: "0.35rem 0.5rem",
+                          color: `var(--success)`,
+                          background: `var(--white)`,
+                          boxShadow: `var(--cards-shadow-2)`,
+                        }}
+                      >
+                        PAID
+                      </span>
+                    ) : order?.payment?.status == "CANCELLED" ? (
+                      <span
+                        style={{
+                          width: "100%",
+                          textAlig: "center",
+                          borderRadius: `var(--radius-min)`,
+                          padding: "0.35rem 0.5rem",
+                          color: `var(--danger)`,
+                          background: `var(--white)`,
+                          boxShadow: `var(--cards-shadow-2)`,
+                        }}
+                      >
+                        CANCELLED
+                      </span>
+                    ) : (
+                      <Link
+                        style={{
+                          width: "100%",
+                          fontWeight: 700,
+                          height: "max-content",
+                          padding: "0.75rem 1.5rem",
+                          borderRadius: "var(--radius-min)",
+                          backgroundColor: `var(--green-primary)`,
+                          textAlign: "center",
+                          color: `var(--white)`,
+                        }}
+                        disabled={orderPaymentLoading}
+                        type="button"
+                        className={styles.paymentBtn}
+                        title="Pay for order"
+                        target="_blank"
+                        href={`${order?.payment?.payment_details?.url}`}
+                        // onClick={() => triggerOrderItemsPayment(order?._id)}
+                      >
+                        PAY
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
+            </>
+          </div>
+        </>
+      ) : (getOrderSuccess && orderItems?.length == 0) ||
+        orderItems?.length == "undefined" ? (
+        <NoOrderData
+          notification={
+            "There are no order items here. Checkout from your cart to see your orders here..."
+          }
+        />
+      ) : getOrderError ? (
+        <>
+          <ClientDownTime
+            notification={
+              "An error occured while getting your order items. Please refresh your page or try again later..."
+            }
+          />
+        </>
+      ) : (
+        <NoOrderData
+          notification={
+            "There are no order items here. Checkout from your cart to see your orders here..."
+          }
+        />
+      )}
+    </div>
+  );
+}

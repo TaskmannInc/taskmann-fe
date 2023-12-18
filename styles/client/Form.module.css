@@ -1,0 +1,47 @@
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: max-content;
+  row-gap: 2rem;
+}
+
+.modalFormHeader {
+  width: 100%;
+  height: max-content;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+}
+
+.closeBtn {
+  color: var(--green-darker);
+  position: fixed;
+  right: 5%;
+  top: 2%;
+}
+
+.closeBtn:hover {
+  color: var(--danger-2);
+}
+
+.formContainer {
+  width: 100%;
+  height: max-content;
+  /* background: linear-gradient(to right, #f9f9f9, #c1c1c1); */
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  padding: 1.5rem 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 1.5rem;
+  color: #000;
+  width: 100%;
+}

@@ -1,0 +1,243 @@
+/*contacts banner*/
+.contactsBanner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30rem;
+  background: url("/assets/backgrounds/contact-us.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--dark-overlay);
+  background-blend-mode: overlay;
+}
+
+.contactsBanner .contactsHeading {
+  font-size: 3rem;
+  color: var(--white);
+}
+.contactsBanner .tagLine {
+  color: var(--white);
+  text-shadow: var(--text-shadow-1);
+  font-size: var(--text-heading-2);
+  width: 60%;
+  text-align: center;
+}
+
+/*contact request*/
+.contactRequest {
+  height: max-content;
+  padding: 0 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.contactRequestForm {
+  padding: 1.5rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.75rem;
+  background: var(--gray-2);
+}
+
+.requestForm {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.7rem;
+}
+
+.contactInputWrapper,
+.contactTextAreaWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 0.75rem;
+}
+
+.contactInputWrapper label {
+  font-size: var(--text-normal);
+  font-weight: 600;
+}
+
+.contactInputWrapper input {
+  width: 100%;
+  border-radius: 10px;
+  height: max-content;
+  padding: 0.7rem 0.4rem;
+  font-family: var(--global-font);
+}
+
+.contactTextAreaWrapper {
+  width: 95%;
+  height: max-content;
+}
+.contactTextAreaWrapper textarea {
+  width: 100%;
+  border-radius: 10px;
+  height: max-content;
+  padding: 1.2rem 0.4rem;
+  font-family: var(--global-font);
+  resize: none;
+}
+
+.requestForm .contactMode {
+  width: 95%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 1rem;
+}
+
+.requestForm .contactMode .contactOptions {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contactMode .contactOptions .contactcheckWrapper label {
+  font-weight: 400 !important;
+  font-size: var(--text-md);
+}
+
+.contactMode .contactOptions input[type="checkbox"] {
+  border: 1px solid var(--green-dark);
+  visibility: visible;
+  width: 15px;
+  height: 15px;
+  background-color: none !important;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  color: var(--white);
+}
+
+.contactMode .contactOptions input[type="checkbox"]:after {
+  background-color: var(--green-dark);
+  color: var(--white);
+  width: 15px;
+  height: 15px;
+  content: "✔";
+  display: inline-block;
+  visibility: visible;
+  color: var(--white);
+  text-align: center;
+}
+
+.contactMode .contactOptions input[type="checkbox"]:checked:after {
+  background-color: var(--green-dark);
+  color: var(--white);
+  content: "✔";
+}
+
+.requestForm .submitBtn {
+  text-transform: uppercase;
+  border-radius: var(--radius-md);
+  height: max-content;
+  text-align: center;
+  letter-spacing: 0.1rem;
+
+  padding: 0.8rem 0.25rem;
+  width: 95%;
+  font-weight: 600;
+
+  color: var(--white);
+  background-color: var(--green-dark);
+}
+
+.contactRequestIllustration {
+  background-image: url("/assets/backgrounds/contact-section-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.5rem;
+}
+
+.contactRequestIllustration span {
+  color: var(--white);
+  font-size: 3rem;
+  font-family: var(--cursvie-3);
+  text-shadow: var(--text-shadow-1);
+}
+
+.otherContactModes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 1rem;
+}
+
+.otherContactModes a {
+  color: var(--white);
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 250px) and (max-width: 720px) {
+  .contactsBanner {
+    height: 20rem;
+  }
+  .contactsBanner .contactsHeading {
+    font-size: var(--text-heading-3);
+    color: var(--white);
+    text-align: center;
+  }
+  .contactsBanner .tagLine {
+    font-size: var(--text-nm);
+  }
+
+  /*contact request*/
+  .contactRequest {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .requestForm .contactMode {
+    width: 95%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 1rem;
+  }
+
+  .contactRequestIllustration {
+    text-align: center;
+    background-color: var(--dark-overlay);
+    background-blend-mode: overlay;
+    width: 100%;
+    padding: 2rem 0;
+  }
+
+  .contactRequestIllustration span {
+    color: var(--white);
+    font-size: 2rem;
+    font-family: var(--cursvie-3);
+    text-shadow: var(--text-shadow-1);
+  }
+
+  .otherContactModes a {
+    font-size: var(--text-md);
+  }
+}

@@ -1,0 +1,488 @@
+/*tasker layout*/
+.taskerAccountRelatedSettings {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.navigationWrapper {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  row-gap: 0.8rem;
+  padding: 1.5rem 0.8rem;
+  background-color: var(--dark);
+}
+
+.accountRelatedNavigation {
+  width: 100%;
+  height: max-content;
+  row-gap: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.profileSummary,
+.accountRelatedLinks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+}
+
+.profileSummary {
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+  color: var(--white);
+}
+
+.profileSummary .profileImage {
+  border: 1pt solid var(--gray-2);
+  border-radius: var(--radius-circular);
+  object-fit: contain;
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileSummary span {
+  font-weight: 700;
+}
+
+.profileSummary .profileName {
+  font-size: var(--text-heading-2);
+  text-transform: capitalize;
+}
+
+.profileSummary .profileDate {
+  font-size: 0.65rem;
+  color: var(--gray-3);
+}
+.accountRelatedLinks {
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 3rem;
+  row-gap: 1.5rem;
+}
+
+.accountRelatedLinks .linkItem {
+  width: 95%;
+  font-size: var(--text-sm);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 0.25rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--white);
+}
+
+.accountRelatedLinks .linkItem:hover {
+  background-color: var(--dark);
+  border-radius: var(--radius-md);
+  filter: brightness(1.2);
+}
+
+.accountRelatedLinks .activeLinkItem {
+  background-color: var(--green-primary);
+  color: var(--white);
+  font-weight: 700;
+  border-radius: var(--radius-md);
+}
+
+.accountRelatedLinks.activeLinkItem:hover {
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+.accountRelatedComponent {
+  width: 65%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.componentHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.staffBioSettings,
+.staffPasswordSettings {
+  width: 95%;
+}
+
+.actionTab {
+  width: max-content;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  column-gap: 0.65rem;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.actionTab .tabButton {
+  width: max-content;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  color: var(--dark);
+  border: 1px solid var(--green-primary);
+  filter: brightness(1);
+  padding: 0.25rem 0.5rem;
+}
+
+.actionTab .tabButton:hover {
+  background-color: none;
+}
+
+.actionTab .tabButtonActive {
+  background-color: var(--green-primary);
+  color: var(--white);
+  font-weight: 700;
+  border-radius: var(--radius-md);
+}
+
+/*tasker bio settings*/
+.taskerBioSettings,
+.taskerPasswordSettings {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.bioContainer {
+  width: 99%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.basicInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: max-content;
+  row-gap: 2rem;
+  padding: 2rem 0;
+}
+
+.basicInfo .accountStatus {
+  display: flex;
+  column-gap: 3rem;
+  width: 100%;
+}
+
+.accountStatus span {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: max-content;
+}
+
+.basicInfo .basicInfoFormFields {
+  padding: 1rem 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--dark-gray);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  row-gap: 2rem;
+
+  justify-items: center;
+  align-items: center;
+}
+
+.basicInfoFormFields .inputWrapper {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+}
+
+.formAction {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  column-gap: 3rem;
+  padding: 1rem 0;
+}
+
+.formAction button {
+  width: max-content;
+  padding: 0.8rem 3.5rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-md);
+  color: var(--white);
+}
+.formAction button:disabled {
+  opacity: 0.5;
+}
+
+.clearBtn {
+  background-color: var(--dark);
+}
+.submitBtn {
+  background-color: var(--green-darker);
+}
+
+/*tasker profile image settings*/
+.basicInfo .profileImageSettings {
+  padding: 1rem 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--white);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8rem;
+  row-gap: 2rem;
+
+  justify-items: center;
+  align-items: center;
+}
+
+.profileImageSettings .avatar {
+  border: 1px solid var(--gray-3);
+  box-shadow: var(--tamed-shadows);
+  border-radius: var(--radius-circular);
+  object-fit: contain;
+}
+
+.profileImageSettings .initials {
+  border: 1px solid var(--gray-3);
+  box-shadow: var(--tamed-shadows);
+  border-radius: var(--radius-circular);
+  object-fit: contain;
+  width: 12.5rem;
+  height: 12.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 0.8rem;
+  align-items: center;
+  font-weight: 700;
+}
+
+.profileImageSettings .initials h2 {
+  font-size: 2rem;
+}
+
+.profileImageSettings .uploadActions {
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  row-gap: 1.5rem;
+  height: max-content;
+}
+
+.profileImageSettings .uploadActions .changeImage,
+.profileImageSettings .uploadActions .selectImage {
+  width: 50%;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--text-md);
+}
+
+.profileImageSettings .uploadActions .selectImage {
+  background-color: var(--black-2);
+  border: 2pt solid var(--dark-2);
+  color: var(--white);
+}
+.profileImageSettings .uploadActions .changeImage {
+  background-color: var(--white);
+  border: 2pt solid var(--green-dark);
+  color: var(--dark);
+}
+
+/*tasker password settings*/
+.taskerPasswordSettings {
+}
+
+/*Mobile responsive styles*/
+@media (min-width: 250px) and (max-width: 720px) {
+  /*tasker layout*/
+  .taskerAccountRelatedSettings {
+    flex-direction: column;
+  }
+
+  .navigationWrapper {
+    width: 100%;
+    height: max-content;
+  }
+
+  .accountRelatedNavigation {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 0.75rem;
+  }
+  .profileSummary,
+  .accountRelatedLinks {
+    width: 100%;
+  }
+
+  .accountRelatedComponent {
+    width: 100%;
+    height: max-content;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1.8rem 0;
+  }
+
+  .componentHeader {
+    flex-direction: column;
+    row-gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .staffBioSettings,
+  .staffPasswordSettings {
+    width: 95%;
+  }
+
+  .actionTab {
+    width: 95%;
+    padding: 0.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .actionTab .tabButton {
+    padding: 0.45rem 0.45rem;
+  }
+
+  /*tasker bio settings*/
+  .taskerBioSettings,
+  .taskerPasswordSettings {
+    align-items: center;
+  }
+
+  .basicInfo {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .basicInfo .accountStatus {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+    font-size: var(--text-md);
+  }
+
+  .accountStatus span {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: max-content;
+  }
+
+  .basicInfo .basicInfoFormFields {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+  }
+
+  .basicInfoFormFields .inputWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formAction {
+    flex-direction: column;
+    row-gap: 0.75rem;
+  }
+
+  .formAction button {
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+  .formAction button:disabled {
+    opacity: 0.5;
+  }
+
+  /*tasker profile image settings*/
+  .profileImageSettings .initials h2 {
+    font-size: 2rem;
+  }
+
+  .profileImageSettings .uploadActions {
+    width: 100%;
+  }
+
+  .profileImageSettings .uploadActions .changeImage,
+  .profileImageSettings .uploadActions .selectImage {
+    width: 100%;
+  }
+}
+/*Tablet responsive styles*/
+@media (min-width: 724px) and (max-width: 1024px) {
+  /*tasker layout*/
+  .taskerAccountRelatedSettings {
+    flex-direction: column;
+  }
+  .navigationWrapper {
+    width: 100%;
+    height: max-content;
+  }
+
+  .accountRelatedNavigation {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 1%;
+  }
+  .profileSummary,
+  .accountRelatedLinks {
+    width: 45%;
+  }
+
+  .accountRelatedComponent {
+    width: 100%;
+    height: max-content;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1.8rem 0;
+  }
+
+  .componentHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .staffBioSettings,
+  .staffPasswordSettings {
+    width: 95%;
+  }
+}

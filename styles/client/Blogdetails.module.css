@@ -1,0 +1,123 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 40px;
+  font-size: 20px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn3 {
+  float: left;
+  width: 75%;
+  padding: 0px 100px 0px 20px;
+}
+
+/* Right column */
+.rightcolumn3 {
+  float: left;
+  width: 23%;
+  padding: 0px 20px 0px 0px;
+  margin: 20px;
+}
+
+/* Fake image */
+.fakeimg3 {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card3 {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-style: normal;
+}
+
+
+
+.card2 .readmore {
+  display: block;
+  background-color: #4caf50;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  /* font-size: 16px; */
+  margin: 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+.card2 .readmore:hover {
+  background-color: #044d06;
+  cursor: pointer;
+}
+/* Clear floats after the columns */
+.row3:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn3,
+  .rightcolumn3 {
+    width: 100%;
+    padding: 0;
+  }
+}
+.blogimg {
+  width: 20%;
+  max-width: 36%;
+  border-style: solid;
+  border-radius: 84px 84px 84px 84px;
+  vertical-align: middle;
+  display: inline-block;
+  align-self: center;
+}
+.column2 {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+/* Remove extra left and right margins, due to padding */
+.row2 {
+  margin: 20px;
+  padding: 20px;
+}
+
+/* Clear floats after the columns */
+.row2:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card2 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column2 {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}

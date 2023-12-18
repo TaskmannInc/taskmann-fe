@@ -1,0 +1,65 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.col {
+  flex: 1;
+  padding: 20px 20px;
+  width: 50%;
+}
+.cardrow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 018px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.card {
+  width: calc(33.33% - 20px);
+  margin-bottom: 20px;
+  border: none;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  margin: 10px;
+  flex: 0;
+}
+
+.cardimgtop {
+  height: auto;
+  width: auto;
+  object-fit: cover;
+}
+
+.cardbody {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.cardtitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.column {
+  flex: 1;
+  padding: 10px;
+  /* justify-content: center; */
+  justify-content: space-between;
+  align-items: center;
+}
+.img {
+  border-radius: 50%;
+}
+.main75 {
+  width: 75%;
+  float: left;
+  padding: 15px;
+}
+
+.main25 {
+  width: 25%;
+  float: left;
+  padding: 15px;
+}

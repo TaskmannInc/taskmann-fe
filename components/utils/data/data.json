@@ -1,0 +1,93 @@
+[
+  {
+    "code": 1209034,
+    "name": "Halifax",
+    "province": "Nova Scotia",
+    "slug": "halifax",
+    "area": 5490.35,
+    "pop2011": 390086,
+    "pop2016": 403131,
+    "pop2022": 419362,
+    "pop2023": 422130,
+    "growth": 13045,
+    "growthRate": 0.006600556997184093
+  },
+  {
+    "code": 1217030,
+    "name": "Cape Breton",
+    "province": "Nova Scotia",
+    "slug": "cape-breton",
+    "area": 2430.06,
+    "pop2011": 97398,
+    "pop2016": 94285,
+    "pop2022": 90680,
+    "pop2023": 90093,
+    "growth": -3113,
+    "growthRate": -0.006475655261188318
+  },
+  {
+    "code": 1206001,
+    "name": "Lunenburg",
+    "province": "Nova Scotia",
+    "slug": "lunenburg",
+    "area": 1759.59,
+    "pop2011": 25118,
+    "pop2016": 24863,
+    "pop2022": 24560,
+    "pop2023": 24510,
+    "growth": -255,
+    "growthRate": -0.0020387121993689084
+  },
+  {
+    "code": 1208008,
+    "name": "East Hants",
+    "province": "Nova Scotia",
+    "slug": "east-hants",
+    "area": 1786.56,
+    "pop2011": 22111,
+    "pop2016": 22453,
+    "pop2022": 22870,
+    "pop2023": 22941,
+    "growth": 342,
+    "growthRate": 0.0030745193293744144
+  },
+  {
+    "code": 1208001,
+    "name": "West Hants",
+    "province": "Nova Scotia",
+    "slug": "west-hants",
+    "area": 1244.09,
+    "pop2011": 15324,
+    "pop2016": 15368,
+    "pop2022": 15421,
+    "pop2023": 15430,
+    "growth": 44,
+    "growthRate": 0.0005736041735622255
+  },
+  {
+    "code": 1210006,
+    "name": "Truro",
+    "province": "Nova Scotia",
+    "slug": "truro",
+    "area": 34.49,
+    "pop2011": 12059,
+    "pop2016": 12261,
+    "pop2022": 12508,
+    "pop2023": 12549,
+    "growth": 202,
+    "growthRate": 0.003327970263194757
+  },
+  {
+    "code": 1206009,
+    "name": "Chester",
+    "province": "Nova Scotia",
+    "slug": "chester",
+    "area": 1122.11,
+    "pop2011": 10599,
+    "pop2016": 10310,
+    "pop2022": 9974,
+    "pop2023": 9919,
+    "growth": -289,
+    "growthRate": -0.005513814618056001
+  }
+]

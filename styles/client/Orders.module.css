@@ -1,0 +1,415 @@
+.orderContainer {
+  width: 100%;
+  min-height: 30rem;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 2rem;
+  padding: 2rem 0;
+  background-color: var(--gray-2);
+}
+
+.orderHeader,
+.orderBody {
+  width: 98%;
+  height: max-content;
+  display: flex;
+  border-radius: var(--radius-md);
+}
+
+.orderBodyMobileTab {
+  display: none;
+}
+
+.orderHeader {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.8rem;
+  /* column-gap: 1rem; */
+}
+
+.orderHeader h1 {
+  font-size: 2rem;
+}
+
+.backLink {
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1pt solid var(--dark-2);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--black);
+}
+
+.backLink:hover {
+  background-color: var(--green-darker);
+  color: var(--white);
+}
+
+.orderBody {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 0.4rem;
+  background: transparent;
+  border-radius: var(--radius-md);
+}
+
+.orderBody .orderItemsHeader,
+.orderBody .orderItemsBody {
+  background-color: var(--white);
+  width: 100%;
+  height: max-content;
+  padding: 0.8rem 0.45rem;
+  display: grid;
+  grid-template-columns: 12% 30% 10% 15% 13% 10% 10%;
+  align-items: center;
+  column-gap: 0.65%;
+  border-radius: var(--radius-md);
+}
+
+.orderBody .orderItemsHeader span,
+.orderBody .orderItemsBody div {
+  width: 100%;
+}
+
+.orderBody .orderItemsHeader span:nth-child(3),
+.orderBody .orderItemsHeader span:nth-child(4),
+.orderBody .orderItemsHeader span:nth-child(5),
+.orderBody .orderItemsHeader span:nth-child(6),
+.orderBody .orderItemsBody div:nth-child(3),
+.orderBody .orderItemsBody div:nth-child(4),
+.orderBody .orderItemsBody div:nth-child(5),
+.orderBody .orderItemsBody div:nth-child(6) {
+  /* justify-content: center;
+  align-self: center; */
+}
+
+.orderBody .orderItemsHeader {
+  border: 1pt solid var(--gray);
+  font-size: var(--text-heading-1);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.orderBody .orderItemsBody {
+  padding: 1rem;
+
+  font-size: var(--text-md);
+  border-bottom: 1pt solid var(--gray-2);
+}
+
+.orderBody .orderItemsBody .orderDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 0.3rem;
+}
+
+.orderBody .orderItemsBody:last-child {
+  border-bottom: none;
+}
+
+.orderBody .orderItemsBody .orderPackage {
+  width: 100%;
+  height: max-content;
+  display: grid;
+  grid-template-columns: 50% 10% 40%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orderBody .orderItemsBody .orderPackage span {
+  font-size: var(--text-md);
+  font-style: italic;
+  font-weight: 700;
+}
+.orderBody .orderItemsBody .serviceDetails .orderImage {
+  width: 30%;
+  height: 10rem;
+  object-fit: fill;
+}
+
+.orderBody .orderItemsBody .serviceDetails .serviceDetSub {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.orderBody .orderItemsBody .paymentBtn:hover {
+  background-color: var(--white);
+  border: 1pt solid var(--green-primary);
+  color: var(--white);
+}
+
+/*Order statuses*/
+.orderStatusContainers {
+  width: 100%;
+  min-height: 30rem;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+  padding: 2rem 0;
+  background-color: var(--gray-2);
+}
+
+.orderDetails {
+  width: 98%;
+  display: grid;
+  grid-template-columns: 48% 48%;
+  height: max-content;
+  justify-items: flex-start;
+  align-items: center;
+}
+
+.orderInteraction {
+  border: 2pt dashed var(--green-primary);
+  border-radius: var(--radius-md);
+  background-color: var(--white);
+}
+
+.orderInteraction,
+.orderActions {
+  width: 100%;
+  min-height: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+  padding: 1rem 1rem;
+}
+
+.orderActions .orderActLink {
+  width: 20rem;
+  min-height: 2rem;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  column-gap: 0.75rem;
+  align-items: center;
+  color: var(--white);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+}
+
+.serviceLnk {
+  background-color: var(--black);
+}
+.historyLnk {
+  background-color: var(--green-primary);
+}
+
+@media (min-width: 250px) and (max-width: 720px) {
+  .orderContainer {
+    width: 100%;
+    min-height: 30rem;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 2rem;
+    padding: 2rem 0;
+    background-color: var(--gray-2);
+  }
+
+  .orderHeader h1 {
+    font-size: var(--text-heading-1);
+  }
+
+  .backLink {
+    padding: 0.65rem 1rem;
+  }
+
+  .backLink:hover {
+    background-color: var(--green-darker);
+    color: var(--white);
+  }
+
+  .orderBody {
+    display: none;
+  }
+
+  .orderBodyMobileTab {
+    height: max-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    row-gap: 0.85rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .orderBodyMobileTab .orderItem {
+    width: 95%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: center;
+    row-gap: 0.65rem;
+    background-color: var(--green-primary);
+    padding: 1.3rem 0.75rem;
+    border-radius: var(--radius-md);
+    color: var(--white);
+  }
+
+  .orderItem .orderId {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+  }
+  .orderBodyMobileTab .orderItem .orderCartItems {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 0.5rem;
+  }
+
+  .orderBodyMobileTab .orderItem .orderCartItems .orderPackage {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 0.3rem;
+  }
+  .orderBodyMobileTab .orderItem .orderCartItems .orderPackage .serviceDate {
+    width: 100%;
+    display: flex;
+    height: max-content;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .orderBodyMobileTab .orderItem .orderPricing {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 724px) and (max-width: 1024px) {
+  .orderContainer {
+    width: 100%;
+    min-height: 30rem;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 2rem;
+    padding: 2rem 0;
+    background-color: var(--gray-2);
+  }
+
+  .orderHeader h1 {
+    font-size: var(--text-heading-1);
+  }
+
+  .backLink {
+    padding: 0.65rem 1rem;
+  }
+
+  .backLink:hover {
+    background-color: var(--green-darker);
+    color: var(--white);
+  }
+
+  .orderBody {
+    display: none;
+  }
+
+  .orderBodyMobileTab {
+    height: max-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    row-gap: 0.85rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .orderBodyMobileTab .orderItem {
+    width: 95%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: center;
+    row-gap: 0.65rem;
+    background-color: var(--green-primary);
+    padding: 1.3rem 0.75rem;
+    border-radius: var(--radius-md);
+    color: var(--white);
+  }
+
+  .orderItem .orderId {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+  }
+  .orderBodyMobileTab .orderItem .orderCartItems {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 0.5rem;
+  }
+
+  .orderBodyMobileTab .orderItem .orderCartItems .orderPackage {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 0.3rem;
+  }
+  .orderBodyMobileTab .orderItem .orderCartItems .orderPackage .serviceDate {
+    width: 100%;
+    display: flex;
+    height: max-content;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .orderBodyMobileTab .orderItem .orderPricing {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

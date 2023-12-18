@@ -1,0 +1,317 @@
+.authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: max-content;
+  row-gap: 0.8rem;
+}
+
+.authFormHeader {
+  width: 100%;
+  height: max-content;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.closeBtn {
+  color: var(--green-darker);
+  position: fixed;
+  right: 5%;
+  top: 2%;
+}
+
+.closeBtn:hover {
+  color: var(--danger-2);
+}
+
+.formContainer {
+  width: 100%;
+  height: max-content;
+  /* background: linear-gradient(to right, #f9f9f9, #c1c1c1); */
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+}
+
+.authFormHeader {
+  row-gap: 0.5rem;
+  color: #000;
+  justify-content: center;
+  align-items: center;
+  padding: 0.65rem 1rem;
+}
+
+.formContainer {
+  padding: 1.5rem 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 0.5rem;
+  color: #000;
+  width: 100%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 90%;
+  height: max-content;
+  row-gap: 0.5rem;
+  width: 90%;
+}
+.fieldValidation {
+  margin: -1.5rem 0 0 0;
+  color: red;
+}
+
+.formGroup label {
+  font-weight: 600;
+}
+
+.formContainer > .formGroup input {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  height: max-content;
+  padding: 0.7rem 0.4rem;
+  font-family: var(--global-font);
+  border: 1px solid var(--green-darker) !important;
+}
+
+.formContainer input,
+.formContainer textarea,
+.formContainer select {
+  border-radius: var(--radius-sm);
+  height: max-content;
+  padding: 0.7rem 0.4rem;
+  font-family: var(--global-font);
+  border: 1pt solid var(--dark) !important;
+  background-color: var(--white);
+}
+
+.formContainer input {
+  width: 100%;
+}
+.formContainer textarea {
+  width: 100%;
+  height: 7.5rem;
+  resize: none;
+}
+.formContainer select {
+  width: 25rem;
+}
+
+.formContainer .uploadActions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  row-gap: 1.5rem;
+  height: max-content;
+}
+.formContainer .uploadActions .imagePreview {
+  width: 90%;
+  height: 8rem;
+  border: 2pt dashed var(--green-darker);
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+}
+
+.formContainer .uploadActions .changeImage,
+.formContainer .uploadActions .selectImage {
+  width: 90%;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--text-md);
+}
+
+.formContainer .uploadActions .selectImage {
+  cursor: pointer;
+  background-color: var(--gray-2);
+  color: var(--dark);
+}
+.formContainer .uploadActions .changeImage {
+  cursor: pointer;
+  background-color: var(--white);
+  border: 2pt solid var(--green-darker);
+  color: var(--dark);
+}
+
+.formContainer button {
+  width: 90%;
+  border-radius: 10px;
+  height: max-content;
+  padding: 0.7rem 0.25rem;
+}
+.submitBtn {
+  padding: 0.5rem 1rem;
+  text-align: center;
+  width: 90%;
+  font-weight: 600;
+  background-color: var(--green-darker);
+  color: var(--white);
+}
+
+.pageLink {
+  color: #fff;
+  padding: 0 0 0.5rem 0;
+}
+
+.password-wrapper {
+  width: 100%;
+  height: max-content;
+  display: grid;
+  grid-template-columns: 85% 10%;
+  column-gap: 5%;
+  justify-items: center;
+  align-content: center;
+}
+.password-toggle {
+  display: flex;
+  justify-content: flex-end;
+  background-color: transparent;
+  width: 100%;
+  color: #e1e1e1;
+}
+
+/*Invoices*/
+
+.invoiceContainer {
+  width: 100%;
+  height: 100%;
+  padding: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 2rem;
+  border-top: 1pt solid var(--dark);
+  border-bottom: 1pt solid var(--dark);
+}
+
+.invoiceHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: max-content;
+  background-color: var(--green-darker);
+  padding: 0.5rem 0.5rem;
+  border-radius: var(--radius-md);
+}
+
+.invoiceHeader h3 {
+  font-weight: 800;
+  font-size: var(--text-heading-1);
+  color: var(--white);
+}
+.customerDetail {
+  border-radius: var(--radius-md);
+  /* border: 3pt dashed var(--white); */
+  background-color: var(--black);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 1rem;
+  padding: 0.75rem 0.85rem;
+  width: 100%;
+  height: max-content;
+}
+
+.customerDetail .detailItem {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  align-items: center;
+  align-content: center;
+}
+.customerDetail .detailItem label {
+  font-weight: 600;
+  width: 100%;
+}
+.customerDetail .detailItem .detailInfo {
+  width: 100%;
+  font-weight: 700;
+  font-style: italic;
+  font-size: var(--text-lg-2);
+  display: flex;
+  justify-content: flex-end;
+}
+.orderDetail {
+  border-radius: var(--radius-md);
+  border: 3pt dashed var(--green-primary);
+  background-color: var(--white);
+  box-shadow: var(--cards-shadow-2);
+  color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 1rem;
+  padding: 0.75rem 0.85rem;
+  width: 100%;
+  height: max-content;
+}
+
+.orderDetail .detailItem {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  align-items: center;
+  align-content: center;
+}
+.orderDetail .detailItem label {
+  font-weight: 600;
+  width: 100%;
+}
+.orderDetail .detailItem .detailInfo {
+  width: 100%;
+  font-weight: 700;
+  font-size: var(--text-lg-2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+}
+.paymentAdvice {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: max-content;
+  background-color: var(--green-darker);
+  padding: 0.5rem 0.5rem;
+  border-radius: var(--radius-md);
+}
+
+.paymentAdvice .paymentStatus {
+  padding: 0.45rem 0.85rem;
+  text-align: center;
+  width: max-content;
+  height: max-content;
+  border: 2pt solid var(--white);
+  color: var(--white);
+  border-radius: var(--radius-md);
+}
+.paymentAdvice .paymentAmount {
+  padding: 0.45rem 0.85rem;
+  text-align: center;
+  width: max-content;
+  height: max-content;
+  border: 2pt dashed var(--white);
+  color: var(--white);
+  border-radius: var(--radius-md);
+}

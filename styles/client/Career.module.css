@@ -1,0 +1,100 @@
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 20px;
+  margin: 20px;
+  text-align: center;
+}
+.title {
+  font-size: 30px;
+  padding: 10px;
+  text-align: center;
+}
+.hero {
+  background-color: #04720c9d;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  text-align: center;
+}
+.row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 0;
+  text-align: center;
+  /* background-color: #ffa6a6; */
+  align-items: flex-start;
+  height: auto;
+  width: 100%; 
+  line-height: 30px;
+}
+.col li {
+  text-align: center;
+  list-style-type: none;
+  list-style: none;
+  width: 90%;
+  height: max-content;
+  font-size: 24px;
+}
+
+.col h2 {
+  margin-top: 0;
+  width: 90%;
+  text-align: center;
+  font-size: 28px;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-rows: repeat(3, 1fr); */
+  gap: 10px;
+  padding: 10px;
+}
+
+.gridItem {
+  /* background-color: #e6e6e6; */
+  /* border: 1px solid #ccc; */
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.myButton {
+  background-color: #032405; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.myButton:hover {
+  opacity: 0.8;
+}
+.main75 {
+  width: 80%;
+  float: left;
+  padding: 15px 0;
+  justify-content: center;
+  display: flex;
+}
+
+.main25 {
+  width: 15%;
+  float: left;
+  padding: 15px 0;
+  display: flex;
+  justify-content: left;
+}

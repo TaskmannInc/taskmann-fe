@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "topic": "Culture",
+        "data": "We’re building a company culture that support involvement and provide positive, fun ways for our employees to get together for personal and professional development activities, both within and outside normal company hours.",
+        "image": "/others/culture.jpg"
+    },
+    {
+        "id": 2,
+        "topic": "Integrity",
+        "data": "Taskmann Ethics and compliance policy outlines our commitment to integrity at the highest levels within the company. We encourage our taskers to read and understand our ethics within our workplace. ",
+        "image": "/others/org-integrity.jpg"
+    },
+    {
+        "id": 3,
+        "topic": "Diversity",
+        "data": "It is our goal to create a workplace that promotes inclusion and diversity. We believe having a diverse workforce improves our readiness to innovate and make better decisions. ",
+        "image": "/others/diversified.jpg"
+    }
+]
