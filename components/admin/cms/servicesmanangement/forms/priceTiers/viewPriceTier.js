@@ -141,6 +141,16 @@ export default function ViewServicePriceTier({ closeForm, __selected_tier }) {
                       readOnly={true}
                     />
                   </div>
+                  <div className={"formGroupWrapper"}>
+                    <GeneralTextInput
+                      label={"Duration (minutes)"}
+                      placeholder={"Maximum value"}
+                      type={"number"}
+                      name={"max"}
+                      value={param?.duration}
+                      readOnly={true}
+                    />
+                  </div>
                 </div>
               </div>
             );

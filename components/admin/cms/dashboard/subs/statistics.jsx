@@ -13,13 +13,14 @@ export default function Statistics({
   const stats = [
     {
       title: "Users",
-      val: allMainServices?.length,
+      val: allUsers?.length,
       icon: <HiOutlineUsers size={iconSize} />,
       brief: "Total users onboarded",
     },
     {
       title: "Services",
-      val: allUsers?.length,
+      val: allMainServices?.length,
+
       icon: <FaTasks size={iconSize} />,
       brief: "Main service offered",
     },

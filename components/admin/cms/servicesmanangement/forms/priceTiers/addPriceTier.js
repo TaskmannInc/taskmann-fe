@@ -26,7 +26,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
   const [formattedContent, setFormattedContent] = useState(null);
 
   const [costParameters, setCostParameters] = useState([
-    { name: "", unitPrice: 0, unitType: "", min: 1, max: 1, duration: 1 },
+    { name: "", unitPrice: 0, unitType: "", min: 1, max: 1, duration: 20 },
   ]);
 
   const addMoreParamaters = () => {
@@ -38,7 +38,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
         unitType: "",
         min: 1,
         max: 1,
-        duration: 1,
+        duration: 20,
       },
     ]);
   };
@@ -299,12 +299,13 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
                   </div>
                   <div className={"formGroupWrapper"}>
                     <GeneralTextInput
-                      label={"Duration"}
-                      placeholder={"Maximum value"}
+                      label={"Duration (minutes)"}
+                      placeholder={"Duration in minutes"}
                       type={"number"}
                       name={"duration"}
                       onChange={(e) => parameterValueChanges(e, i)}
                       defaultValue={param?.duration}
+                      min={20}
                       // value={param?.max?.[i]}
                       // validate={errors}
                       readOnly={isLoading}

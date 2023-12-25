@@ -45,6 +45,7 @@ export default function UpdateServicePriceTier({
         unitType: "",
         min: 1,
         max: 1,
+        duration: 20,
       },
     ]);
   };
@@ -84,6 +85,7 @@ export default function UpdateServicePriceTier({
     subservice: formData?.subservice,
     cost_parameters: costParameters,
   };
+
   //function to submit form data
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -296,6 +298,18 @@ export default function UpdateServicePriceTier({
                       name={"max"}
                       onChange={(e) => parameterValueChanges(e, i)}
                       defaultValue={param?.max}
+                      // validate={errors}
+                      readOnly={isLoading}
+                    />
+                  </div>
+                  <div className={"formGroupWrapper"}>
+                    <GeneralTextInput
+                      label={"Duration (minutes)"}
+                      placeholder={"Cost duration"}
+                      type={"number"}
+                      name={"duration"}
+                      onChange={(e) => parameterValueChanges(e, i)}
+                      defaultValue={param?.duration}
                       // validate={errors}
                       readOnly={isLoading}
                     />
