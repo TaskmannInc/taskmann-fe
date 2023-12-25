@@ -45,7 +45,7 @@ export default function UpdateServicePriceTier({
         unitType: "",
         min: 1,
         max: 1,
-        duration: 20,
+        duration: 0,
       },
     ]);
   };
@@ -308,6 +308,7 @@ export default function UpdateServicePriceTier({
                       placeholder={"Cost duration"}
                       type={"number"}
                       name={"duration"}
+                      min={0}
                       onChange={(e) => parameterValueChanges(e, i)}
                       defaultValue={param?.duration}
                       // validate={errors}

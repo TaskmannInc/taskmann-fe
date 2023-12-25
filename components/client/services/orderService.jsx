@@ -46,6 +46,7 @@ export default function OrderPackage() {
       newCosts["unitPrice"] = param?.unitPrice;
       newCosts["unitType"] = param?.unitType;
       newCosts["quantity"] = parseInt(param?.min);
+      newCosts["duration"] = parseInt(param?.duration);
       return newCosts;
     });
     setMutableParameters(serviceCosts);
@@ -288,7 +289,18 @@ export default function OrderPackage() {
                           {params?.name}
                         </span>
                         <span className={styles.orderSummaryInfo}>
-                          {params?.quantity} * {params?.unitPrice}
+                          <>
+                            {params?.quantity} * {primaryCurrency}
+                            {params?.unitPrice}
+                          </>
+                          &nbsp;&nbsp; |&nbsp;&nbsp;
+                          {params?.duration && (
+                            <>
+                              {`⌚`}
+                              {params?.quantity * params?.duration}
+                              {`(mins)`}
+                            </>
+                          )}
                         </span>
                       </div>
                     );

@@ -155,7 +155,11 @@ export default function ViewServicePriceTier({ closeForm, __selected_tier }) {
               </div>
             );
           })}
-          <span className="mini-card" title={__selected_tier?.last_name}>
+          <span
+            className="mini-card"
+            title={__selected_tier?.last_name}
+            style={{ padding: "1rem 2rem" }}
+          >
             <small
               dangerouslySetInnerHTML={sanitizedData(
                 __selected_tier?.description

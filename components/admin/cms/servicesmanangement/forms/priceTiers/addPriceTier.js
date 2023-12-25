@@ -38,7 +38,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
         unitType: "",
         min: 1,
         max: 1,
-        duration: 20,
+        duration: 0,
       },
     ]);
   };
@@ -305,7 +305,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
                       name={"duration"}
                       onChange={(e) => parameterValueChanges(e, i)}
                       defaultValue={param?.duration}
-                      min={20}
+                      min={0}
                       // value={param?.max?.[i]}
                       // validate={errors}
                       readOnly={isLoading}
