@@ -1,19 +1,18 @@
 import Joi from "joi-browser";
 import { useState } from "react";
 import { FaMinusCircle, FaTasks } from "react-icons/fa";
+import { MdOutlineAddCircle } from "react-icons/md";
 import styles from "../../../../../../styles/admin/Forms.module.css";
-import { GeneralTextInput } from "../../../../../ui-fragments/input.jsx";
+import {
+  GeneralDecimalInput,
+  GeneralTextInput,
+} from "../../../../../ui-fragments/input.jsx";
 import { StatusNotification } from "../../../../../ui-fragments/notification";
 import { GeneralSelectInput } from "../../../../../ui-fragments/select";
-import validation from "../../../../../utils/helpers/validation";
-import {
-  AddPriceTierHook,
-  GetSubServicesHook,
-} from "../../../../../utils/hooks/serviceMgmtHook";
-import { CloseButton } from "../../../../Globals/closeBtn";
-import { MdOutlineAddCircle } from "react-icons/md";
-import { BsFillPatchMinusFill } from "react-icons/bs";
 import RichTextEditor from "../../../../../ui-fragments/textEditor";
+import validation from "../../../../../utils/helpers/validation";
+import { AddPriceTierHook } from "../../../../../utils/hooks/serviceMgmtHook";
+import { CloseButton } from "../../../../Globals/closeBtn";
 
 export default function AddServicePriceTier({ closeForm, subServices }) {
   //form states
@@ -27,7 +26,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
   const [formattedContent, setFormattedContent] = useState(null);
 
   const [costParameters, setCostParameters] = useState([
-    { name: "", unitPrice: 0, unitType: "", min: 1, max: 1 },
+    { name: "", unitPrice: 0, unitType: "", min: 1, max: 1, duration: 1 },
   ]);
 
   const addMoreParamaters = () => {
@@ -39,6 +38,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
         unitType: "",
         min: 1,
         max: 1,
+        duration: 1,
       },
     ]);
   };
@@ -257,7 +257,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
                     />
                   </div>
                   <div className={"formGroupWrapper"}>
-                    <GeneralTextInput
+                    <GeneralDecimalInput
                       label={"Unit Price"}
                       placeholder={"Eg: 20.00"}
                       type={"number"}
@@ -265,6 +265,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
                       onChange={(e) => parameterValueChanges(e, i)}
                       validate={errors}
                       defaultValue={param?.unitPrice}
+                      step={0.01}
                       // value={param?.unitPrice?.[i]}
                       readOnly={isLoading}
                     />
@@ -291,6 +292,19 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
                       name={"max"}
                       onChange={(e) => parameterValueChanges(e, i)}
                       defaultValue={param?.max}
+                      // value={param?.max?.[i]}
+                      // validate={errors}
+                      readOnly={isLoading}
+                    />
+                  </div>
+                  <div className={"formGroupWrapper"}>
+                    <GeneralTextInput
+                      label={"Duration"}
+                      placeholder={"Maximum value"}
+                      type={"number"}
+                      name={"duration"}
+                      onChange={(e) => parameterValueChanges(e, i)}
+                      defaultValue={param?.duration}
                       // value={param?.max?.[i]}
                       // validate={errors}
                       readOnly={isLoading}

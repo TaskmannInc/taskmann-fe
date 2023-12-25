@@ -1206,7 +1206,7 @@ p {
 
 .noTableData,
 .noTableData-illustration {
-  width: 100%;
+  width: 50%;
   height: max-content;
   display: flex;
   flex-direction: column;

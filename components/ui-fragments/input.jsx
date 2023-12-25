@@ -33,6 +33,41 @@ export const GeneralTextInput = ({
   );
 };
 
+export const GeneralDecimalInput = ({
+  label,
+  placeholder,
+  type,
+  name,
+  onChange,
+  readOnly,
+  defaultValue,
+  required,
+  step,
+  min,
+  value,
+}) => {
+  return (
+    <div className="input-container formGroup">
+      <label className="label">
+        {label}
+        {required && <small className="field-validation"> *</small>}
+      </label>
+      <input
+        placeholder={placeholder}
+        type={type}
+        min={min}
+        name={name}
+        className=""
+        onChange={onChange}
+        readOnly={readOnly}
+        defaultValue={defaultValue}
+        value={value}
+        step={step}
+      />
+    </div>
+  );
+};
+
 export const GeneralPasswordInput = ({
   label,
   placeholder,
