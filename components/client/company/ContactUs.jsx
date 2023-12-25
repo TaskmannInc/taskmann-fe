@@ -5,12 +5,13 @@ import styles from "../../../styles/client/Contact.module.css";
 import validation from "../../utils/helpers/validation.js";
 
 import { HiOutlineMail, HiOutlinePhoneIncoming } from "react-icons/hi";
-import { RequestServiceHook } from "../../utils/hooks/orderHooks";
+import { StatusNotification } from "../../ui-fragments/notification.jsx";
+import { AddMessageContentHook } from "../../utils/hooks/contactMessagesHook.js";
+import { Toaster, toast } from "react-hot-toast";
 
-export default function Contact() {
+export default function ContactCustomerCare() {
   //state objects
-  const [stepOne, setStepOne] = useState(true);
-  const [stepTwo, setStepTwo] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     first_name: "",
@@ -20,22 +21,13 @@ export default function Contact() {
     message: "",
   });
 
-  const showStepOne = () => {
-    setStepOne(true);
-    setStepTwo(false);
-  };
-  const showStepTwo = () => {
-    setStepOne(false);
-    setStepTwo(true);
-  };
-
   //defined validation schema
   const schema = {
     first_name: Joi.string().required(),
     last_name: Joi.string().required(),
     phone: Joi.string().required(),
     email: Joi.string().required().email(),
-    message: Joi.string().required().email(),
+    message: Joi.string().required(),
   };
 
   //Form inputs event handler
@@ -43,10 +35,10 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const serviceRequestBody = {
+  const contactRequestBody = {
     first_name: formData.first_name,
     last_name: formData.last_name,
-    phone: formData.phone,
+    phone_number: formData.phone,
     email: formData.email,
     message: formData.message,
   };
@@ -57,39 +49,43 @@ export default function Contact() {
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (!errors) {
-      console.log("data", userData);
-      // return;
-      sendRequest(serviceRequestBody);
+      sendRequest(contactRequestBody);
     } else {
       console.log(errors);
     }
   };
   const onSuccess = (data) => {
-    console.log(data);
+    toast.success({
+      message: "Your message has been sent over. Our team will be in touch.",
+    });
   };
 
   const onError = (error) => {
-    console.log("error: ", error.message);
+    toast.error({
+      message: `We. could not send over your message. ${
+        error?.response?.data?.error ?? error?.message
+      }`,
+    });
   };
 
   const {
     mutate: sendRequest,
     isLoading,
-    data: submissionResponse,
     isError,
     error,
     isSuccess,
-  } = RequestServiceHook(onSuccess, onError);
+  } = AddMessageContentHook(onSuccess, onError);
 
   return (
     <>
+      <Toaster reverseOrder={false} />
       <section className={styles.contactsBanner}>
         <h2 className={styles.contactsHeading}>Leave us a message</h2>
         <p className={styles.tagLine}>Tell us how we can help you today...</p>
       </section>
       <div className={styles.contactRequest}>
         <div className={styles.contactRequestForm}>
-          <h4>Get in touch.</h4>
+          <h4>Get in touch</h4>
           <MdOutlinePermContactCalendar size={40} />
 
           <>
@@ -169,9 +165,24 @@ export default function Contact() {
                 </small>{" "}
               </div>
 
-              <button className={styles.submitBtn}>Submit</button>
+              <button className={styles.submitBtn}>
+                {isLoading ? "Sending over your message..." : "Submit"}
+              </button>
             </form>
           </>
+          <div style={{ width: "80%" }}>
+            {isSuccess ? (
+              <StatusNotification
+                type="success"
+                message={`Your message was sent successfully 🎉. Our team will be in touch`}
+              />
+            ) : isError ? (
+              <StatusNotification
+                type="error"
+                message={error?.response?.data?.error ?? error?.message}
+              />
+            ) : null}
+          </div>
         </div>
         <div className={styles.contactRequestIllustration}>
           <span>You can also ...</span>

@@ -54,7 +54,7 @@ export const GetSelectedMessageContentHook = (onSuccess, onError, id) => {
 const addMessageContent = (data) => {
   const url = baseURL + ENDPOINTS.contact;
   const headers = {
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
     Authorization: `Bearer ${ACCESS_TOKEN}`,
   };
   return axios.post(url, data, { headers: headers });
@@ -64,7 +64,7 @@ export const AddMessageContentHook = (onAddSuccess, onError) => {
   const queryClient = useQueryClient();
   return useMutation(addMessageContent, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries("allmessages");
+      queryClient.invalidateQueries(["allmessages"]);
     },
     onAddSuccess,
     onError,

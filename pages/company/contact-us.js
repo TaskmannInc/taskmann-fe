@@ -1,16 +1,16 @@
 import dynamic from "next/dynamic";
+import ContactCustomerCare from "../../components/client/company/ContactUs";
 const DynamicClientLayout = dynamic(
   () => import("../../components/client/Globals/LayoutWrapper"),
   {
     ssr: false,
   }
 );
-import Contact from "../../components/client/company/ContactUs";
 
 export default function ContactPage() {
   return (
     <DynamicClientLayout>
-      <Contact />
+      <ContactCustomerCare />
     </DynamicClientLayout>
   );
 }
