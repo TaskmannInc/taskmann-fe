@@ -438,7 +438,9 @@ export default function SessionCart() {
           </div>
           <button
             className={styles.checkoutBtn}
-            disabled={!(cartItems?.length > 0) || placeOrderLoading}
+            disabled={
+              !(cartItems?.length > 0) || placeOrderLoading || placeOrderSuccess
+            }
             type="button"
             onClick={handleCheckoutCart}
           >
