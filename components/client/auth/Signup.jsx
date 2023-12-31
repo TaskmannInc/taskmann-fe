@@ -17,7 +17,11 @@ import { ButtonLoader, DataSetLoader } from "../../ui-fragments/loaders";
 import { StatusNotification } from "../../ui-fragments/notification";
 import { MdAlternateEmail } from "react-icons/md";
 import { BsFillInfoCircleFill } from "react-icons/bs";
+import { toast } from "react-hot-toast";
+
 export default function Signup() {
+  //initilizations
+  const router = useRouter();
   //form states
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfrmPass] = useState(false);
@@ -69,15 +73,14 @@ export default function Signup() {
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (!errors) {
-      console.log("data", userData);
       // return;
       SignupRequest(userData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
+  const onSuccess = () => {
+    setTimeout(router.push("/auth/login"), 4000);
   };
 
   const onError = (error) => {
@@ -132,7 +135,9 @@ export default function Signup() {
               ) : isSuccess ? (
                 <StatusNotification
                   type={"success"}
-                  message={signupResponse?.data?.message}
+                  message={
+                    "Registration successful. Kindly check your email for a verification instructions."
+                  }
                 />
               ) : isError ? (
                 <StatusNotification

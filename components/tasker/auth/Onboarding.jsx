@@ -20,7 +20,11 @@ import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
 import ContactAdmin from "../dashboard/subs/contactModal.jsx";
+import { useRouter } from "next/router";
+
 export default function OnboardTaskerStaff() {
+  //initialize router
+  const router = useRouter();
   //form states
   const [showInfo, setShowInfo] = useState(false);
   const [showContactInfo, setshowContactInfo] = useState(false);
@@ -80,7 +84,7 @@ export default function OnboardTaskerStaff() {
     }
   };
   const onSuccess = (data) => {
-    console.log(data);
+    setTimeout(router.push("/staff/auth/login"), 4000);
   };
 
   const onError = (error) => {
@@ -280,7 +284,11 @@ export default function OnboardTaskerStaff() {
                 </small>
               </div>
             </div>
-            <button type="submit" className={"submitBtn"} disabled={isLoading}>
+            <button
+              type="submit"
+              className={"submitBtn"}
+              disabled={isLoading || isSuccess}
+            >
               {isLoading ? <ButtonLoader /> : "Proceed"}
             </button>
             <Link href={"/staff/auth/login"} className={"pageLink"}>
