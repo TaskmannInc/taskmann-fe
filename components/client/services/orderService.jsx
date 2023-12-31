@@ -101,6 +101,7 @@ export default function OrderPackage() {
       return paramItem;
     });
     setSelectedOptions(paramsOnOp);
+    console.log("setSelectedOptions", paramsOnOp);
     return;
   };
 
@@ -173,7 +174,7 @@ export default function OrderPackage() {
       <section className={styles.servicesBanner}>
         <h6
           className={styles.servicesHeading}
-          style={{ textTransform: "capitalize", fontSize: `var()` }}
+          style={{ textTransform: "capitalize" }}
         >
           {priceTierInformation?.tier_name}
         </h6>
@@ -222,43 +223,69 @@ export default function OrderPackage() {
                     {param?.name} &nbsp; <FiArrowRight size={22} />
                   </span>
                   <span className={styles.parameter}>
-                    <button
-                      title="Decrease"
-                      type="button"
-                      className="action-btn"
-                      onClick={() =>
-                        handleChangeParamQty(param?.name, "decrease")
-                      }
-                      disabled={
-                        param?.quantity == param?.min ||
-                        allSelectedOptions?.some(
-                          (optionexist) => optionexist?.title == param?.name
-                        )
-                          ? true
-                          : false
-                      }
-                    >
-                      <FaMinusCircle size={80} color="red" />
-                    </button>
+                    {allSelectedOptions?.some(
+                      (optionexist) => optionexist?.name == param?.name
+                    ) ? (
+                      <button
+                        title="Decrease"
+                        type="button"
+                        className="action-btn"
+                        onClick={() =>
+                          handleChangeParamQty(param?.name, "decrease")
+                        }
+                        disabled={allSelectedOptions?.some(
+                          (optionexist) =>
+                            optionexist?.name == param?.name &&
+                            optionexist?.quantity == param?.min
+                        )}
+                      >
+                        <FaMinusCircle size={80} color="red" />
+                      </button>
+                    ) : (
+                      <button
+                        title="Decrease"
+                        type="button"
+                        className="action-btn"
+                        onClick={() =>
+                          handleChangeParamQty(param?.name, "decrease")
+                        }
+                        disabled={true}
+                      >
+                        <FaMinusCircle size={80} color="red" />
+                      </button>
+                    )}
                     <span></span>
-                    <button
-                      title="Increase"
-                      type="button"
-                      className="action-btn"
-                      onClick={() =>
-                        handleChangeParamQty(param?.name, "increase")
-                      }
-                      disabled={
-                        param?.quantity == param?.max ||
-                        allSelectedOptions?.some(
-                          (optionexist) => optionexist?.title == param?.name
-                        )
-                          ? true
-                          : false
-                      }
-                    >
-                      <BsPlusCircleFill size={80} color="green" />
-                    </button>
+                    {allSelectedOptions?.some(
+                      (optionexist) => optionexist?.name == param?.name
+                    ) ? (
+                      <button
+                        title="Increase"
+                        type="button"
+                        className="action-btn"
+                        onClick={() =>
+                          handleChangeParamQty(param?.name, "increase")
+                        }
+                        disabled={allSelectedOptions?.some(
+                          (optionexist) =>
+                            optionexist?.name == param?.name &&
+                            optionexist?.quantity == param?.max
+                        )}
+                      >
+                        <BsPlusCircleFill size={80} color="green" />
+                      </button>
+                    ) : (
+                      <button
+                        title="Increase"
+                        type="button"
+                        className="action-btn"
+                        onClick={() =>
+                          handleChangeParamQty(param?.name, "increase")
+                        }
+                        disabled={true}
+                      >
+                        <BsPlusCircleFill size={80} color="green" />
+                      </button>
+                    )}
                   </span>
                 </span>
               );
