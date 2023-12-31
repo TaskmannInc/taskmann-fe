@@ -80,7 +80,7 @@ export default function Signup() {
     }
   };
   const onSuccess = () => {
-    setTimeout(router.push("/auth/login"), 4000);
+    setTimeout(() => router.push("/auth/login"), 6000);
   };
 
   const onError = (error) => {

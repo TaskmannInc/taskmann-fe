@@ -84,7 +84,7 @@ export default function OnboardTaskerStaff() {
     }
   };
   const onSuccess = (data) => {
-    setTimeout(router.push("/staff/auth/login"), 4000);
+    setTimeout(() => router.push("/staff/auth/login"), 6000);
   };
 
   const onError = (error) => {
