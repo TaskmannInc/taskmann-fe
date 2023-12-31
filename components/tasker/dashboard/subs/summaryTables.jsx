@@ -1,4 +1,5 @@
 import { BsLayers } from "react-icons/bs";
+import { NoTableData } from "../../../ui-fragments/dataInteractions";
 
 export default function SummaryTables({
   styles,
@@ -135,13 +136,21 @@ export default function SummaryTables({
                         </small>
                       </span>
                     </div>
-                  ))}{" "}
+                  ))}
                 </>
               )}
               {allSystemTasks?.length == 0 && (
-                <span className="pill-error">
-                  There is nothing here at the moment
-                </span>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    alignSelf: "center",
+                  }}
+                >
+                  <NoTableData />
+                </div>
               )}
               {tasksError && (
                 <>
