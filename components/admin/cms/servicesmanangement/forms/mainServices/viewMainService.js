@@ -1,19 +1,10 @@
-import { useState } from "react";
-import Joi from "joi-browser";
-import validation from "../../../../../utils/helpers/validation";
-import {
-  GeneralTextAreaInput,
-  GeneralTextInput,
-} from "../../../../../ui-fragments/input.jsx";
-import { FaUserAlt } from "react-icons/fa";
-import { AddUserData } from "../../../../../utils/hooks/usermgmtHook";
-import styles from "../../../../../../styles/admin/Forms.module.css";
-import { GeneralSelectInput } from "../../../../../ui-fragments/select";
-import provinceDump from "../../../../../utils/data/candianProvinces.json";
-import cityDump from "../../../../../utils/data/cities.json";
-import { CloseButton } from "../../../../Globals/closeBtn";
-import { StatusNotification } from "../../../../../ui-fragments/notification";
+import DOMPurify from "dompurify";
 import Image from "next/image";
+import { FaUserAlt } from "react-icons/fa";
+import styles from "../../../../../../styles/admin/Forms.module.css";
+import { GeneralTextInput } from "../../../../../ui-fragments/input.jsx";
+import { GeneralSelectInput } from "../../../../../ui-fragments/select";
+import { CloseButton } from "../../../../Globals/closeBtn";
 
 export default function ViiewSystemService({ closeForm }) {
   //get selected row data
@@ -27,6 +18,11 @@ export default function ViiewSystemService({ closeForm }) {
   } else {
     console.log(null);
   }
+
+  const sanitizedData = (param) => ({
+    __html: DOMPurify.sanitize(param),
+  });
+
   return (
     <div className={""} style={{ width: "100%" }}>
       <div className={styles.authForm}>
@@ -67,14 +63,14 @@ export default function ViiewSystemService({ closeForm }) {
             defaultValue={__selected_service?.service_name}
           />
 
-          <GeneralTextAreaInput
+          {/* <GeneralTextAreaInput
             readOnly={true}
             label={"Service description"}
             placeholder={"Service description goes here"}
             type={"text"}
             name={"description"}
-            defaultValue={__selected_service?.description}
-          />
+            defaultValue={(__selected_service?.description)}
+          /> */}
 
           <GeneralSelectInput
             disabled={true}
@@ -87,6 +83,19 @@ export default function ViiewSystemService({ closeForm }) {
               { val: false, name: "Inactive" },
             ]}
           />
+          <span
+            className="mini-card"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              padding: "1rem 2rem",
+            }}
+            dangerouslySetInnerHTML={sanitizedData(
+              __selected_service?.description
+            )}
+          ></span>
         </div>
       </div>
     </div>

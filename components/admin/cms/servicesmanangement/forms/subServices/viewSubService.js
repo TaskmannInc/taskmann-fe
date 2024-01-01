@@ -1,10 +1,8 @@
+import DOMPurify from "dompurify";
 import Image from "next/image";
 import { FaTasks } from "react-icons/fa";
 import styles from "../../../../../../styles/admin/Forms.module.css";
-import {
-  GeneralTextAreaInput,
-  GeneralTextInput,
-} from "../../../../../ui-fragments/input";
+import { GeneralTextInput } from "../../../../../ui-fragments/input";
 import { GeneralSelectInput } from "../../../../../ui-fragments/select";
 import { CloseButton } from "../../../../Globals/closeBtn";
 
@@ -20,6 +18,10 @@ export default function ViewSystemSubService({ closeForm }) {
   } else {
     console.log(null);
   }
+
+  const sanitizedData = (param) => ({
+    __html: DOMPurify.sanitize(param),
+  });
 
   return (
     <div style={{ width: "100%" }}>
@@ -57,15 +59,6 @@ export default function ViewSystemSubService({ closeForm }) {
             readOnly
           />
 
-          <GeneralTextAreaInput
-            label={"Description"}
-            placeholder={"Sub service description goes here"}
-            type={"text"}
-            name={"description"}
-            defaultValue={__selected_sub_service?.description}
-            readOnly
-          />
-
           <GeneralSelectInput
             label={"Sub service status"}
             name={"active"}
@@ -77,9 +70,22 @@ export default function ViewSystemSubService({ closeForm }) {
             ]}
             disabled
           />
+
+          <span
+            className="mini-card"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              padding: "1rem 2rem",
+            }}
+            dangerouslySetInnerHTML={sanitizedData(
+              __selected_sub_service?.description
+            )}
+          ></span>
         </div>
       </div>
-      <div className={"PageNotice"}></div>
     </div>
   );
 }
