@@ -1,0 +1,963 @@
+/*Services banner*/
+.servicesBanner,
+.servicesBannerLoading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30rem;
+  background: url("/assets/backgrounds/taskmann-web-banner-a.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  color: var(--white);
+}
+
+.servicesBannerLoading {
+  filter: blur(25px);
+}
+
+.servicesBanner .servicesHeading {
+  font-size: var(--text-heading-3);
+  color: var(--dark-2);
+  text-align: center;
+}
+.servicesBanner .tagLine {
+  color: var(--white);
+  text-shadow: var(--text-shadow-1);
+  font-size: var(--text-lg);
+  width: 60%;
+  text-align: center;
+}
+
+.servicesBanner .serviceReqLink {
+  border: 1px solid var(--white);
+  padding: 0.8rem 1.5rem;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.servicesBanner .serviceReqLink:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+/*Service listing*/
+.serviceListing {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-2);
+  row-gap: 0.5rem;
+}
+
+.taskmannWebServicesWrapper {
+  width: 100%;
+  padding: 1rem 0.75rem;
+  min-height: 30rem;
+  max-height: max-content;
+  display: grid;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  grid-template-columns: 23% 23% 23% 23%;
+  justify-content: space-between;
+  justify-items: flex-start;
+  align-items: flex-start;
+}
+
+.taskService,
+.taskServiceLoading {
+  width: 100%;
+  height: 22rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  border-radius: var(--radius-md);
+}
+
+.taskServiceLoading {
+  filter: blur(25px);
+}
+
+.serviceImageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 55%;
+  border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+}
+
+.serviceImageContainer .serviceImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+}
+
+.serviceImageContainer .placeholderImage {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+  border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+}
+
+.serviceImageContainer .serviceImage:hover,
+.serviceImageContainer .placeholderImage:hover {
+  filter: brightness(0.5);
+}
+
+.serviceBox {
+  padding: 1.2rem 0.8rem;
+  border: 1px solid var(--gray-2);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 0.75rem;
+  width: 100%;
+  height: 45%;
+
+  color: var(--black);
+  background: var(--linear-white);
+
+  background-size: 100% 202%;
+  transition: all 0.2s ease;
+  animation: down-bump 0.4s ease;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  overflow-y: auto;
+}
+
+.serviceBox h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-transform: capitalize;
+  font-size: var(--text-md);
+  justify-content: space-between;
+  width: 100%;
+}
+
+.serviceBox .serviceDetails {
+  font-size: var(--text-sm);
+}
+
+.serviceDetails .subServices {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 1rem;
+  text-transform: capitalize;
+}
+
+.serviceDetails .subServices .sub {
+  color: var(--green-dark) !important;
+  font-weight: 600;
+}
+.serviceDetails .subServices .moreServiceInfo {
+  padding: 0.5rem 1.25rem;
+  border: 1pt solid var(--green-dark);
+  font-size: var(--text-normal);
+  color: var(--dark-2);
+  border-radius: var(--radius-md);
+}
+
+.serviceDetails .subServices .moreServiceInfo:hover {
+  background-color: var(--white);
+  color: var(--green-dark);
+}
+
+.serviceBox:hover {
+  background-position: 100% 100%;
+  animation: up-bump 0.4s ease;
+}
+.serviceBox:hover div {
+  color: white;
+}
+.serviceBox:hover h4 {
+  color: #25a79a;
+}
+.serviceBox:hover h4 span {
+  color: white;
+}
+.serviceBox:hover h3 {
+  color: #999;
+}
+
+/*Animations*/
+@keyframes up-bump {
+  0% {
+    padding-top: 2em;
+  }
+  50% {
+    padding-top: 1.5em;
+  }
+  100% {
+    padding-top: 2em;
+  }
+}
+@keyframes down-bump {
+  0% {
+    padding-top: 2em;
+  }
+  50% {
+    padding-top: 2.5em;
+  }
+  100% {
+    padding-top: 2em;
+  }
+}
+
+/*Main service */
+
+/*Service request*/
+.serviceRequest {
+  height: max-content;
+  padding: 0 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.serviceRequestIllustration {
+  background-image: url("../../public/assets/backgrounds/service-request.jpg");
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.serviceRequestIllustration span {
+  color: var(--gray);
+  font-size: 3rem;
+  font-family: var(--cursvie-3);
+  text-shadow: var(--text-shadow-1);
+}
+.serviceRequestForm {
+  padding: 1.5rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.75rem;
+  background: var(--gray-2);
+}
+
+.requestForm {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.7rem;
+}
+
+.serviceInputWrapper,
+.serviceTextAreaWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 0.75rem;
+}
+
+.serviceInputWrapper label {
+  font-size: var(--text-normal);
+  font-weight: 600;
+}
+
+.serviceInputWrapper input {
+  width: 100%;
+  border-radius: 10px;
+  height: max-content;
+  padding: 0.7rem 0.4rem;
+  font-family: var(--global-font);
+}
+
+.serviceTextAreaWrapper {
+  width: 95%;
+  height: max-content;
+}
+.serviceTextAreaWrapper textarea {
+  width: 100%;
+  border-radius: 10px;
+  height: max-content;
+  padding: 1.2rem 0.4rem;
+  font-family: var(--global-font);
+  resize: none;
+}
+
+.requestForm .contactMode {
+  width: 95%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 1rem;
+}
+
+.requestForm .contactMode .contactOptions {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contactMode .contactOptions .contactcheckWrapper label {
+  font-weight: 400 !important;
+  font-size: var(--text-md);
+}
+/* 
+.contactMode .contactOptions input[type="checkbox"] {
+  border: 1px solid var(--green-dark);
+  visibility: visible;
+  width: 15px;
+  height: 15px;
+  background-color: none !important;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  color: var(--white);
+}
+
+.contactMode .contactOptions input[type="checkbox"]:after {
+  background-color: var(--green-dark);
+  color: var(--white);
+  width: 15px;
+  height: 15px;
+  content: "✔";
+  display: inline-block;
+  visibility: visible;
+  color: var(--white);
+  text-align: center;
+}
+
+.contactMode .contactOptions input[type="checkbox"]:checked:after {
+  background-color: var(--green-dark);
+  color: var(--white);
+  content: "✔";
+} */
+
+.requestForm .submitBtn {
+  text-transform: uppercase;
+  border-radius: var(--radius-md);
+  height: max-content;
+  text-align: center;
+  letter-spacing: 0.1rem;
+
+  padding: 0.8rem 0.25rem;
+  width: 95%;
+  font-weight: 600;
+
+  color: var(--white);
+  background-color: var(--green-dark);
+}
+
+/*Sub service ordering*/
+.subServiceOrdering {
+  width: 100%;
+  height: max-content;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.subServiceOrdering .subServiceDetails,
+.subServiceOrdering .subServiceOrder {
+  padding: 2rem 1rem;
+  width: 100%;
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1pt solid var(--gray-2);
+  row-gap: 3rem;
+  overflow-y: scroll;
+}
+
+.subServiceOrdering .subServiceDetails h3,
+.subServiceOrdering .subServiceOrder h3 {
+  width: max-content;
+  height: max-content;
+  padding: 1rem 2rem;
+  color: var(--white);
+  border-radius: var(--radius-md);
+  border: 1pt solid var(--gray-2);
+  font-size: var(--text-heading-1);
+  font-weight: 800 !important;
+}
+
+.subServiceOrdering .subServiceDetails h3 {
+  background-color: var(--black);
+}
+
+.subServiceOrdering .subServiceOrder h3 {
+  background-color: var(--green-dark);
+}
+
+.subServiceOrdering .subServiceDetails .subServiceDetailList,
+.subServiceOrdering .subServiceOrder .orderSummary {
+  width: 80%;
+  height: max-content;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  border-radius: var(--radius-md);
+}
+
+.subServiceOrdering .subServiceDetails .subServiceDetailList {
+  /* border: 1pt solid var(--gray); */
+
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: var(--green-dark);
+}
+
+.subServiceOrdering .subServiceDetails .subServiceDetailList .serviceParamater {
+  border-radius: var(--radius-circular);
+  background-color: var(--white);
+  padding: 0.45rem 0.5rem;
+  height: max-content;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  column-gap: 1%;
+}
+
+.subServiceOrdering
+  .subServiceDetails
+  .subServiceDetailList
+  .serviceParamater
+  span {
+  height: 100%;
+  padding: 0.45rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-transform: initial;
+}
+
+.subServiceOrdering
+  .subServiceDetails
+  .subServiceDetailList
+  .serviceParamater
+  .parameterLabel {
+  font-weight: 600;
+  width: 100%;
+  font-size: var(--text-md);
+}
+.subServiceOrdering
+  .subServiceDetails
+  .subServiceDetailList
+  .serviceParamater
+  .parameter {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 55% 20%;
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.subServiceOrdering
+  .subServiceDetails
+  .subServiceDetailList
+  .serviceParamater
+  .parameter
+  input {
+  border: 2pt solid var(--dark);
+  border-radius: var(--radius-circular);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0.25rem;
+}
+
+.subServiceOrdering
+  .subServiceDetails
+  .subServiceDetailList
+  .serviceParamater
+  .parameter
+  button {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0;
+}
+
+.subServiceOrdering .subServiceOrder .orderSummary {
+  border: 1pt solid var(--green-dark);
+  background-color: var(--white);
+  box-shadow: var(--cards-shadow-2);
+  justify-content: center;
+  align-items: center;
+}
+
+.subServiceOrdering .subServiceOrder .orderSummary .summaryInfo {
+  width: 90%;
+  height: 2.5rem;
+  display: grid;
+  grid-template-columns: 49.5% 49.5%;
+  /* background-color: var(--dark); */
+  column-gap: 1%;
+  /* border: 1pt solid var(--dark); */
+}
+
+.orderSummaryTitle {
+  width: 100%;
+  text-align: center;
+  align-self: center;
+  font-weight: 700;
+  border: 1pt solid var(--gray-2);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-circular);
+}
+
+.orderSummaryLabel,
+.orderSummaryInfo {
+  width: 100%;
+  height: 100%;
+  padding: 0.35rem 0.55rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: var(--radius-circular) !important;
+  font-size: var(--text-sm);
+}
+
+.orderSummaryLabel {
+  color: var(--gray-2);
+  font-weight: 600;
+}
+
+.orderSummaryInfo {
+  background-color: var(--white);
+  color: var(--black);
+  font-weight: 800;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  border: 1pt solid var(--gray);
+}
+
+.addtoCart {
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  border: 1pt solid var(--green-dark);
+  width: 50%;
+  height: max-content;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+}
+
+.addtoCart:hover {
+  background-color: var(--green-dark);
+  color: var(--white);
+}
+
+/*Mobile responsive styles*/
+@media (min-width: 250px) and (max-width: 720px) {
+  .servicesBanner .servicesHeading {
+    font-size: var(--text-heading-1);
+    color: var(--dark-2);
+    text-align: center;
+  }
+  .servicesBanner .tagLine {
+    font-size: var(--text-md);
+    width: 90%;
+  }
+
+  .taskmannWebServicesWrapper {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+  }
+
+  .taskService,
+  .taskServiceLoading {
+    width: 100%;
+    height: 30rem;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+  }
+
+  .serviceBox {
+    border-bottom: 2pt solid var(--black);
+  }
+
+  .prices,
+  .pricesLoading {
+    background-color: var(--white);
+    width: 100%;
+    height: max-content;
+    border-radius: var(--radius-md);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+  }
+
+  .pricesLoading {
+    filter: blur(25px);
+  }
+
+  .priceCard {
+    background-color: var(--white);
+    width: 100%;
+    height: max-content;
+    border-radius: var(--radius-md);
+    box-shadow: var(--cards-shadow-2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: var(--tamed-shadows);
+  }
+
+  .priceCard .priceHeader {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    padding: 1rem 0.6rem;
+    width: 100%;
+    height: 15%;
+    background-color: var(--green-dark);
+    color: var(--white);
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .priceCard .priceBody {
+    padding: 1rem 0.6rem;
+    height: 70%;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 0.9rem;
+    overflow-y: auto;
+  }
+
+  .priceBody .priceTag {
+    width: max-content;
+    display: flex;
+  }
+
+  .priceBody .priceTag h1 {
+    font-size: var(--text-heading-3);
+  }
+
+  .priceBody .subServices {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 0.75rem;
+    width: 100%;
+  }
+  .subServices .item {
+    width: 90%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    font-weight: 400;
+    font-size: var(--text-md);
+    text-transform: initial;
+  }
+
+  .priceCard .priceFooter {
+    border-top: 1px solid var(--gray);
+    height: 15%;
+    bottom: 0;
+    padding: 1rem 0.6rem;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+  .priceFooter .getStartedLink {
+    width: 80%;
+    padding: 0.8rem 2.5rem;
+    text-align: center;
+    border-radius: var(--radius-md);
+  }
+
+  .priceCard:nth-child(1) .priceFooter .getStartedLink {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .priceCard:nth-child(n + 1) .priceFooter .getStartedLink {
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  .priceCard:nth-of-type(2n + 1) .priceFooter .getStartedLink {
+    background-color: var(--green-dark);
+    color: var(--white);
+  }
+
+  .priceFooter .getStartedLink:hover {
+    filter: brightness(0.8);
+  }
+
+  /*Service request*/
+  .serviceRequest {
+    padding: 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .serviceRequestIllustration {
+    padding: 2rem 1rem;
+  }
+
+  .serviceRequestIllustration span {
+    color: var(--black);
+    text-shadow: var(--text-shadow-2);
+    text-align: center;
+  }
+
+  .serviceRequestForm {
+    padding: 2rem 0.1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1.75rem;
+    background: var(--gray-2);
+  }
+
+  .serviceRequestForm h4 {
+    text-align: center;
+  }
+
+  .requestForm .contactMode .contactOptions {
+    flex-direction: column;
+    row-gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  /*Sub service ordering*/
+  .subServiceOrdering {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .subServiceOrdering .subServiceDetails,
+  .subServiceOrdering .subServiceOrder {
+    padding: 1rem 0.75rem;
+    height: max-content;
+  }
+
+  .subServiceOrdering .subServiceDetails .subServiceDetailList,
+  .subServiceOrdering .subServiceOrder .orderSummary {
+    width: 99%;
+    height: max-content;
+    padding: 1rem 0.65rem;
+    display: flex;
+  }
+
+  .subServiceOrdering
+    .subServiceDetails
+    .subServiceDetailList
+    .serviceParamaterMobile {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    row-gap: 0.4rem;
+  }
+
+  .subServiceOrdering
+    .subServiceDetails
+    .subServiceDetailList
+    .serviceParamater
+    .parameterLabel {
+    height: max-content;
+    font-weight: 600;
+    width: 100%;
+    font-size: var(--text-sm);
+  }
+
+  .subServiceOrdering
+    .subServiceDetails
+    .subServiceDetailList
+    .serviceParamater
+    .parameter {
+    height: max-content;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 55% 20%;
+    column-gap: 0.25rem;
+    align-items: center;
+    font-size: var(--text-sm);
+  }
+  .subServiceOrdering
+    .subServiceDetails
+    .subServiceDetailList
+    .serviceParamaterMobile
+    .parameter
+    button,
+  .subServiceOrdering
+    .subServiceDetails
+    .subServiceDetailList
+    .serviceParamater
+    .parameter
+    button {
+    max-height: 0.3rem !important;
+  }
+
+  /* .subServiceOrdering
+    .subServiceDetails
+    .subServiceDetailList
+    .serviceParamaterMobile
+    .parameter {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 48% 48%;
+    column-gap: 0.25rem;
+    align-items: center;
+    font-size: var(--text-sm);
+  } */
+
+  .subServiceOrdering .subServiceOrder .orderSummary .summaryInfo {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .subServiceOrdering
+    .subServiceOrder
+    .orderSummary
+    .summaryInfo
+    .orderSummaryLabel {
+    border-radius: var(--radius-md) !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    padding: 0.55rem 0.65rem;
+  }
+  .subServiceOrdering
+    .subServiceOrder
+    .orderSummary
+    .summaryInfo
+    .orderSummaryInfo {
+    border-radius: var(--radius-md) !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .orderSummaryInfo {
+    background-color: var(--white);
+    color: var(--black);
+    font-weight: 800;
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    border: 1pt solid var(--gray);
+  }
+}
+
+/*Tablet responsive styles*/
+@media (min-width: 724px) and (max-width: 1024px) {
+  .prices,
+  .pricesLoading {
+    padding: 2rem 2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .priceCard {
+    width: 100%;
+  }
+
+  /*Service request*/
+  .serviceRequest {
+    padding: 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .serviceRequestIllustration {
+    padding: 2rem 1rem;
+    min-height: 10rem;
+  }
+
+  .serviceRequestIllustration span {
+    color: var(--black);
+    text-shadow: var(--text-shadow-2);
+    text-align: center;
+  }
+
+  .serviceRequestForm {
+    padding: 2rem 0.1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1.75rem;
+    background: var(--gray-2);
+  }
+
+  .serviceRequestForm h4 {
+    text-align: center;
+  }
+
+  .requestForm .contactMode .contactOptions {
+    flex-direction: column;
+    row-gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  /*Sub service ordering*/
+  .subServiceOrdering {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .subServiceOrdering .subServiceDetails,
+  .subServiceOrdering .subServiceOrder {
+    height: max-content;
+  }
+}
