@@ -90,7 +90,6 @@ export default function Signup() {
   const {
     mutate: SignupRequest,
     isLoading,
-    data: signupResponse,
     isError,
     error,
     isSuccess,
