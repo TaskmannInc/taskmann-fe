@@ -237,7 +237,11 @@ export default function SessionOrders() {
                                 orderItem?.service_date
                               )?.toLocaleDateString()}
                             </b>
-                            <b>{orderItem?.service_date?.split("T")[1]}</b>
+                            <b>
+                              {new Date(
+                                orderItem?.service_date
+                              )?.toLocaleTimeString()}
+                            </b>
                           </small>
                         </span>
                       ))}
