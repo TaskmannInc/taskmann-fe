@@ -23,7 +23,7 @@ export default function Navigation() {
   const paths = [
     { id: 1, title: "Home", path: "/" },
     { id: 2, title: "Services", path: "/services/all-services" },
-    { id: 3, title: "Taskmann Web", path: "/company/taskmann-web" },
+    { id: 3, title: "Taskmann Web", path: "/services/taskmann-web" },
     { id: 4, title: "About", path: "/company/about" },
     { id: 5, title: "Contact", path: "/company/contact-us" },
   ];
