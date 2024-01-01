@@ -1106,6 +1106,7 @@ p {
 
 ::-webkit-scrollbar-track {
   background: var(--white);
+  border-radius: var(--radius-md) 0 var(--radius-md) 0;
 }
 
 ::-webkit-scrollbar-thumb {
