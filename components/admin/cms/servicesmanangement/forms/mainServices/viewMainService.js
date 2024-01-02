@@ -63,15 +63,6 @@ export default function ViiewSystemService({ closeForm }) {
             defaultValue={__selected_service?.service_name}
           />
 
-          {/* <GeneralTextAreaInput
-            readOnly={true}
-            label={"Service description"}
-            placeholder={"Service description goes here"}
-            type={"text"}
-            name={"description"}
-            defaultValue={(__selected_service?.description)}
-          /> */}
-
           <GeneralSelectInput
             disabled={true}
             label={"Service status"}
