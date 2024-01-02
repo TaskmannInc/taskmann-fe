@@ -295,6 +295,25 @@ button:disabled {
   height: max-content;
   width: max-content;
 }
+
+.closeBtn {
+  color: var(--green-darker);
+  position: fixed;
+  right: 5%;
+  top: 2%;
+}
+
+.closeBtn:hover {
+  color: var(--danger-2);
+}
+
+.modalHeader {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 /*Admin auth Styles*/
 .adminAuthBg {
   width: 100vw;
