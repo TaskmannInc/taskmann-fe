@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaInfoCircle, FaTasks } from "react-icons/fa";
 import { MdOutlineMiscellaneousServices } from "react-icons/md";
 import Lottie from "react-lottie";
@@ -25,6 +25,23 @@ export default function TaskmannWebCustomServices() {
   const [taskmannWebServices, setAllServices] = useState([]);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [webService, setWebService] = useState(null);
+  //mobile responsive screen
+  const [screenWidthMobile, setScreenWidthMobile] = useState(
+    window.matchMedia("(min-width: 250px) and (max-width: 720px)").matches
+  );
+  const [screenWidthTablet, setScreenWidthTablet] = useState(
+    window.matchMedia("(min-width:724px ) and (max-width:1024px)").matches
+  );
+
+  useEffect(() => {
+    window
+      .matchMedia("(min-width: 250px) and (max-width: 720px)")
+      .addEventListener("change", (e) => setScreenWidthMobile(e.matches));
+
+    window
+      .matchMedia("(min-width:724px ) and (max-width:1024px)")
+      .addEventListener("change", (e) => setScreenWidthTablet(e.matches));
+  }, []);
 
   //--Material ui modal wrapper  styles--//
   const ModalStyle = {
@@ -32,8 +49,8 @@ export default function TaskmannWebCustomServices() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 800,
-    maxHeight: "70vh",
+    width: screenWidthMobile ? "90%" : screenWidthTablet ? "95%" : 800,
+    maxHeight: screenWidthMobile ? "80vh" : screenWidthTablet ? "90vh" : "70vh",
     overflowY: "auto",
     bgcolor: `var(--white)`,
     border: "none",
