@@ -14,7 +14,51 @@ import {
   NoClientData,
 } from "../../ui-fragments/dataInteractions";
 
+/*Modal Imports*/
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
+import Modal from "@mui/material/Modal";
+import WebServicePreview from "./taskmannWeb/servicePreview";
 export default function TaskmannWebCustomServices() {
+  //component states
+  const [taskmannWebServices, setAllServices] = useState([]);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [webService, setWebService] = useState(null);
+
+  //--Material ui modal wrapper  styles--//
+  const ModalStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 800,
+    maxHeight: "70vh",
+    overflowY: "auto",
+    bgcolor: `var(--white)`,
+    border: "none",
+    boxShadow: 24,
+    borderRadius: `var(--radius-md)`,
+    p: 2,
+  };
+
+  //info btn styles
+  const infoBtnHovered = (paramId) => {
+    var btn = document.getElementById(paramId);
+    btn.style.color = `var(--white)`;
+  };
+
+  const infoBtnNotHovered = (paramId) => {
+    var btn = document.getElementById(paramId);
+    btn.style.color = `var(--black)`;
+  };
+
+  //show preview modal
+  const viewDetailModal = (service) => {
+    setWebService(service);
+    setShowPreviewModal(!showPreviewModal);
+  };
+
   //clean up html data
   const sanitizedData = (param) => ({
     __html: DOMPurify.sanitize(param),
@@ -28,9 +72,7 @@ export default function TaskmannWebCustomServices() {
     renderer: "svg",
   };
 
-  const [taskmannWebServices, setAllServices] = useState([]);
-
-  //--get main service <--> request--//
+  //--get taskmann web services <--> request--//
   const onError = (response) => {
     console.log("error", response);
   };
@@ -59,6 +101,7 @@ export default function TaskmannWebCustomServices() {
     data: serviceData,
   } = GetServicesHook(onSuccess, onError);
   const allMainServices = serviceData?.data?.result;
+
   return (
     <>
       <section className={styles.servicesBanner}>
@@ -147,14 +190,26 @@ export default function TaskmannWebCustomServices() {
                         </span>
                       </span>
                       &nbsp;{" "}
-                      <button onClick={() => console.log("E")} type="button">
+                      <button
+                        id={`infoBtn${index + 1}`}
+                        onMouseEnter={() =>
+                          infoBtnHovered(`infoBtn${index + 1}`)
+                        }
+                        onMouseLeave={() =>
+                          infoBtnNotHovered(`infoBtn${index + 1}`)
+                        }
+                        onClick={() => viewDetailModal(service)}
+                        type="button"
+                      >
                         <FaInfoCircle size={18} />
                       </button>
                     </h4>
                     <div className={styles.serviceDetails}>
                       <span
                         dangerouslySetInnerHTML={sanitizedData(
-                          service?.description
+                          service?.description?.length > 120
+                            ? `${service?.description?.slice(0, 120)} ...`
+                            : service?.description
                         )}
                       ></span>
                     </div>
@@ -171,6 +226,30 @@ export default function TaskmannWebCustomServices() {
           <NoClientData />
         )}
       </div>
+      {showPreviewModal && (
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={viewDetailModal}
+          onClose={viewDetailModal}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={viewDetailModal}>
+            <Box sx={ModalStyle}>
+              <WebServicePreview
+                closeForm={viewDetailModal}
+                styles={styles}
+                service={webService}
+                sanitizedData={sanitizedData}
+              />
+            </Box>
+          </Fade>
+        </Modal>
+      )}
     </>
   );
 }
