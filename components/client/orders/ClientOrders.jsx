@@ -5,7 +5,7 @@ import { LoaderIcon } from "react-hot-toast";
 import { BsFillArrowLeftCircleFill, BsThreeDots } from "react-icons/bs";
 import { FaArrowRight, FaBullseye, FaLongArrowAltRight } from "react-icons/fa";
 import { GrFormClose } from "react-icons/gr";
-import { MdOutlinePayments } from "react-icons/md";
+import { MdOutlinePayments, MdPendingActions } from "react-icons/md";
 import styles from "../../../styles/client/Orders.module.css";
 import {
   ClientDownTime,
@@ -20,11 +20,19 @@ import {
 import Cookies from "universal-cookie";
 import { useEffect } from "react";
 import { AiFillCodeSandboxCircle } from "react-icons/ai";
+
+/*Modal Imports*/
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
+import Modal from "@mui/material/Modal";
+import OrderActivities from "./orderActions";
+
 export default function SessionOrders() {
   //initializations
   const cookie = new Cookies();
   const router = useRouter();
-  const sessionAuth = cookie.get("TM_AC_TK");
+  const sessionAuth = sessionStorage?.getItem("TM_AC_TK");
 
   //redirect to login on unauthorization.
   useEffect(() => {
@@ -37,6 +45,14 @@ export default function SessionOrders() {
   const [paymentURL, setPaymentURL] = useState("");
   const [orderInfo, setOrderInfo] = useState({});
   const [orderItems, setOrderItem] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showActionsForm, setshowActionsForm] = useState(false);
+  const [screenWidthMobile, setScreenWidthMobile] = useState(
+    window.matchMedia("(min-width: 250px) and (max-width: 720px)").matches
+  );
+  const [screenWidthTablet, setScreenWidthTablet] = useState(
+    window.matchMedia("(min-width:724px ) and (max-width:1024px)").matches
+  );
 
   //get logged in user session order(s) info
   const onGetOrderSuccess = (data) => {
@@ -77,10 +93,39 @@ export default function SessionOrders() {
     isSuccess: onTriggerSuccess,
   } = MakePaymentHook(onPaymentTriggerSuccess, onPaymentTriggerError);
 
-  // if (onTriggerSuccess) {
-  //   setPaymentURL;
-  //   router?.push(paymentURL, "_blank");
-  // }
+  //mobile responsive screen effects and checks
+  useEffect(() => {
+    window
+      .matchMedia("(min-width: 250px) and (max-width: 720px)")
+      .addEventListener("change", (e) => setScreenWidthMobile(e.matches));
+
+    window
+      .matchMedia("(min-width:724px ) and (max-width:1024px)")
+      .addEventListener("change", (e) => setScreenWidthTablet(e.matches));
+  }, []);
+
+  //--Material ui modal wrapper  styles--//
+  const ModalStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: screenWidthMobile ? "90%" : screenWidthTablet ? "95%" : 800,
+    maxHeight: screenWidthMobile ? "80vh" : screenWidthTablet ? "90vh" : "70vh",
+    overflowY: "auto",
+    bgcolor: `var(--white)`,
+    border: "none",
+    boxShadow: 24,
+    borderRadius: `var(--radius-md)`,
+    p: 2,
+  };
+
+  //show actions modal
+  const viewActionsForm = (params) => {
+    setSelectedOrder(params);
+    setshowActionsForm(!showActionsForm);
+  };
+
   return (
     <div className={styles.orderContainer}>
       <div className={styles.orderHeader}>
@@ -188,6 +233,7 @@ export default function SessionOrders() {
               <span>Total items</span>
               <span>Cost</span>
               <span>Codes</span>
+              <span>Order status</span>
               <span>Task status</span>
               <span style={{ textAlign: "center" }} title="Payment actions">
                 <BsThreeDots size={25} />
@@ -295,28 +341,7 @@ export default function SessionOrders() {
                         {order?.cancellation_code ?? "none"}
                       </small>
                     </div>
-                    <div>
-                      <span
-                        style={{
-                          width: "70%",
-                          textAlig: "center",
-                          borderRadius: `var(--radius-min)`,
-                          padding: "0.35rem 0.5rem",
-                          color: `${
-                            order?.status == "PENDING"
-                              ? "var(--dark-2)"
-                              : order?.status == "PAID"
-                              ? "var(--success)"
-                              : "var(--danger)"
-                          }`,
-                          background: `var(--white)`,
-                          boxShadow: `var(--cards-shadow-2)`,
-                        }}
-                      >
-                        {order?.status ?? "Unavailable"}
-                      </span>
-                    </div>
-                    <div style={{ textAlign: "center" }}>
+                    <div style={{ textAlign: "left" }}>
                       {order?.payment?.status == "PAID" ? (
                         <span
                           style={{
@@ -368,6 +393,39 @@ export default function SessionOrders() {
                           PAY
                         </Link>
                       )}
+                    </div>
+                    <div>
+                      <span
+                        style={{
+                          width: "70%",
+                          textAlig: "center",
+                          borderRadius: `var(--radius-min)`,
+                          padding: "0.35rem 0.5rem",
+                          color: `${
+                            order?.status == "PENDING"
+                              ? "var(--dark-2)"
+                              : order?.status == "PAID"
+                              ? "var(--success)"
+                              : "var(--danger)"
+                          }`,
+                          background: `var(--white)`,
+                          boxShadow: `var(--cards-shadow-2)`,
+                        }}
+                      >
+                        {order?.status ?? "Unavailable"}
+                      </span>
+                    </div>
+                    <div style={{ textAlign: "center" }}>
+                      <button
+                        onClick={() => viewActionsForm(order)}
+                        type="button"
+                        disabled={
+                          order?.payment?.status !== "PAID" ||
+                          order?.status == "CANCELLED"
+                        }
+                      >
+                        <MdPendingActions size={20} />
+                      </button>
                     </div>
                   </div>
                 );
@@ -463,26 +521,7 @@ export default function SessionOrders() {
                         {order?.cancellation_code ?? "none"}
                       </small>
                     </div>
-                    <span
-                      style={{
-                        width: "100%",
-                        textAlig: "center",
-                        borderRadius: `var(--radius-min)`,
-                        padding: "0.35rem 0.5rem",
-                        color: `${
-                          order?.status == "PENDING"
-                            ? "var(--dark-2)"
-                            : order?.status == "PAID"
-                            ? "var(--success)"
-                            : "var(--danger)"
-                        }`,
-                        background: `var(--white)`,
-                        boxShadow: `var(--cards-shadow-1)`,
-                      }}
-                    >
-                      <span>Task status:</span>{" "}
-                      <span>{order?.status ?? "Unavailable"}</span>
-                    </span>
+
                     {order?.payment?.status == "PAID" ? (
                       <span
                         style={{
@@ -492,10 +531,10 @@ export default function SessionOrders() {
                           padding: "0.35rem 0.5rem",
                           color: `var(--success)`,
                           background: `var(--white)`,
-                          boxShadow: `var(--cards-shadow-2)`,
+                          boxShadow: `var(--cards-shadow-1)`,
                         }}
                       >
-                        PAID
+                        Order status: PAID
                       </span>
                     ) : order?.payment?.status == "CANCELLED" ? (
                       <span
@@ -506,10 +545,10 @@ export default function SessionOrders() {
                           padding: "0.35rem 0.5rem",
                           color: `var(--danger)`,
                           background: `var(--white)`,
-                          boxShadow: `var(--cards-shadow-2)`,
+                          boxShadow: `var(--cards-shadow-1)`,
                         }}
                       >
-                        CANCELLED
+                        Order status: CANCELLED
                       </span>
                     ) : (
                       <Link
@@ -534,6 +573,39 @@ export default function SessionOrders() {
                         PAY
                       </Link>
                     )}
+                    <span
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        textAlign: "center",
+                        borderRadius: `var(--radius-min)`,
+                        padding: "0.35rem 0.5rem",
+                        color: `${
+                          order?.status == "PENDING"
+                            ? "var(--dark-2)"
+                            : order?.status == "PAID"
+                            ? "var(--success)"
+                            : "var(--danger)"
+                        }`,
+                        background: `var(--white)`,
+                        boxShadow: `var(--cards-shadow-1)`,
+                      }}
+                    >
+                      <span>Task status:{order?.status ?? "Unavailable"}</span>{" "}
+                      <div style={{ textAlign: "center" }}>
+                        <button
+                          onClick={() => viewActionsForm(order)}
+                          type="button"
+                          disabled={
+                            order?.payment?.status !== "PAID" ||
+                            order?.status == "CANCELLED"
+                          }
+                        >
+                          <MdPendingActions size={25} />
+                        </button>
+                      </div>{" "}
+                    </span>
                   </div>
                 );
               })}
@@ -561,6 +633,29 @@ export default function SessionOrders() {
             "There are no order items here. Checkout from your cart to see your orders here..."
           }
         />
+      )}
+      {showActionsForm && (
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={viewActionsForm}
+          onClose={viewActionsForm}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={viewActionsForm}>
+            <Box sx={ModalStyle}>
+              <OrderActivities
+                closeForm={viewActionsForm}
+                styles={styles}
+                selectedOrder={selectedOrder}
+              />
+            </Box>
+          </Fade>
+        </Modal>
       )}
     </div>
   );
