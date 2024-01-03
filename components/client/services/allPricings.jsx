@@ -1,22 +1,25 @@
 import Link from "next/link";
-import styles from "../../../styles/client/Services.module.css";
-import { FaRegStar } from "react-icons/fa";
-import { BsClipboardCheck } from "react-icons/bs";
 import { useRouter } from "next/router";
-import {
-  GetSelectedServiceHook,
-  GetSubServicesHook,
-} from "../../utils/hooks/serviceMgmtHook";
+import { useState } from "react";
+import { BsClipboardCheck } from "react-icons/bs";
+import { FaRegStar } from "react-icons/fa";
+import styles from "../../../styles/client/Services.module.css";
 import {
   ClientDownTime,
   NoClientData,
 } from "../../ui-fragments/dataInteractions";
-import { useState } from "react";
-import { primaryCurrency } from "../../utils/constants/constants";
 import { SubServiceCardsLoader } from "../../ui-fragments/loaders";
+import { primaryCurrency } from "../../utils/constants/constants";
+import { GetSubServicesHook } from "../../utils/hooks/serviceMgmtHook";
+import DOMPurify from "dompurify";
 
 export default function ServicePricing() {
-  //next router definition
+  //initializations
+  //clean up html data
+  const sanitizedData = (param) => ({
+    __html: DOMPurify.sanitize(param),
+  });
+
   const router = useRouter();
 
   var queryParams = router?.query?.sv;
@@ -117,7 +120,13 @@ export default function ServicePricing() {
                     <div className={styles.subServices}>
                       <span key={index + 1} className={styles.item}>
                         <BsClipboardCheck size={20} />{" "}
-                        <small>{subs?.description}</small>
+                        <small
+                          dangerouslySetInnerHTML={sanitizedData(
+                            subs?.description?.length > 400
+                              ? `${subs?.description?.slice(0, 400)} ...`
+                              : subs?.description
+                          )}
+                        ></small>
                       </span>
                     </div>
                   </span>
