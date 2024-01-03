@@ -43,6 +43,12 @@ export default function SubServiceDetails() {
     router.push(`/services/book-service?i=${selectedService?._id}`);
   };
 
+  //book service
+  const bookCustomPackage = () => {
+    sessionStorage.setItem("customBooking", JSON.stringify(selectedService));
+    router.push(`/services/request-service?i=${selectedService?._id}`);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -61,11 +67,12 @@ export default function SubServiceDetails() {
             {selectedSubServiceData?.sub_service_name ?? "Sub services offered"}
           </h2>
           <p className={styles.tagLine}>
-            Check out the amazing catalogue of pricing plans we have for{" "}
+            Check out the amazing ww of pricing plans we have for{" "}
             {selectedSubServiceData?.sub_service_name ?? "us"}.
           </p>
           <Link
-            href={"/services/request-service"}
+            onClick={() => bookCustomPackage()}
+            href={"#"}
             className={styles.serviceReqLink}
           >
             Request on your own terms
@@ -80,7 +87,8 @@ export default function SubServiceDetails() {
               affordable prices.
             </p>
             <Link
-              href={"/services/request-service"}
+              onClick={() => bookCustomPackage()}
+              href={"#"}
               className={styles.serviceReqLink}
             >
               Request a Service
@@ -139,17 +147,11 @@ export default function SubServiceDetails() {
             </div>
           </>
         ) : isSuccess && selectedSubServiceData?.subservice?.length == 0 ? (
-          <div style={{ padding: "3rem 0" }}>
-            <NoClientData />
-          </div>
+          <NoClientData />
         ) : isError ? (
-          <div style={{ padding: "3rem 0" }}>
-            <ClientDownTime />
-          </div>
+          <ClientDownTime />
         ) : (
-          <div style={{ padding: "3rem 0" }}>
-            <NoClientData />
-          </div>
+          <NoClientData />
         )}
       </div>
     </>

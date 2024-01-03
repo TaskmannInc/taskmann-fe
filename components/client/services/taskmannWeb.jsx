@@ -95,11 +95,12 @@ export default function TaskmannWebCustomServices() {
   };
 
   const onSuccess = (response) => {
-    console.log("response", response?.data?.result);
-    const dataInclusion = "description" || "service_name";
     const filterWebServices = response?.data?.result?.filter((webServices) => {
-      return webServices?.description?.includes(
-        "Taskmann web" ||
+      return webServices?.service_name?.includes(
+        "Taskmann Web Exclusive" ||
+          "Taskmann Web exclusive" ||
+          "Taskmann web exclusive" ||
+          "Taskmann web" ||
           "Taskmann Web" ||
           "taskmann web" ||
           "TASKMANN WEB" ||
@@ -107,17 +108,10 @@ export default function TaskmannWebCustomServices() {
       );
     });
     console.log("filter web services", filterWebServices);
-    setAllServices(filterWebServices);
+    setAllServices(filterWebServices[0]?.subservice);
   };
 
-  const {
-    isLoading,
-    isError,
-    isSuccess,
-    error,
-    data: serviceData,
-  } = GetServicesHook(onSuccess, onError);
-  const allMainServices = serviceData?.data?.result;
+  const { isLoading, isError, isSuccess } = GetServicesHook(onSuccess, onError);
 
   return (
     <>
@@ -167,7 +161,7 @@ export default function TaskmannWebCustomServices() {
               );
             })}
           </>
-        ) : isSuccess && allMainServices?.length > 0 ? (
+        ) : isSuccess && taskmannWebServices?.length > 0 ? (
           <div className={styles.taskmannWebServicesWrapper}>
             {taskmannWebServices?.map((service, index) => {
               return (
@@ -175,12 +169,12 @@ export default function TaskmannWebCustomServices() {
                   <div className={styles.serviceImageContainer}>
                     <Image
                       className={
-                        service?.service_image?.[0]?.image_url
+                        service?.subservice_image?.[0]?.image_url
                           ? styles.serviceImage
                           : styles.placeholderImage
                       }
                       src={
-                        service?.service_image?.[0]?.image_url ??
+                        service?.subservice_image?.[0]?.image_url ??
                         "/assets/trademarks/taskmann-logo.png"
                       }
                       alt="Service Cover"
@@ -201,9 +195,9 @@ export default function TaskmannWebCustomServices() {
                       >
                         <FaTasks size={15} />
                         <span>
-                          {service?.service_name?.length > 22
-                            ? `${service?.service_name?.slice(0, 22)}...`
-                            : service?.service_name}
+                          {service?.sub_service_name?.length > 22
+                            ? `${service?.sub_service_name?.slice(0, 22)}...`
+                            : service?.sub_service_name}
                         </span>
                       </span>
                       &nbsp;{" "}
@@ -235,7 +229,7 @@ export default function TaskmannWebCustomServices() {
               );
             })}
           </div>
-        ) : isSuccess && allMainServices?.length == 0 ? (
+        ) : isSuccess && taskmannWebServices?.length == 0 ? (
           <NoClientData />
         ) : isError ? (
           <ClientDownTime />

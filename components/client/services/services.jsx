@@ -18,7 +18,12 @@ export default function Allservices() {
   };
 
   const onSuccess = (response) => {
-    setAllServices(response?.data?.result);
+    const includedServices = response?.data?.result?.filter((service) => {
+      return !service.service_name?.includes(
+        "Taskmann Web" || "Taskmann web exclusive"
+      );
+    });
+    setAllServices(includedServices);
   };
 
   const {
@@ -85,7 +90,7 @@ export default function Allservices() {
           </>
         ) : isSuccess && allMainServices?.length > 0 ? (
           <>
-            {allMainServices?.map((service, index) => {
+            {allServices?.map((service, index) => {
               return (
                 <div key={index + 1} className={styles.taskService}>
                   <div className={styles.serviceBox}>
