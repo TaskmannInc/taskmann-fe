@@ -6,8 +6,8 @@ export const NoTableData = ({ notification }) => {
       <Image
         src={"/assets/illustrations/desk-illustration.svg"}
         alt={"No data"}
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         className={"noTableData-illustration"}
         loading="lazy"
       />
@@ -25,8 +25,8 @@ export const NoClientData = ({ notification }) => {
       <Image
         src={"/assets/illustrations/person-working.svg"}
         alt={"No data"}
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         className={"noTableData-illustration"}
         loading="lazy"
       />
@@ -43,8 +43,8 @@ export const NoCartData = ({ notification }) => {
       <Image
         src={"/assets/illustrations/cart.svg"}
         alt={"No data"}
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         className={"noTableData-illustration"}
         loading="lazy"
       />
@@ -62,8 +62,8 @@ export const NoOrderData = ({ notification }) => {
       <Image
         src={"/assets/illustrations/package.svg"}
         alt={"No data"}
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         className={"noTableData-illustration"}
         loading="lazy"
       />
@@ -81,8 +81,8 @@ export const SuccessInteraction = ({ notification }) => {
       <Image
         src={"/assets/illustrations/dancing-jubilation.svg"}
         alt={"No data"}
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         className={"noTableData-illustration"}
         loading="lazy"
       />
@@ -101,8 +101,8 @@ export const ErrorInteraction = ({ notification }) => {
       <Image
         src={"/assets/illustrations/payment-error.svg"}
         alt={"No data"}
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         className={"noTableData-illustration"}
         loading="lazy"
       />
@@ -123,8 +123,8 @@ export const ClientDownTime = ({ notification }) => {
       <Image
         src={"/assets/illustrations/server-woman-colour.svg"}
         alt={"No data"}
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         className={"noTableData-illustration"}
         loading="lazy"
       />
@@ -142,8 +142,8 @@ export const NoAvailableOpenings = ({ notification }) => {
       <Image
         src={"/assets/illustrations/careers-illustration.svg"}
         alt={"No data"}
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         className={"noTableData-illustration"}
         loading="lazy"
       />
