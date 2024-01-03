@@ -1,6 +1,7 @@
 import { FaTasks } from "react-icons/fa";
 import { CloseButton } from "../../../admin/Globals/closeBtn";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function WebServicePreview({
   service,
@@ -14,9 +15,9 @@ export default function WebServicePreview({
         <FaTasks size={25} />
         <h4>
           <small style={{ fontWeight: "600", fontStyle: "italic" }}>
-            {service?.service_name?.length > 50
-              ? `${service?.service_name?.slice(0, 50)} ...`
-              : service?.service_name}
+            {service?.sub_service_name?.length > 50
+              ? `${service?.sub_service_name?.slice(0, 50)} ...`
+              : service?.sub_service_name}
           </small>
         </h4>
         <CloseButton className={"closeBtn"} closeFunc={closeForm} />
@@ -32,7 +33,7 @@ export default function WebServicePreview({
         >
           <Image
             src={
-              service?.service_image?.[0]?.image_url ??
+              service?.subservice_image?.[0]?.image_url ??
               "/assets/trademarks/taskmann-logo.png"
             }
             alt={service?.service_name}
@@ -40,6 +41,12 @@ export default function WebServicePreview({
             height={100}
             className={styles.webServiceDetailImage}
           />
+          <Link
+            href={`/services/sub-service-pricing?sv=${service?._id}`}
+            className={styles.bookWebServiceLink}
+          >
+            Book service
+          </Link>
         </span>
 
         <div
