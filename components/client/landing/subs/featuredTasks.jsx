@@ -20,7 +20,10 @@ export default function FeaturedTasksSection({ styles }) {
   };
 
   const onSuccess = (response) => {
-    setFeaturedServices(response?.data?.result);
+    const featured = response?.data?.result?.filter((service) => {
+      return !service.service_name?.includes("Taskmann Web");
+    });
+    setFeaturedServices(featured);
   };
 
   const {
@@ -47,7 +50,7 @@ export default function FeaturedTasksSection({ styles }) {
           <CardsLoader styles={styles} />
         ) : isSuccess && allMainServices?.length > 0 ? (
           <>
-            {allMainServices?.slice?.(0, 8)?.map((featured, index) => {
+            {featuredServices?.slice?.(0, 8)?.map((featured, index) => {
               return (
                 <Link
                   href={`/services/service-pricing?sv=${featured?._id}`}
