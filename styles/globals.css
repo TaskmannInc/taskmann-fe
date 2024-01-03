@@ -1230,11 +1230,13 @@ p {
   height: max-content;
   display: flex;
   flex-direction: column;
+  justify-items: center;
   justify-content: center;
   align-items: center;
   align-self: center;
   row-gap: 1.5rem;
   margin: 2rem 0;
+  padding: 3rem 0;
 }
 
 .noTableData-illustration {
@@ -1417,6 +1419,13 @@ p {
   label {
     font-size: var(--text-md) !important;
   }
+  .select-container {
+    width: 90% !important;
+  }
+
+  .input-container {
+    width: 90% !important;
+  }
 }
 
 /*Tablet responsive styles*/
@@ -1530,5 +1539,12 @@ p {
   }
   label {
     font-size: var(--text-md) !important;
+  }
+  .select-container {
+    width: 90% !important;
+  }
+
+  .input-container {
+    width: 90% !important;
   }
 }

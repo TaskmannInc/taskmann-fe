@@ -226,6 +226,21 @@
   object-fit: cover;
   border-radius: var(--radius-md) 0 0 var(--radius-md);
 }
+
+.bookWebServiceLink {
+  position: absolute;
+  bottom: 10%;
+  background-color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-md);
+  font-weight: 700;
+}
+
+.bookWebServiceLink:hover {
+  background-color: var(--green-dark);
+  color: var(--white);
+}
 .webServiceDetail .webServiceDescription {
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   width: 100%;
