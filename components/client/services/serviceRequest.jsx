@@ -1,15 +1,30 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Joi from "joi-browser";
-import validation from "../../utils/helpers/validation.js";
-import Cookies from "universal-cookie";
-import Link from "next/link";
-import styles from "../../../styles/client/Services.module.css";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { MdOutlineCleaningServices } from "react-icons/md";
+import styles from "../../../styles/client/Services.module.css";
+import validation from "../../utils/helpers/validation.js";
 
 import { RequestServiceHook } from "../../utils/hooks/orderHooks";
 
 export default function ServiceRequest() {
+  //get selected service to book
+  const orderingState = {
+    customService:
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("customBooking")
+        : null,
+    session: sessionStorage?.getItem("TM_AC_TK"),
+    sessionData: sessionStorage?.getItem("TM_AC_USR"),
+  };
+
+  var customServiceData = JSON.parse(orderingState?.customService);
+  var requestBio = JSON.parse(orderingState?.sessionData);
+
+  // next router definition
+  const router = useRouter();
+  var queryParams = router?.query?.sv;
+
   //state objects
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
@@ -93,15 +108,10 @@ export default function ServiceRequest() {
       <section className={styles.servicesBanner}>
         <h2 className={styles.servicesHeading}>Request a service</h2>
         <p className={styles.tagLine}>
-          {"Can't"} find the service you need? Kindly fill out the form below
-          and a customer representative will be assigned to you a few moments.
+          {"Can't"} find the service you need or have a more tailored request?
+          Kindly fill out the form below and a customer representative will be
+          assigned to you in a short time.
         </p>
-        {/* <Link
-          href={"/services/request-service"}
-          className={styles.serviceReqLink}
-        >
-          Request a Service
-        </Link> */}
       </section>
       <div className={styles.serviceRequest}>
         <div className={styles.serviceRequestIllustration}>
@@ -109,9 +119,15 @@ export default function ServiceRequest() {
         </div>
 
         <div className={styles.serviceRequestForm}>
-          <h4>
-            Kindly fill out the form below to request an unlisted service.
-          </h4>
+          <h5 style={{ fontWeight: "500" }}>
+            Kindly fill out the form below to request{" "}
+            <i style={{ fontWeight: "800" }}>
+              {customServiceData
+                ? `the ${customServiceData?.sub_service_name} `
+                : "an unlisted "}{" "}
+            </i>
+            service.
+          </h5>
           <MdOutlineCleaningServices size={40} />
 
           {stepOne && (
@@ -126,6 +142,7 @@ export default function ServiceRequest() {
                       name={"first_name"}
                       onChange={handleChange}
                       className={styles.input}
+                      defaultValue={requestBio?.first_name ?? ""}
                     />
                     <small className="field-validation-contrast">
                       {errors.first_name && "Your first name is required"}
@@ -139,6 +156,7 @@ export default function ServiceRequest() {
                       name={"last_name"}
                       onChange={handleChange}
                       className={styles.input}
+                      defaultValue={requestBio?.last_name ?? ""}
                     />
                     <small className="field-validation-contrast">
                       {errors.last_name && "Your last name is required"}
@@ -154,6 +172,7 @@ export default function ServiceRequest() {
                       name={"email"}
                       onChange={handleChange}
                       className={styles.input}
+                      defaultValue={requestBio?.email ?? ""}
                     />
                     <small className="field-validation-contrast">
                       {errors.email && "A vaild email is required"}
@@ -169,6 +188,7 @@ export default function ServiceRequest() {
                       name={"phone"}
                       onChange={handleChange}
                       className={styles.input}
+                      defaultValue={requestBio?.phone ?? ""}
                     />
                     <small className="field-validation-contrast">
                       {errors.phone && "A vaild phone number is required"}
@@ -177,7 +197,7 @@ export default function ServiceRequest() {
                 </div>
                 <div className={"grid-col-2"}>
                   <div className={styles.serviceInputWrapper}>
-                    <label>Service date</label>
+                    <label>Service start date</label>
                     <input
                       type={"date"}
                       name={"service_date"}
@@ -189,7 +209,7 @@ export default function ServiceRequest() {
                     </small>{" "}
                   </div>
                   <div className={styles.serviceInputWrapper}>
-                    <label>Service time</label>
+                    <label>Service start time</label>
                     <input
                       type={"time"}
                       name={"service_time"}
