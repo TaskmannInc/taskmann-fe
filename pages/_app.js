@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
           <link rel="icon" href="/assets/trademarks/taskmann-logo.png" />
         </Head>
         <Component {...pageProps} />
-        <ReactQueryDevtools initialIsOpen="false" position="bottom-right" />
+        {/* <ReactQueryDevtools initialIsOpen="false" position="bottom-right" /> */}
       </LoadingStateProvider>
     </QueryClientProvider>
   );
