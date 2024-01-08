@@ -92,10 +92,7 @@ export default function Footer() {
               Careers
             </Link>
             <Link href={"/company/faq"} className="footerLinkItem">
-              FAQ
-            </Link>
-            <Link href={"/usage-and-more"} className="footerLinkItem">
-              Usage & More
+              FAQs, Usage & More
             </Link>
             <Link href={"/"} className="footerLinkItem">
               Taskers
