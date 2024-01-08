@@ -29,7 +29,7 @@ export default function AccountDropdown({ session }) {
   const onSuccess = () => {
     logoutNotif(
       <span style={{ color: `var(--green-primary)` }}>
-        Logout successful. Redirecting to login...
+        Logout successful...
       </span>
     );
     sessionStorage.removeItem("TM_AC_USR");
@@ -45,8 +45,8 @@ export default function AccountDropdown({ session }) {
     if (error?.message?.includes("401")) {
       logoutNotif(
         <span style={{ color: `var(--warning)` }}>
-          An error occured while logging you out. You will be logged out of this
-          current session now.
+          An error occured while logging you out. You will be logged out of
+          locally and out of the current session now.
         </span>
       );
       sessionStorage.removeItem("TM_AC_USR");
