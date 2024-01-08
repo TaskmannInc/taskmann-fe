@@ -87,3 +87,27 @@ export const MakePaymentHook = (onPaymentSuccess, onError) => {
     onError,
   });
 };
+
+const cancelSessionUserOrder = (data) => {
+  const url = baseURL + ENDPOINTS.order + `/${data?.id}`;
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${userSession?.accessAuth}`,
+  };
+  delete data.id;
+  return axios.patch(url, data, { headers: headers });
+};
+
+export const CancelSessionUserOrderHook = (onUpdateSuccess, onError) => {
+  const queryClient = useQueryClient();
+  return useMutation(cancelSessionUserOrder, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["sessionOrders"]);
+      queryClient.invalidateQueries(["adminTaskList"]);
+      queryClient.invalidateQueries(["taskersTasks"]);
+    },
+    onUpdateSuccess,
+    onError,
+  });
+};

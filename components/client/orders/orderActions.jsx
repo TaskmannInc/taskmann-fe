@@ -1,6 +1,6 @@
+import Joi from "joi-browser";
 import { useState } from "react";
 import { FaTasks } from "react-icons/fa";
-import Joi from "joi-browser";
 
 import validation from "../../utils/helpers/validation.js";
 
@@ -8,20 +8,18 @@ import styles from "../../../styles/admin/Forms.module.css";
 import { CloseButton } from "../../admin/Globals/closeBtn";
 import { GeneralTextInput } from "../../ui-fragments/input";
 import { StatusNotification } from "../../ui-fragments/notification";
-import { GeneralSelectInput } from "../../ui-fragments/select";
-import { UpdateTaskersTasks } from "../../utils/hooks/ordersMgmtHook";
+import { CancelSessionUserOrderHook } from "../../utils/hooks/orderHook.js";
 
 export default function OrderActivities({ selectedOrder, closeForm }) {
   //form states
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    status: "",
+    code: "",
   });
-  const [code, setCode] = useState(null);
 
   //defined validation schema
   const schema = {
-    status: Joi.string().required(),
+    code: Joi.string().required(),
   };
 
   //Form inputs event handler
@@ -30,8 +28,7 @@ export default function OrderActivities({ selectedOrder, closeForm }) {
   };
 
   const requestBody = {
-    action: formData.status,
-    code: code,
+    code: formData?.code,
     id: selectedOrder?._id,
   };
 
@@ -39,32 +36,29 @@ export default function OrderActivities({ selectedOrder, closeForm }) {
     e.preventDefault();
     const errors = validation(formData, schema);
     setErrors(errors || {});
-    (requestBody?.action == "ACCEPTED" || requestBody?.action == "REJECTED") &&
-      delete requestBody.code;
     if (!errors) {
-      updateTaskStatus(requestBody);
-      console.log("data", formData);
+      cancelSessionOrder(requestBody);
     } else {
       console.log(errors);
     }
   };
 
   //response statuses
-  const onUpdateTaskError = (response) => {
+  const onCancelOrderError = (response) => {
     console.log("error", response);
   };
 
-  const onUpdateTaskSuccess = () => {
+  const onCancelOrderSuccess = () => {
     closeModal();
   };
 
   const {
-    mutate: updateTaskStatus,
-    isLoading: isUpdatingLoading,
-    isError: isUpdatingError,
-    isSuccess: isUpdatingSuccess,
-    error: updateError,
-  } = UpdateTaskersTasks(onUpdateTaskSuccess, onUpdateTaskError);
+    mutate: cancelSessionOrder,
+    isLoading: isCancellingOrder,
+    isError: isCancellingOrderError,
+    isSuccess: isCancellingOrderSuccess,
+    error: cancellationError,
+  } = CancelSessionUserOrderHook(onCancelOrderSuccess, onCancelOrderError);
   return (
     <div style={{ width: "100%" }}>
       <div className={"modalHeader"}>
@@ -76,55 +70,59 @@ export default function OrderActivities({ selectedOrder, closeForm }) {
         </h4>
         <CloseButton className={"closeBtn"} closeFunc={closeForm} />
       </div>
+      <legend
+        style={{
+          fontSize: "1rem",
+          padding: "1rem 0.5rem",
+          textAlign: "center",
+        }}
+      >
+        Are you sure you want to cancel this order? You will be charged a
+        cancellation fee of{" "}
+        <b>
+          <i>{"20%"}</i>
+        </b>{" "}
+        the order amount on refund ...
+      </legend>
       <form
         className={styles.formContainer}
         onSubmit={(e) => submitAssignmentData(e)}
       >
-        <GeneralSelectInput
-          label={"Task status"}
-          name={"status"}
-          defaultValue={formData.active}
-          disabledDescription={"Task status"}
-          options={[{ val: "CANCELLED", name: "Cancel order" }]}
-          onChange={handleChange}
+        <GeneralTextInput
+          label={"Status code"}
+          placeholder={"Enter order cancellation code. Eg: 2058"}
+          type={"text"}
+          name={"code"}
+          onChange={(e) => handleChange(e)}
           validate={errors}
         />
-        <small className="field-validation">
-          {!formData.status && "Please select status to continue..."}
-        </small>
-
-        {formData?.status == "CANCELLED" && (
-          <>
-            <GeneralTextInput
-              label={"Status code"}
-              placeholder={"Enter status code. Eg: 2058"}
-              type={"text"}
-              name={"code"}
-              onChange={(e) => setCode(e.target.value)}
-              validate={errors}
-            />
-            <small className="field-validation">
-              {formData?.status == "CANCELLED" && "Task code is required"}
-            </small>
-          </>
+        {errors.code && (
+          <small className="field-validation">
+            Order cancellation code is required to continue ...
+          </small>
         )}
 
         <button
           type="submit"
           className={styles.submitBtn}
-          disabled={isUpdatingLoading}
+          style={{ backgroundColor: `var(--danger)`, width: "50%" }}
+          disabled={isCancellingOrder}
         >
-          {isUpdatingLoading ? "Updating..." : "Update status"}
+          {isCancellingOrder ? "Cancelling..." : "Cancel order"}
         </button>
-        {isUpdatingSuccess ? (
+        {isCancellingOrderSuccess ? (
           <StatusNotification
             type={"success"}
-            message={`Task assigned successfully.`}
+            message={`Order cancelled successfully... A refund will be initiated and the order amount -20% paid to your payment account.`}
           />
-        ) : isUpdatingError ? (
+        ) : isCancellingOrderError ? (
           <StatusNotification
             type={"error"}
-            message={updateError?.response?.data?.error ?? updateError?.message}
+            message={
+              cancellationError?.response?.data?.error
+                ? `We could not cancel your order. Reason: ${cancellationError?.response?.data?.error} `
+                : `We could not cancel your order. Reason: ${cancellationError?.message}`
+            }
           />
         ) : null}
       </form>

@@ -20,6 +20,7 @@ import {
 import Cookies from "universal-cookie";
 import { useEffect } from "react";
 import { AiFillCodeSandboxCircle } from "react-icons/ai";
+import { TbShoppingCartCancel } from "react-icons/tb";
 
 /*Modal Imports*/
 import Backdrop from "@mui/material/Backdrop";
@@ -58,7 +59,6 @@ export default function SessionOrders() {
   const onGetOrderSuccess = (data) => {
     setOrderInfo(data?.data?.data);
     setOrderItem(data?.data?.data);
-    console.info("orders", data?.data?.data);
   };
 
   const onGetOrderError = (error) => {
@@ -419,12 +419,13 @@ export default function SessionOrders() {
                       <button
                         onClick={() => viewActionsForm(order)}
                         type="button"
+                        title="Cancel order"
                         disabled={
                           order?.payment?.status !== "PAID" ||
                           order?.status == "CANCELLED"
                         }
                       >
-                        <MdPendingActions size={20} />
+                        <TbShoppingCartCancel size={25} color="var(--danger)" />
                       </button>
                     </div>
                   </div>
@@ -597,14 +598,18 @@ export default function SessionOrders() {
                         <button
                           onClick={() => viewActionsForm(order)}
                           type="button"
+                          title="Cancel order"
                           disabled={
                             order?.payment?.status !== "PAID" ||
                             order?.status == "CANCELLED"
                           }
                         >
-                          <MdPendingActions size={25} />
+                          <TbShoppingCartCancel
+                            size={25}
+                            color="var(--danger)"
+                          />
                         </button>
-                      </div>{" "}
+                      </div>
                     </span>
                   </div>
                 );
