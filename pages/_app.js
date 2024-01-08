@@ -11,9 +11,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <LoadingStateProvider>
-        {" "}
         <Head>
-          <title>Taskmann</title>{" "}
+          <title>
+            Taskmann - Let our taskers make life easier at an affordable rate
+          </title>
           <link rel="icon" href="/assets/trademarks/taskmann-logo.png" />
         </Head>
         <Component {...pageProps} />
