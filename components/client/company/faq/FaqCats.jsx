@@ -78,8 +78,8 @@ export default function FAQCategories({
       >
         <RiPsychotherapyLine size="25" className="icon" />
         &nbsp; Others
-      </button>{" "}
-      <button
+      </button>
+      {/* <button
         onClick={faqChangeEvents?.showMoreCat}
         className={
           faqRenderEvents?.ShowMoreFAQS === true
@@ -89,7 +89,7 @@ export default function FAQCategories({
       >
         <TbZoomQuestion size="25" className="icon" />
         &nbsp; More FAQs
-      </button>
+      </button> */}
     </div>
   );
 }

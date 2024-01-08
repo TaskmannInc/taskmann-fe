@@ -139,7 +139,8 @@
 }
 
 .accordionItem:hover > .accordionTitle {
-  transform: scale(1.005);
+  background-color: var(--green-primary);
+  color: var(--white);
 }
 
 .accordionTitle {
@@ -228,7 +229,8 @@
 
   .sectionAccordians {
     width: 99%;
-    height: max-content;
+    height: 20rem;
+    overflow-y: auto;
     max-height: max-content;
   }
 

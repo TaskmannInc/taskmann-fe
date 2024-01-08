@@ -68,7 +68,7 @@ export default function FAQsManagementWrapper({ styles }) {
     console.log("sucesss :", response);
   };
 
-  //get career faqs <--> request
+  //get all faqs <--> request
   const {
     isLoading,
     isError,

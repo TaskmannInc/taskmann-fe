@@ -13,11 +13,15 @@ import {
   OthersQuestionsAnswers__,
 } from "./faqData";
 import { FrequentQuest } from "./frequent";
-import { OtherFAQS } from "./others";
 export default function QuestionsAnswers({
   styles,
   faqRenderEvents,
-  user_faqs,
+  RegCategoryData,
+  ACCategoryData,
+  OrderCategoryData,
+  PaymentCategoryData,
+  CustomerCategoryData,
+  OtherCategoryData,
 }) {
   return (
     <div className={styles.qaAccordiansContainer}>
@@ -26,8 +30,8 @@ export default function QuestionsAnswers({
         <div className={styles.sectionAccordians}>
           {faqRenderEvents?.ShowRegCategory && (
             <>
-              {RegistrationQuestionsAnswers__.map(
-                ({ id, question, answer, index }) => (
+              <>
+                {RegCategoryData?.map(({ id, question, answer, index }) => (
                   <FrequentQuest
                     key={index + 1}
                     id={id}
@@ -36,14 +40,14 @@ export default function QuestionsAnswers({
                     BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
                     BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
                   />
-                )
-              )}
+                ))}
+              </>
             </>
           )}
           {faqRenderEvents?.ShowACCategory && (
             <>
-              {AccountRelatedQuestionsAnswers__.map(
-                ({ id, question, answer, index }) => (
+              <>
+                {ACCategoryData?.map(({ id, question, answer, index }) => (
                   <FrequentQuest
                     key={index + 1}
                     id={id}
@@ -52,14 +56,14 @@ export default function QuestionsAnswers({
                     BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
                     BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
                   />
-                )
-              )}
+                ))}
+              </>
             </>
           )}
           {faqRenderEvents?.ShowOrderCategory && (
             <>
-              {OrderRelatedQuestionsAnswers__.map(
-                ({ id, question, answer, index }) => (
+              <>
+                {OrderCategoryData?.map(({ id, question, answer, index }) => (
                   <FrequentQuest
                     key={index + 1}
                     id={id}
@@ -68,14 +72,14 @@ export default function QuestionsAnswers({
                     BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
                     BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
                   />
-                )
-              )}
+                ))}
+              </>
             </>
           )}
           {faqRenderEvents?.ShowPaymentCategory && (
             <>
-              {PaymentsQuestionsAnswers__.map(
-                ({ id, question, answer, index }) => (
+              <>
+                {PaymentCategoryData?.map(({ id, question, answer, index }) => (
                   <FrequentQuest
                     key={index + 1}
                     id={id}
@@ -84,66 +88,16 @@ export default function QuestionsAnswers({
                     BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
                     BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
                   />
-                )
-              )}
+                ))}
+              </>
             </>
           )}
           {faqRenderEvents?.ShowCustomerCategory && (
             <>
-              {CustomerQuestionsAnswers__.map(
-                ({ id, question, answer, index }) => (
-                  <FrequentQuest
-                    key={index + 1}
-                    id={id}
-                    question={question}
-                    answer={answer}
-                    BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
-                    BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
-                  />
-                )
-              )}
-            </>
-          )}
-          {faqRenderEvents?.ShowDeliveryCategory && (
-            <>
-              {DeliveryQuestionsAnswers__.map(
-                ({ id, question, answer, index }) => (
-                  <FrequentQuest
-                    key={index + 1}
-                    id={id}
-                    question={question}
-                    answer={answer}
-                    BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
-                    BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
-                  />
-                )
-              )}
-            </>
-          )}
-          {faqRenderEvents?.ShowOtherCategory && (
-            <>
-              {OthersQuestionsAnswers__.map(
-                ({ id, question, answer, index }) => (
-                  <FrequentQuest
-                    key={index + 1}
-                    id={id}
-                    question={question}
-                    answer={answer}
-                    BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
-                    BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
-                  />
-                )
-              )}
-            </>
-          )}
-          {faqRenderEvents?.ShowMoreFAQS && (
-            <>
-              {user_faqs === [] || user_faqs === undefined ? (
-                <span className={styles.faqNoData}>Nothing in this secton</span>
-              ) : (
-                <>
-                  {user_faqs?.map(({ id, question, answer, index }) => (
-                    <OtherFAQS
+              <>
+                {CustomerCategoryData?.map(
+                  ({ id, question, answer, index }) => (
+                    <FrequentQuest
                       key={index + 1}
                       id={id}
                       question={question}
@@ -151,9 +105,26 @@ export default function QuestionsAnswers({
                       BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
                       BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
                     />
-                  ))}
-                </>
-              )}
+                  )
+                )}
+              </>
+            </>
+          )}
+
+          {faqRenderEvents?.ShowOtherCategory && (
+            <>
+              <>
+                {OtherCategoryData?.map(({ id, question, answer, index }) => (
+                  <FrequentQuest
+                    key={index + 1}
+                    id={id}
+                    question={question}
+                    answer={answer}
+                    BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
+                    BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
+                  />
+                ))}
+              </>
             </>
           )}
         </div>

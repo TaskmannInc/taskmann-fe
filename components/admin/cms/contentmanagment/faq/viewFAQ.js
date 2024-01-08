@@ -33,7 +33,7 @@ export default function ViewFAQs({ closeForm }) {
       <div className={styles.authForm}>
         <div className={styles.authFormHeader}>
           <MdOutlineQuestionMark size={25} />
-          <h6>Review</h6>
+          <h6>FAQ</h6>
           <CloseButton style={styles.closeBtn} closeFunc={closeForm} />
         </div>
         <div className={styles.formContainer}>

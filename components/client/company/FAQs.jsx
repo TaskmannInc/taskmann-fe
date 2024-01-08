@@ -16,6 +16,13 @@ export default function HowTo() {
   const [ShowOtherCategory, setShowOtherCategory] = useState(false);
   const [ShowMoreFAQS, setShowMoreFAQS] = useState(false);
 
+  const [RegCategoryData, setRegCategoryData] = useState([]);
+  const [ACCategoryData, setACCategoryData] = useState([]);
+  const [OrderCategoryData, setOrderCategoryData] = useState([]);
+  const [PaymentCategoryData, setPaymentCategoryData] = useState([]);
+  const [CustomerCategoryData, setCustomerCategoryData] = useState([]);
+  const [OtherCategoryData, setOtherCategoryData] = useState([]);
+
   //event states
   const showRegCat = () => {
     setShowRegCategory(true);
@@ -133,12 +140,45 @@ export default function HowTo() {
     console.log("fetch error", error);
   };
 
-  const onSuccess = (userdata) => {
-    // console.log("sucesss :", userdata);
+  const onSuccess = (data) => {
+    const regFAQ = data?.data?.result?.filter((filterItem) => {
+      return filterItem?.category == "Registration";
+    });
+    const accFAQ = data?.data?.result?.filter((filterItem) => {
+      return filterItem?.category == "Account related";
+    });
+    const ordersFAQ = data?.data?.result?.filter((filterItem) => {
+      return filterItem?.category == "Order related";
+    });
+
+    const payFAQ = data?.data?.result?.filter((filterItem) => {
+      return filterItem?.category == "Payments";
+    });
+
+    const cusFAQ = data?.data?.result?.filter((filterItem) => {
+      return filterItem?.category == "Customers";
+    });
+
+    const otherFAQ = data?.data?.result?.filter((filterItem) => {
+      return filterItem?.category == "Miscellaneous";
+    });
+
+    setRegCategoryData(regFAQ);
+    setACCategoryData(accFAQ);
+    setOrderCategoryData(ordersFAQ);
+    setPaymentCategoryData(payFAQ);
+    setCustomerCategoryData(cusFAQ);
+    setOtherCategoryData(otherFAQ);
   };
 
-  //get faqs
-  const { data: all_faqs } = GetFAQsHook(onSuccess, onError);
+  //get career faqs <--> request
+  const {
+    isLoading,
+    isError,
+    isSuccess,
+    error,
+    data: FAQs,
+  } = GetFAQsHook(onSuccess, onError);
 
   return (
     <>
@@ -151,18 +191,36 @@ export default function HowTo() {
           at the cheapest rates.
         </p>
       </section>
-      <div className={styles.faqContent}>
-        <FAQCategories
-          faqChangeEvents={faqChangeEvents}
-          faqRenderEvents={faqRenderEvents}
-          styles={styles}
-        />
-        <QuestionsAnswers
-          faqRenderEvents={faqRenderEvents}
-          user_faqs={all_faqs?.data}
-          styles={styles}
-        />
-      </div>
+      {isLoading ? (
+        <div className={styles.faqContent} style={{ filter: "blur(10px)" }}>
+          <FAQCategories
+            faqChangeEvents={faqChangeEvents}
+            faqRenderEvents={faqRenderEvents}
+            styles={styles}
+          />
+          <QuestionsAnswers faqRenderEvents={faqRenderEvents} styles={styles} />
+        </div>
+      ) : (
+        isSuccess && (
+          <div className={styles.faqContent}>
+            <FAQCategories
+              faqChangeEvents={faqChangeEvents}
+              faqRenderEvents={faqRenderEvents}
+              styles={styles}
+            />
+            <QuestionsAnswers
+              faqRenderEvents={faqRenderEvents}
+              styles={styles}
+              RegCategoryData={RegCategoryData}
+              ACCategoryData={ACCategoryData}
+              OrderCategoryData={OrderCategoryData}
+              PaymentCategoryData={PaymentCategoryData}
+              CustomerCategoryData={CustomerCategoryData}
+              OtherCategoryData={OtherCategoryData}
+            />
+          </div>
+        )
+      )}
     </>
   );
 }

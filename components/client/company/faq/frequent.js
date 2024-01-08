@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../../../styles/client/faq.module.css";
+import DOMPurify from "dompurify";
+
 export const FrequentQuest = ({
   question,
   answer,
@@ -7,6 +9,10 @@ export const FrequentQuest = ({
   BsFillArrowDownCircleFill,
   BsFillArrowUpCircleFill,
 }) => {
+  const sanitizedData = (param) => ({
+    __html: DOMPurify.sanitize(param),
+  });
+
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -25,7 +31,12 @@ export const FrequentQuest = ({
           )}
         </div>
       </div>
-      {isActive && <div className={styles.accordionContent}>{answer}</div>}
+      {isActive && (
+        <div
+          className={styles.accordionContent}
+          dangerouslySetInnerHTML={sanitizedData(answer)}
+        ></div>
+      )}
     </div>
   );
 };
