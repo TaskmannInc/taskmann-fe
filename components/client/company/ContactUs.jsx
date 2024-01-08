@@ -54,7 +54,7 @@ export default function ContactCustomerCare() {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
+  const onSuccess = () => {
     toast.success({
       message: "Your message has been sent over. Our team will be in touch.",
     });
@@ -97,6 +97,7 @@ export default function ContactCustomerCare() {
                     placeholder={"Please enter your first name"}
                     type={"text"}
                     name={"first_name"}
+                    defaultValue={formData?.first_name}
                     onChange={handleChange}
                     className={styles.input}
                   />
@@ -110,6 +111,7 @@ export default function ContactCustomerCare() {
                     placeholder={"Please enter your last name"}
                     type={"text"}
                     name={"last_name"}
+                    defaultValue={formData?.last_name}
                     onChange={handleChange}
                     className={styles.input}
                   />
@@ -125,6 +127,7 @@ export default function ContactCustomerCare() {
                     placeholder={"Please enter your mail address"}
                     type={"email"}
                     name={"email"}
+                    defaultValue={formData?.email}
                     onChange={handleChange}
                     className={styles.input}
                   />
@@ -140,6 +143,7 @@ export default function ContactCustomerCare() {
                     }
                     type={"phone"}
                     name={"phone"}
+                    defaultValue={formData?.phone}
                     onChange={handleChange}
                     className={styles.input}
                   />
@@ -155,6 +159,7 @@ export default function ContactCustomerCare() {
                   type={"text"}
                   placeholder={"Your message goes here..."}
                   name={"message"}
+                  defaultValue={formData?.message}
                   onChange={handleChange}
                   validate={errors}
                   className={styles.textarea}
