@@ -48,7 +48,7 @@ export default function Footer() {
               Contact Us
             </Link>
             <Link href={"/company/reviews"} className="footerLinkItem">
-              Our Reviews
+              Testimonials & Reviews
             </Link>
             <Link href={"/company/about"} className="footerLinkItem">
               Overview

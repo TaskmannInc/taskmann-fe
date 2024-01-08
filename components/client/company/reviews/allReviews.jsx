@@ -71,9 +71,15 @@ export default function SelectedReviewDetail({
         ))}
       </div>
       <p className={styles.reviewContent}>
-        {review.message?.length > 600
-          ? `${review.message?.slice(0, 599)}...`
-          : review?.message}
+        {review?.message
+          ? review.message?.length > 600
+            ? `${review.message?.slice(0, 599)}...`
+            : review?.message
+          : review?.statment
+          ? review.statment?.length > 600
+            ? `${review.statment?.slice(0, 599)}...`
+            : review?.message
+          : null}
       </p>
       {review.message?.length > 600 && (
         <button

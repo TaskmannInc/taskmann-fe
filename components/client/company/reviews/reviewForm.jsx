@@ -2,28 +2,73 @@ import { useState } from "react";
 import { MdCancel, MdFormatListBulletedAdd } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { AiOutlineStar } from "react-icons/ai";
+import Joi from "joi-browser";
+import validation from "../../../utils/helpers/validation";
+import { AddReviewHook } from "../../../utils/hooks/reviewsMgmtHook";
+import { StatusNotification } from "../../../ui-fragments/notification";
 
 export default function ReviewForm({ onAddReview, styles, closeForm }) {
   //component states
   const [rateHover, setRateHover] = useState(1);
+  const [errors, setErrors] = useState({});
   const [formdata, setFormdata] = useState({
     firstname: "",
     lastname: "",
     email: "",
     rating: "",
-    message: "",
+    statement: "",
   });
+
+  //defined validation schema
+  const schema = {
+    firstname: Joi.string().required(),
+    lastname: Joi.string().required(),
+    email: Joi.string().required().email(),
+    rating: Joi.string().optional().allow(null),
+    statement: Joi.string().required(),
+  };
 
   //hanlde form input change events
   const handleFormChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
   };
 
-  //form submission function
+  const requestBody = {
+    name: `${formdata?.firstname} ${formdata?.lastname}`,
+    statement: formdata.statement,
+  };
+
+  //function to submit form data
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formdata);
+    const errors = validation(formdata, schema);
+    setErrors(errors || {});
+    if (!errors) {
+      addReviewSubmission(requestBody);
+    } else {
+      console.log(errors);
+    }
   };
+
+  const onSuccess = (data) => {
+    console.log(data);
+  };
+
+  const onError = (error) => {
+    console.log("error: ", error.message);
+  };
+
+  const {
+    mutate: addReviewSubmission,
+    isLoading,
+    isError,
+    error,
+    isSuccess,
+  } = AddReviewHook(onSuccess, onError);
+
+  if (isSuccess) {
+    closeForm();
+  }
 
   return (
     <form className={styles.reviewform} onSubmit={handleSubmit}>
@@ -42,6 +87,7 @@ export default function ReviewForm({ onAddReview, styles, closeForm }) {
           <div className={styles.inputGroup}>
             <label htmlFor="name">First name</label>
             <input
+              disabled={isLoading}
               type="text"
               id="name"
               name="firstname"
@@ -52,6 +98,7 @@ export default function ReviewForm({ onAddReview, styles, closeForm }) {
           <div className={styles.inputGroup}>
             <label htmlFor="name">Last name</label>
             <input
+              disabled={isLoading}
               type="text"
               id="name"
               name="lastname"
@@ -60,10 +107,14 @@ export default function ReviewForm({ onAddReview, styles, closeForm }) {
             />
           </div>
         </div>
-
+        <small className="field-validation">
+          {(errors.firstname || errors.lastname) &&
+            "Your full name is required"}
+        </small>
         <div className={styles.inputGroup}>
           <label htmlFor="email">E-mail:</label>
           <input
+            disabled={isLoading}
             type="email"
             id="email"
             name="email"
@@ -71,6 +122,9 @@ export default function ReviewForm({ onAddReview, styles, closeForm }) {
             onChange={handleFormChange}
           />
         </div>
+        <small className="field-validation">
+          {errors.email && "Your full email is required"}
+        </small>
         <div className={styles.inputGroup}>
           <label htmlFor="rating">Rating:</label>
           <div className={styles.ratings}>
@@ -79,6 +133,7 @@ export default function ReviewForm({ onAddReview, styles, closeForm }) {
               return (
                 <label className="ratings" key={i} title={ratingValue}>
                   <input
+                    disabled={isLoading}
                     type="radio"
                     name="rating"
                     defaultValue={ratingValue}
@@ -108,18 +163,42 @@ export default function ReviewForm({ onAddReview, styles, closeForm }) {
           </div>
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor="message">Message:</label>
+          <label htmlFor="statement">Message:</label>
           <textarea
-            id="message"
-            name="message"
+            className=""
+            disabled={isLoading}
+            id="statement"
+            name="statement"
             defaultValue={""}
             onChange={handleFormChange}
           ></textarea>
         </div>
+        <small className="field-validation">
+          {errors.statement && "Message cannot be empty"}
+        </small>{" "}
       </div>
-      <button className={styles.submitBtn} type="submit">
-        Add review
+      <button
+        className={styles.submitBtn}
+        type="submit"
+        disabled={isLoading || isSuccess}
+      >
+        {isLoading
+          ? "Submitting your review ..."
+          : isError
+          ? "Retry"
+          : "Add review"}
       </button>
+      {isSuccess ? (
+        <StatusNotification
+          type={"success"}
+          message={"Your review has been submitted successfully"}
+        />
+      ) : isError ? (
+        <StatusNotification
+          type={"error"}
+          message={error?.response?.data?.error ?? error?.message}
+        />
+      ) : null}
     </form>
   );
 }

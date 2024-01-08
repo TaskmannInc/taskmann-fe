@@ -3,15 +3,6 @@ import {
   BsFillArrowDownCircleFill,
   BsFillArrowUpCircleFill,
 } from "react-icons/bs";
-import {
-  RegistrationQuestionsAnswers__,
-  AccountRelatedQuestionsAnswers__,
-  OrderRelatedQuestionsAnswers__,
-  PaymentsQuestionsAnswers__,
-  CustomerQuestionsAnswers__,
-  DeliveryQuestionsAnswers__,
-  OthersQuestionsAnswers__,
-} from "./faqData";
 import { FrequentQuest } from "./frequent";
 export default function QuestionsAnswers({
   styles,

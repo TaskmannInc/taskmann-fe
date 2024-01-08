@@ -101,3 +101,73 @@
   align-items: center;
   padding: 0.5rem 0.75rem;
 }
+
+@media (min-width: 240px) and (max-width: 420px) {
+  .policiesBanner .policiesHeading {
+    font-size: var(--text-heading-3);
+  }
+
+  .policiesBanner .tagLine {
+    width: 90%;
+  }
+
+  .policiesSection h3 {
+    font-size: var(--text-lg);
+    line-height: 1.5rem;
+  }
+  .policiesSection h3 i {
+    font-size: var(--text-md);
+  }
+
+  .policiesAccordionsContainer {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: center;
+    background-color: var(--gray-2);
+    border-radius: var(--radius-min);
+  }
+
+  .accordianItem {
+    height: max-content;
+    border-radius: var(--radius-lg);
+    border-bottom: 1px solid var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    padding: 0.65rem 0.8rem;
+  }
+
+  .accordianItem:hover {
+    transform: scale(1.01);
+  }
+
+  .accordianItem .heading {
+    font-size: var(--text-lg);
+  }
+  .accordianItem .icon {
+    color: var(--dark);
+  }
+
+  .accordianContent {
+    /* letter-spacing: 0.5rem; */
+    word-spacing: 0.4rem;
+    line-height: 1.5rem;
+    font-size: var(--text-md);
+    background-color: var(--white);
+    color: #0e0e0e;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+  }
+}

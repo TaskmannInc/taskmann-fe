@@ -19,7 +19,7 @@ const getPolicies = () => {
   const url = baseURL + ENDPOINTS.policies;
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${ACCESS_TOKEN}`,
+    // Authorization: `Bearer ${ACCESS_TOKEN}`,
   };
   // console.log("headers", headers);
   return axios.get(url, { headers: headers });
