@@ -94,7 +94,7 @@ export default function Footer() {
             <Link href={"/company/faq"} className="footerLinkItem">
               FAQs, Usage & More
             </Link>
-            <Link href={"/"} className="footerLinkItem">
+            <Link href={"/company/taskers"} className="footerLinkItem">
               Taskers
             </Link>
           </div>
