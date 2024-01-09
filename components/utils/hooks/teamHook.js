@@ -26,7 +26,7 @@ const getTeamMembers = () => {
 };
 
 export const GetTeamMembersHook = (onSuccess, onError) => {
-  return useQuery("allteammembers", getTeamMembers, {
+  return useQuery(["allteammembers"], getTeamMembers, {
     onSuccess,
     onError,
     staleTime: Infinity,
@@ -65,7 +65,7 @@ export const AddTeamMemberHook = (onAddSuccess, onError) => {
   const queryClient = useQueryClient();
   return useMutation(addTeamMember, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries("allteammembers");
+      queryClient.invalidateQueries(["allteammembers"]);
     },
     onAddSuccess,
     onError,
