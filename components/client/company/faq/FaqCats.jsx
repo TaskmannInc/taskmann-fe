@@ -1,10 +1,9 @@
 import { AiOutlineUserAdd, AiOutlineUserSwitch } from "react-icons/ai";
+import { FaTasks } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { GiPayMoney } from "react-icons/gi";
-import { GrDeliver } from "react-icons/gr";
 import { MdOutlineManageAccounts } from "react-icons/md";
 import { RiPsychotherapyLine } from "react-icons/ri";
-import { TbZoomQuestion } from "react-icons/tb";
 
 export default function FAQCategories({
   styles,
@@ -67,6 +66,17 @@ export default function FAQCategories({
       >
         <AiOutlineUserSwitch size="25" className="icon" />
         &nbsp; Customer
+      </button>
+      <button
+        onClick={faqChangeEvents?.showTaskersCat}
+        className={
+          faqRenderEvents?.ShowTaskersCategory === true
+            ? styles.faqBtnActive
+            : styles.faqCategoryBtn
+        }
+      >
+        <FaTasks size="25" className="icon" />
+        &nbsp; Taskers
       </button>
       <button
         onClick={faqChangeEvents?.showOtherCat}

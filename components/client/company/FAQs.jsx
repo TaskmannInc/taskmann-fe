@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import styles from "../../../styles/client/faq.module.css";
+import styles from "../../../styles/client/FAQ.module.css";
 import { GetFAQsHook } from "../../utils/hooks/faqHook";
 import FAQCategories from "./faq/FaqCats";
 import QuestionsAnswers from "./faq/QuestionAnswers";
 export default function HowTo() {
-  const [contentType, setContentType] = useState("customers");
-
   //component states
   const [ShowRegCategory, setShowRegCategory] = useState(true);
   const [ShowACCategory, setShowACCategory] = useState(false);
@@ -13,6 +11,7 @@ export default function HowTo() {
   const [ShowPaymentCategory, setShowPaymentCategory] = useState(false);
   const [ShowCustomerCategory, setShowCustomerCategory] = useState(false);
   const [ShowDeliveryCategory, setShowDeliveryCategory] = useState(false);
+  const [ShowTaskersCategory, setShowTaskersCategory] = useState(false);
   const [ShowOtherCategory, setShowOtherCategory] = useState(false);
   const [ShowMoreFAQS, setShowMoreFAQS] = useState(false);
 
@@ -21,6 +20,7 @@ export default function HowTo() {
   const [OrderCategoryData, setOrderCategoryData] = useState([]);
   const [PaymentCategoryData, setPaymentCategoryData] = useState([]);
   const [CustomerCategoryData, setCustomerCategoryData] = useState([]);
+  const [taskersCategoryData, setTaskersCategoryData] = useState([]);
   const [OtherCategoryData, setOtherCategoryData] = useState([]);
 
   //event states
@@ -31,8 +31,8 @@ export default function HowTo() {
     setShowPaymentCategory(false);
     setShowCustomerCategory(false);
     setShowDeliveryCategory(false);
+    setShowTaskersCategory(false);
     setShowOtherCategory(false);
-    setShowMoreFAQS(false);
   };
 
   const showACCat = () => {
@@ -42,8 +42,8 @@ export default function HowTo() {
     setShowPaymentCategory(false);
     setShowCustomerCategory(false);
     setShowDeliveryCategory(false);
+    setShowTaskersCategory(false);
     setShowOtherCategory(false);
-    setShowMoreFAQS(false);
   };
 
   const showOrderCat = () => {
@@ -53,8 +53,8 @@ export default function HowTo() {
     setShowPaymentCategory(false);
     setShowCustomerCategory(false);
     setShowDeliveryCategory(false);
+    setShowTaskersCategory(false);
     setShowOtherCategory(false);
-    setShowMoreFAQS(false);
   };
 
   const showPaymentCat = () => {
@@ -64,8 +64,8 @@ export default function HowTo() {
     setShowPaymentCategory(true);
     setShowCustomerCategory(false);
     setShowDeliveryCategory(false);
+    setShowTaskersCategory(false);
     setShowOtherCategory(false);
-    setShowMoreFAQS(false);
   };
 
   const showCustomerCat = () => {
@@ -75,8 +75,8 @@ export default function HowTo() {
     setShowPaymentCategory(false);
     setShowCustomerCategory(true);
     setShowDeliveryCategory(false);
+    setShowTaskersCategory(false);
     setShowOtherCategory(false);
-    setShowMoreFAQS(false);
   };
 
   const showDeliveryCat = () => {
@@ -86,10 +86,20 @@ export default function HowTo() {
     setShowPaymentCategory(false);
     setShowCustomerCategory(false);
     setShowDeliveryCategory(true);
+    setShowTaskersCategory(false);
     setShowOtherCategory(false);
-    setShowMoreFAQS(false);
   };
 
+  const showTaskersCat = () => {
+    setShowRegCategory(false);
+    setShowACCategory(false);
+    setShowOrderCategory(false);
+    setShowPaymentCategory(false);
+    setShowCustomerCategory(false);
+    setShowDeliveryCategory(false);
+    setShowTaskersCategory(true);
+    setShowOtherCategory(false);
+  };
   const showOtherCat = () => {
     setShowRegCategory(false);
     setShowACCategory(false);
@@ -97,8 +107,8 @@ export default function HowTo() {
     setShowPaymentCategory(false);
     setShowCustomerCategory(false);
     setShowDeliveryCategory(false);
+    setShowTaskersCategory(false);
     setShowOtherCategory(true);
-    setShowMoreFAQS(false);
   };
 
   const showMoreCat = () => {
@@ -120,6 +130,7 @@ export default function HowTo() {
     showCustomerCat,
     showDeliveryCat,
     showOtherCat,
+    showTaskersCat,
     showMoreCat,
   };
 
@@ -131,6 +142,7 @@ export default function HowTo() {
     ShowPaymentCategory,
     ShowCustomerCategory,
     ShowDeliveryCategory,
+    ShowTaskersCategory,
     ShowOtherCategory,
     ShowMoreFAQS,
   };
@@ -159,6 +171,9 @@ export default function HowTo() {
       return filterItem?.category == "Customers";
     });
 
+    const taskersFAQ = data?.data?.result?.filter((filterItem) => {
+      return filterItem?.category == "Taskers";
+    });
     const otherFAQ = data?.data?.result?.filter((filterItem) => {
       return filterItem?.category == "Miscellaneous";
     });
@@ -168,6 +183,7 @@ export default function HowTo() {
     setOrderCategoryData(ordersFAQ);
     setPaymentCategoryData(payFAQ);
     setCustomerCategoryData(cusFAQ);
+    setTaskersCategoryData(taskersFAQ);
     setOtherCategoryData(otherFAQ);
   };
 
@@ -216,6 +232,7 @@ export default function HowTo() {
               OrderCategoryData={OrderCategoryData}
               PaymentCategoryData={PaymentCategoryData}
               CustomerCategoryData={CustomerCategoryData}
+              taskersCategoryData={taskersCategoryData}
               OtherCategoryData={OtherCategoryData}
             />
           </div>

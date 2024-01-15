@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../../../styles/client/faq.module.css";
+import styles from "../../../../styles/client/FAQ.module.css";
 import DOMPurify from "dompurify";
 
 export const FrequentQuest = ({

@@ -181,6 +181,126 @@
 
 /*Mobile and tablet responsiveness*/
 @media (min-width: 240px) and (max-width: 420px) {
+  .faqBanner {
+    width: 100%;
+    text-align: center;
+  }
+
+  .faqBanner .faqHeading {
+    font-size: var(--text-heading-2);
+    text-shadow: var(--text-shadow-1);
+    text-align: center;
+    width: 95%;
+  }
+
+  .faqBanner .tagLine {
+    color: var(--white);
+    text-shadow: var(--text-shadow-1);
+    font-size: var(--text-heading-1);
+    width: 90%;
+    text-align: center;
+  }
+
+  .faqContent {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+  }
+
+  .faqContentSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-right: none;
+  }
+
+  .categoriesContainer {
+    background: none;
+    width: 100%;
+    padding: 5rem 0.5rem;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 0.5rem;
+    justify-items: center;
+    align-content: center;
+    row-gap: 1.5rem;
+  }
+
+  .faqCategoryBtn {
+    font-size: var(--font-normal);
+    color: var(--global-dark);
+    font-weight: 600;
+    padding: 0.5rem 0.25rem;
+    border: 1px solid var(--global-dark) !important;
+    border-radius: var(--border-radius);
+    width: 100%;
+  }
+
+  .qaAccordiansContainer {
+    width: 100%;
+    padding: 1rem 0.5rem;
+    border: 1px solid green;
+  }
+
+  .sectionAccordians {
+    width: 99%;
+    height: 20rem;
+    overflow-y: auto;
+    max-height: max-content;
+  }
+
+  .faqAccordians {
+    width: 95%;
+  }
+
+  .accordionItem {
+    width: 95%;
+  }
+
+  .accordionItem:hover {
+    background-color: var(--global-white);
+  }
+
+  .accordionTitle {
+    height: max-content;
+    padding: 0.2rem 0.1rem;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .faqNoData {
+    font-size: var(--font-usable);
+    font-weight: 600;
+    font-style: italic;
+  }
+}
+@media (min-width: 421px) and (max-width: 1024px) {
+  .faqBanner {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .faqBanner .faqHeading {
+    text-align: center;
+    width: 95%;
+  }
+
+  .faqBanner .tagLine {
+    color: var(--white);
+    text-shadow: var(--text-shadow-1);
+    font-size: var(--text-heading-2);
+    width: 90%;
+    text-align: center;
+  }
+
   .faqContent {
     width: 95%;
     display: flex;

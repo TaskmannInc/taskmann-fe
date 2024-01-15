@@ -12,6 +12,7 @@ export default function QuestionsAnswers({
   OrderCategoryData,
   PaymentCategoryData,
   CustomerCategoryData,
+  taskersCategoryData,
   OtherCategoryData,
 }) {
   return (
@@ -98,6 +99,22 @@ export default function QuestionsAnswers({
                     />
                   )
                 )}
+              </>
+            </>
+          )}
+          {faqRenderEvents?.ShowTaskersCategory && (
+            <>
+              <>
+                {taskersCategoryData?.map(({ id, question, answer, index }) => (
+                  <FrequentQuest
+                    key={index + 1}
+                    id={id}
+                    question={question}
+                    answer={answer}
+                    BsFillArrowDownCircleFill={BsFillArrowDownCircleFill}
+                    BsFillArrowUpCircleFill={BsFillArrowUpCircleFill}
+                  />
+                ))}
               </>
             </>
           )}

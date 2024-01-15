@@ -20,6 +20,7 @@ export const FAQCategories = [
   { name: "Order related", val: "Order related" },
   { name: "Payments", val: "Payments" },
   { name: "Customers", val: "Customers" },
+  { name: "Taskers", val: "Taskers" },
   { name: "Miscellaneous", val: "Miscellaneous" },
 ];
 
