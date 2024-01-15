@@ -126,6 +126,10 @@ export default function SessionOrders() {
     setshowActionsForm(!showActionsForm);
   };
 
+  const closeModal = () => {
+    setshowActionsForm(false);
+  };
+
   return (
     <div className={styles.orderContainer}>
       <div className={styles.orderHeader}>
@@ -654,7 +658,7 @@ export default function SessionOrders() {
           <Fade in={viewActionsForm}>
             <Box sx={ModalStyle}>
               <OrderActivities
-                closeForm={viewActionsForm}
+                closeForm={closeModal}
                 styles={styles}
                 selectedOrder={selectedOrder}
               />

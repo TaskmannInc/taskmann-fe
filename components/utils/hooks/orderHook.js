@@ -89,7 +89,7 @@ export const MakePaymentHook = (onPaymentSuccess, onError) => {
 };
 
 const cancelSessionUserOrder = (data) => {
-  const url = baseURL + ENDPOINTS.order + `/${data?.id}`;
+  const url = baseURL + ENDPOINTS.order + `/cancel/${data?.id}`;
 
   const headers = {
     "Content-Type": "application/json",

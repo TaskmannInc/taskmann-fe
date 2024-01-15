@@ -49,7 +49,7 @@ export default function OrderActivities({ selectedOrder, closeForm }) {
   };
 
   const onCancelOrderSuccess = () => {
-    closeModal();
+    closeForm();
   };
 
   const {
@@ -59,6 +59,10 @@ export default function OrderActivities({ selectedOrder, closeForm }) {
     isSuccess: isCancellingOrderSuccess,
     error: cancellationError,
   } = CancelSessionUserOrderHook(onCancelOrderSuccess, onCancelOrderError);
+
+  if (isCancellingOrderSuccess) {
+    closeForm();
+  }
   return (
     <div style={{ width: "100%" }}>
       <div className={"modalHeader"}>
