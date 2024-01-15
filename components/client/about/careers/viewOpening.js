@@ -1,11 +1,17 @@
 import { FaGraduationCap, FaInfoCircle } from "react-icons/fa";
-import { CloseButton } from "../../../components/admin/Globals/closeBtn.jsx";
-import styles from "../../../styles/client/Form.module.css";
+import { CloseButton } from "../../../admin/Globals/closeBtn.jsx";
+import styles from "../../../../styles/client/Form.module.css";
 import { TbMapPinPin } from "react-icons/tb";
 import DOMPurify from "dompurify";
 import { MdKeyboardCommandKey } from "react-icons/md";
+import Link from "next/link.js";
 
-export default function ViewCareerOpening({ __selected_data, closeForm }) {
+export default function ViewCareerOpening({
+  screenWidthMobile,
+  screenWidthTablet,
+  __selected_data,
+  closeForm,
+}) {
   const sanitizedData = (param) => ({
     __html: DOMPurify.sanitize(param),
   });
@@ -29,7 +35,17 @@ export default function ViewCareerOpening({ __selected_data, closeForm }) {
               }`,
               color: `var(--white)`,
               display: "flex",
-              justifyContent: "space-between",
+              flexDirection:
+                screenWidthMobile || screenWidthTablet ? "column" : "row",
+              justifyContent:
+                screenWidthMobile || screenWidthTablet
+                  ? "flex-start"
+                  : "space-between",
+              alignItems:
+                screenWidthMobile || screenWidthTablet
+                  ? "flex-start"
+                  : "center",
+              rowGap: 5,
             }}
           >
             <small style={{ fontSize: `var(--text-md)` }}>
@@ -64,6 +80,7 @@ export default function ViewCareerOpening({ __selected_data, closeForm }) {
               flexDirection: "column",
               justifyContent: "flex-start",
               lineHeightStep: "0.2rem",
+              padding: "1rem 1.5rem",
             }}
             className="mini-card"
             dangerouslySetInnerHTML={sanitizedData(
@@ -77,6 +94,17 @@ export default function ViewCareerOpening({ __selected_data, closeForm }) {
             </span>
           )}
         </div>
+        <Link
+          href={"mailto:taskmann@hotmail.com"}
+          className={"submitBtn"}
+          style={{
+            backgroundColor: `var(--green-primary)`,
+            color: `var(--white)`,
+            borderRadius: `var(--radius-md)`,
+          }}
+        >
+          Apply
+        </Link>
       </div>
     </div>
   );

@@ -9,63 +9,54 @@ import {
 } from "../../ui-fragments/dataInteractions";
 
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { GetCareerOpeningsHook } from "../../utils/hooks/careerOpeningsMgmtHook";
 /*Modal Imports*/
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
-import { Toaster, toast } from "react-hot-toast";
-import ViewCareerOpening from "./viewOpening";
-import { FRONTEND_HOST } from "../../utils/constants/constants";
 import { useEffect } from "react";
+import { Toaster, toast } from "react-hot-toast";
+import { FaInfoCircle } from "react-icons/fa";
+import ApplicationProcess from "./careers/applicationInfo";
+import ViewCareerOpening from "./careers/viewOpening";
 
 export default function SessionCart() {
-  //modal styles
-  const ModalStyle = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 600,
-    maxHeight: "60vh",
-    overflowY: "auto",
-    bgcolor: `var(--white)`,
-    border: "none",
-    boxShadow: 24,
-    borderRadius: `var(--radius-md)`,
-    p: 2,
-  };
+  //component states
+  var [careerListings, setCareerListings] = useState({});
+  const [searchInput, setSearchInput] = useState("");
+  const [__selected_data, setSelectedData] = useState(null);
+  const [highlightCard, setHighlightCard] = useState(false);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [screenWidthMobile, setScreenWidthMobile] = useState(
+    window.matchMedia("(min-width: 250px) and (max-width: 720px)").matches
+  );
+  const [screenWidthTablet, setScreenWidthTablet] = useState(
+    window.matchMedia("(min-width:724px ) and (max-width:1024px)").matches
+  );
 
   //initializations
   const router = window.location;
   var HOST = window.location.host;
   const hashParam = router.hash?.replace("#", "");
-  console.debug("hash", hashParam);
-
   const currentPath = router.pathname;
-  //component states
-  const [careerListings, setCareerListings] = useState({});
-  const [searchInput, setSearchInput] = useState("");
-  const [__selected_data, setSelectedData] = useState(null);
-  const [highlightCard, setHighlightCard] = useState(false);
-
-  const [showPreviewModal, setShowPreviewModal] = useState(false);
 
   const viewDetailModal = (opening) => {
     setSelectedData(opening);
     setShowPreviewModal(!showPreviewModal);
   };
 
+  const viewInfoModal = () => {
+    setShowInfoModal(!showInfoModal);
+  };
+
   //get current job openings
   const onGetCareersSuccess = (data) => {
-    console.log("daata--->", data?.data);
     setCareerListings(data?.data?.result);
     if (hashParam) {
       setHighlightCard(true);
     }
-    console.log(hashParam);
   };
 
   const onGetCareersError = (error) => {
@@ -101,11 +92,54 @@ export default function SessionCart() {
   useEffect(() => {
     triggerHighlight();
   }, []);
+
+  //filter career item search
+  if (searchInput?.length > 0) {
+    careerListings = careerListings?.filter((result) => {
+      return (
+        result?.position?.match(new RegExp(searchInput, "i")) ||
+        result?.location?.match(new RegExp(searchInput, "i")) ||
+        result?.created_at?.match(new RegExp(searchInput, "i"))
+      );
+    });
+  }
+
+  //mobile responsive screen effects and checks
+  useEffect(() => {
+    window
+      .matchMedia("(min-width: 250px) and (max-width: 720px)")
+      .addEventListener("change", (e) => setScreenWidthMobile(e.matches));
+
+    window
+      .matchMedia("(min-width:724px ) and (max-width:1024px)")
+      .addEventListener("change", (e) => setScreenWidthTablet(e.matches));
+  }, []);
+
+  //modal styles
+  const ModalStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: screenWidthMobile ? "90%" : screenWidthTablet ? "95%" : 800,
+    maxHeight: screenWidthMobile ? "80vh" : screenWidthTablet ? "90vh" : "70vh",
+    overflowY: "auto",
+    bgcolor: `var(--white)`,
+    border: "none",
+    boxShadow: 24,
+    borderRadius: `var(--radius-md)`,
+    p: 2,
+  };
   return (
     <div className={styles.openingsContainer}>
       <Toaster reverseOrder={false} />
       <div className={styles.openingsHeader}>
-        <h1>Career openings</h1>
+        <h1>
+          Career openings{" "}
+          <button type="button" onClick={() => viewInfoModal()}>
+            <FaInfoCircle size={20} />
+          </button>
+        </h1>
         <div className={styles.openingsSearchWrapper}>
           <input
             type="search"
@@ -118,15 +152,29 @@ export default function SessionCart() {
       </div>
       {listingsLoading ? (
         <div className={`${styles.cartBody} blurred`}>
-          {[...Array(3)]?.map((_, i) => {
+          {[...Array(2)]?.map((_, i) => {
             return (
               <div
                 className={styles.jobOpeningsBody}
                 key={i + 1}
                 style={{ filter: `blur(10px)` }}
-              ></div>
+              >
+                <div className={styles.listingItem}>
+                  <span className={styles.listitemImageWrapper}>
+                    <Image
+                      src={"/assets/trademarks/taskmann-logo-white.png"}
+                      alt={"Logo"}
+                      width={400}
+                      height={300}
+                      className={"logo"}
+                      loading="lazy"
+                    />
+                  </span>
+                </div>
+              </div>
             );
           })}
+          <span style={{ textAlign: "center" }}>Loading</span>
         </div>
       ) : getListingsSuccess && careerListings?.length > 0 ? (
         <div className={styles.jobOpeningsBody}>
@@ -239,8 +287,34 @@ export default function SessionCart() {
           <Fade in={viewDetailModal}>
             <Box sx={ModalStyle}>
               <ViewCareerOpening
+                screenWidthMobile={screenWidthMobile}
+                screenWidthTablet={screenWidthTablet}
                 styles={styles}
                 closeForm={viewDetailModal}
+                __selected_data={__selected_data}
+              />
+            </Box>
+          </Fade>
+        </Modal>
+      )}
+      {showInfoModal && (
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={viewDetailModal}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={viewDetailModal}>
+            <Box sx={ModalStyle}>
+              <ApplicationProcess
+                screenWidthMobile={screenWidthMobile}
+                screenWidthTablet={screenWidthTablet}
+                styles={styles}
+                closeForm={viewInfoModal}
                 __selected_data={__selected_data}
               />
             </Box>
