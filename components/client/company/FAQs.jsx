@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../../styles/client/FAQ.module.css";
+import styles from "../../../styles/client/FAQs.module.css";
 import { GetFAQsHook } from "../../utils/hooks/faqHook";
 import FAQCategories from "./faq/FaqCats";
 import QuestionsAnswers from "./faq/QuestionAnswers";
