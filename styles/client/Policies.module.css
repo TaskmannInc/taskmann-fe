@@ -102,7 +102,7 @@
   padding: 0.5rem 0.75rem;
 }
 
-@media (min-width: 240px) and (max-width: 420px) {
+@media (min-width: 240px) and (max-width: 720px) {
   .policiesBanner .policiesHeading {
     font-size: var(--text-heading-3);
   }
