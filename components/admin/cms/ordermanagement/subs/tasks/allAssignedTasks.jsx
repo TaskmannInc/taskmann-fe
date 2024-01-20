@@ -133,8 +133,9 @@ export default function AllTasks({ styles, iconSize }) {
                       <span
                         style={{
                           display: "flex",
+                          flexDirection: "column",
                           justifyContent: "flex-start",
-                          alignItems: "center",
+                          alignItems: "flex-start",
                           padding: "0 0",
                         }}
                       >

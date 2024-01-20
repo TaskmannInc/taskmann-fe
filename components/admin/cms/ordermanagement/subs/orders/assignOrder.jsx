@@ -73,6 +73,10 @@ export default function AssignTaskOrder({ selectedOrder, closeModal }) {
     isSuccess: isAssignmentSuccess,
     error: assignmentError,
   } = AssignTaskHook(onAssignmentSuccess, onAssignmentError);
+
+  if (isAssignmentSuccess) {
+    closeModal();
+  }
   return (
     <div className={""} style={{ width: "100%" }}>
       <div className={styles.authForm}>

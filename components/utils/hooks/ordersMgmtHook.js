@@ -14,8 +14,6 @@ if (typeof window != "undefined") {
     : (ACCESS_TOKEN = undefined);
 }
 
-// console.log("actok", ACCESS_TOKEN);
-
 //--> call back function to get all services
 const getAdminOrderList = () => {
   const url = baseURL + ENDPOINTS.adminorders;
@@ -23,7 +21,6 @@ const getAdminOrderList = () => {
     "Content-Type": "application/json",
     Authorization: `Bearer ${ACCESS_TOKEN}`,
   };
-  // console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 
@@ -42,7 +39,6 @@ const getSelectedOrder = (data) => {
   const headers = {
     "Content-Type": "application/json",
   };
-  // console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 
@@ -50,7 +46,6 @@ export const GetSelectedOrderHook = (onSuccess, onError, data) => {
   return useQuery(["selectedOrder", data], () => getSelectedOrder(data), {
     onSuccess,
     onError,
-    // staleTime: Infinity,
   });
 };
 
@@ -61,7 +56,6 @@ const getAdminTaskList = () => {
     "Content-Type": "application/json",
     Authorization: `Bearer ${ACCESS_TOKEN}`,
   };
-  console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 
@@ -81,14 +75,14 @@ const getTaskersTasks = () => {
     "Content-Type": "application/json",
     Authorization: `Bearer ${ACCESS_TOKEN}`,
   };
-  console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 
-export const GetTaskersTask = (onSuccess, onError, data) => {
-  return useQuery(["taskersTasks", data], () => getTaskersTasks(data), {
+export const GetTaskersTask = (onSuccess, onError) => {
+  return useQuery(["taskersTasks"], getTaskersTasks, {
     onSuccess,
     onError,
+    keepPreviousData: true,
     staleTime: Infinity,
   });
 };

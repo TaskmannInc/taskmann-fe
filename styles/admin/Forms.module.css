@@ -266,14 +266,19 @@
 
 .orderDetail .detailItem {
   width: 100%;
-  display: grid;
-  grid-template-columns: 35% 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  grid-template-columns: 25% 75%;
+  align-items: flex-start;
   align-content: center;
+  row-gap: 1rem;
 }
 .orderDetail .detailItem label {
-  font-weight: 600;
+  font-weight: 800;
   width: 100%;
+  font-size: var(--text-lg-2);
 }
 .orderDetail .detailItem .detailInfo {
   width: 100%;
@@ -281,10 +286,16 @@
   font-size: var(--text-lg-2);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  justify-items: flex-end;
-  align-items: flex-end;
-  align-content: flex-end;
+  justify-items: flex-start;
+  align-items: flex-start;
+  row-gap: 0.35rem;
+  padding: 0 0 0.5rem 0;
+  border-bottom: 1pt solid var(--gray);
+}
+
+.orderDetail .detailItem .detailInfo span {
+  font-weight: 900 !important;
+  font-size: var(--text-md);
 }
 .paymentAdvice {
   width: 100%;

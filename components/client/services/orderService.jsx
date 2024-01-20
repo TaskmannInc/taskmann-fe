@@ -1,16 +1,17 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { FaMinusCircle } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
+import { MdOutlineAccessTime } from "react-icons/md";
 import Cookies from "universal-cookie";
 import styles from "../../../styles/client/Services.module.css";
 import { DatePickerInstance } from "../../ui-fragments/datePicker";
 import { ButtonLoader } from "../../ui-fragments/loaders";
+import { StatusNotification } from "../../ui-fragments/notification";
 import { primaryCurrency } from "../../utils/constants/constants";
 import { AddCartItemsHook } from "../../utils/hooks/cartHook";
-import { StatusNotification } from "../../ui-fragments/notification";
-import Link from "next/link";
 const cookie = new Cookies();
 export default function OrderPackage() {
   const router = useRouter();
@@ -320,14 +321,16 @@ export default function OrderPackage() {
                             {params?.quantity} * {primaryCurrency}
                             {params?.unitPrice}
                           </>
-                          &nbsp;&nbsp; |&nbsp;&nbsp;
-                          {params?.duration && (
+                          &nbsp;&nbsp;
+                          {params?.duration ? (
                             <>
-                              {`⌚`}
-                              {params?.quantity * params?.duration}
+                              |&nbsp;&nbsp;
+                              <MdOutlineAccessTime size={18} />
+                              &nbsp;
+                              {params?.quantity * params?.duration} &nbsp;
                               {`(mins)`}
                             </>
-                          )}
+                          ) : null}
                         </span>
                       </div>
                     );

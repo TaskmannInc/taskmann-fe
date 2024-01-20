@@ -15,35 +15,37 @@ export default function TaskerDashboard() {
     console.log("tasks error", response);
   };
 
-  const onTasksSuccess = (data) => {
-    console.log("all tasks", data?.data?.data);
-    setAllSystemTasks(data?.data?.data?.splice(0, 5));
+  const onTasksSuccess = (response) => {
+    var allTaskersTasks = response?.data?.data;
+    console.log("response ==>", allTaskersTasks);
 
     //filter cancelled tasks
-    var cancelled = data?.data?.data?.filter(function (item) {
-      return item?.status == "CANCELLED";
+    var cancelled = allTaskersTasks?.filter((item) => {
+      return item?.order?.task?.status == "CANCELLED";
     });
-
     setAllCancelledTasks(cancelled);
 
     //filter pending tasks
-    var pending = data?.data?.data?.filter(function (item) {
-      return item?.status == "PENDING";
+    var pending = allTaskersTasks?.filter((item) => {
+      return item?.order?.task?.status == "PENDING";
     });
-    console.log("pending", pending);
     setAllPendingTasks(pending);
 
     //filter completed tasks
-    var completed = data?.data?.data?.filter(function (item) {
-      return item?.status == "COMPLETED";
+    var completed = allTaskersTasks?.filter((item) => {
+      return item?.order?.task?.status == "COMPLETED";
     });
     setAllCompletedTasks(completed);
+
+    setAllSystemTasks(allTaskersTasks?.splice(0, 5));
   };
 
-  const { isSuccess: isTasksSuccess, error: tasksError } = GetTaskersTask(
-    onTasksSuccess,
-    onTasksError
-  );
+  const {
+    isSuccess: isTasksSuccess,
+    error: tasksError,
+    data: tasks,
+  } = GetTaskersTask(onTasksSuccess, onTasksError);
+
   //get logged in staff session
   const { session } = StaffContextStore();
   return (

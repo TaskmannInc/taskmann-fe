@@ -11,6 +11,7 @@ export const GeneralTextInput = ({
   required,
   min,
   value,
+  step,
 }) => {
   return (
     <div className="input-container formGroup">
@@ -21,6 +22,7 @@ export const GeneralTextInput = ({
       <input
         placeholder={placeholder}
         type={type}
+        step={step ?? 1}
         min={min}
         name={name}
         className=""

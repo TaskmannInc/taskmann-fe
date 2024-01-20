@@ -172,9 +172,9 @@ export default function AllOrders({ styles, iconSize }) {
                     <BsLayers size={15} />
                     &nbsp; ID
                   </span>
-                  <span>Job</span>
-                  <span>Date</span>
-                  <span>Time</span>
+                  <span>Service</span>
+                  <span>Payment date</span>
+                  <span>Service period</span>
                   <span>Location</span>
                   <span>Customer</span>
 
@@ -202,31 +202,58 @@ export default function AllOrders({ styles, iconSize }) {
                           </p>
                         ))}
                       </span>
+                      <span
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        <i>
+                          {orderItem?.payment
+                            ? new Date(
+                                orderItem?.payment?.updated_at
+                              )?.toDateString()
+                            : "Unavailable"}
+                        </i>
+                        <i>
+                          {orderItem?.payment
+                            ? new Date(
+                                orderItem?.payment?.updated_at
+                              )?.toLocaleTimeString()
+                            : "Unavailable"}
+                        </i>
+                      </span>
                       <span>
                         {orderItem?.cart?.line_items?.map((service, i) => (
-                          <p key={i + 1}>
-                            {service?.service_date
-                              ? new Date(
-                                  service?.service_date?.split("T")[0]
-                                )?.toLocaleDateString()
-                              : "Unavailable"}{" "}
+                          <p
+                            key={i + 1}
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "flex-start",
+                            }}
+                          >
+                            <i>
+                              {service?.service_date
+                                ? new Date(
+                                    service?.service_date
+                                  )?.toDateString()
+                                : "Unavailable"}
+                            </i>
+                            <i>
+                              {service?.service_date
+                                ? new Date(
+                                    service?.service_date
+                                  )?.toLocaleTimeString()
+                                : "Unavailable"}
+                            </i>
                           </p>
                         ))}
                       </span>
                       <span>
-                        {orderItem?.cart?.line_items?.map((service, i) => (
-                          <p key={i + 1}>
-                            {service?.service_date
-                              ? service?.service_date
-                                  ?.split("T")[1]
-                                  ?.split(".")[0]
-                              : "Unavailable"}{" "}
-                          </p>
-                        ))}
-                      </span>
-                      <span>
-                        {orderItem?.customer?.address?.length > 20
-                          ? `${orderItem?.customer?.address?.slice(0, 20)}...`
+                        {orderItem?.customer?.address?.length > 30
+                          ? `${orderItem?.customer?.address?.slice(0, 30)}...`
                           : orderItem?.customer?.address}
                       </span>
                       <span

@@ -349,12 +349,13 @@ export default function SessionOrders() {
                       {order?.payment?.status == "PAID" ? (
                         <span
                           style={{
+                            fontSize: `var(--text-sm)`,
                             width: "70%",
                             textAlig: "center",
                             borderRadius: `var(--radius-min)`,
                             padding: "0.35rem 0.5rem",
-                            color: `var(--success)`,
-                            background: `var(--white)`,
+                            background: `var(--success)`,
+                            color: `var(--white)`,
                             boxShadow: `var(--cards-shadow-2)`,
                           }}
                         >
@@ -363,12 +364,13 @@ export default function SessionOrders() {
                       ) : order?.payment?.status == "CANCELLED" ? (
                         <span
                           style={{
+                            fontSize: `var(--text-sm)`,
                             width: "70%",
                             textAlig: "center",
                             borderRadius: `var(--radius-min)`,
                             padding: "0.35rem 0.5rem",
-                            color: `var(--danger)`,
-                            background: `var(--white)`,
+                            background: `var(--danger)`,
+                            color: `var(--white)`,
                             boxShadow: `var(--cards-shadow-2)`,
                           }}
                         >
@@ -377,12 +379,13 @@ export default function SessionOrders() {
                       ) : (
                         <Link
                           style={{
+                            fontSize: `var(--text-sm)`,
                             width: "70%",
                             fontWeight: 700,
                             height: "max-content",
                             padding: "0.75rem 1.5rem",
                             borderRadius: "var(--radius-min)",
-                            backgroundColor: `var(--green-primary)`,
+                            backgroundColor: `var(--gray-2)`,
                             textAlign: "center",
                             color: `var(--white)`,
                           }}
@@ -401,18 +404,21 @@ export default function SessionOrders() {
                     <div>
                       <span
                         style={{
+                          fontSize: `var(--text-sm)`,
                           width: "70%",
                           textAlig: "center",
                           borderRadius: `var(--radius-min)`,
                           padding: "0.35rem 0.5rem",
-                          color: `${
+                          backgroundColor: `${
                             order?.status == "PENDING"
                               ? "var(--dark-2)"
-                              : order?.status == "PAID"
-                              ? "var(--success)"
-                              : "var(--danger)"
+                              : order?.status == "ASSIGNED"
+                              ? "var(--black-2)"
+                              : order?.status == "CANCELLED"
+                              ? "var(--danger)"
+                              : "var(--dark-gray)"
                           }`,
-                          background: `var(--white)`,
+                          color: `var(--white)`,
                           boxShadow: `var(--cards-shadow-2)`,
                         }}
                       >
@@ -421,6 +427,10 @@ export default function SessionOrders() {
                     </div>
                     <div style={{ textAlign: "center" }}>
                       <button
+                        style={{
+                          borderRadius: `var(--radius-circular)`,
+                          padding: `0.2rem 0.25rem`,
+                        }}
                         onClick={() => viewActionsForm(order)}
                         type="button"
                         title="Cancel order"
@@ -429,7 +439,7 @@ export default function SessionOrders() {
                           order?.status == "CANCELLED"
                         }
                       >
-                        <TbShoppingCartCancel size={25} color="var(--danger)" />
+                        <TbShoppingCartCancel size={20} color="var(--danger)" />
                       </button>
                     </div>
                   </div>
@@ -583,23 +593,30 @@ export default function SessionOrders() {
                         width: "100%",
                         display: "flex",
                         justifyContent: "space-between",
+                        alignItems: "center",
                         textAlign: "center",
                         borderRadius: `var(--radius-min)`,
                         padding: "0.35rem 0.5rem",
                         color: `${
                           order?.status == "PENDING"
                             ? "var(--dark-2)"
-                            : order?.status == "PAID"
-                            ? "var(--success)"
-                            : "var(--danger)"
+                            : order?.status == "ASSIGNED"
+                            ? "var(--black-2)"
+                            : order?.status == "CANCELLED"
+                            ? "var(--danger)"
+                            : "var(--dark-gray)"
                         }`,
-                        background: `var(--white)`,
+                        backgroundColor: `var(--white)`,
                         boxShadow: `var(--cards-shadow-1)`,
                       }}
                     >
-                      <span>Task status:{order?.status ?? "Unavailable"}</span>{" "}
+                      <span>Task status: {order?.status ?? "Unavailable"}</span>{" "}
                       <div style={{ textAlign: "center" }}>
                         <button
+                          style={{
+                            borderRadius: `var(--radius-circular)`,
+                            padding: `0.2rem 0.25rem`,
+                          }}
                           onClick={() => viewActionsForm(order)}
                           type="button"
                           title="Cancel order"

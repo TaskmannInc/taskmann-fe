@@ -152,7 +152,7 @@
 .customerOrdersTable .tableBody .tableRow {
   width: 100%;
   display: grid;
-  grid-template-columns: 10% 17% 6% 6% 22% 25% 8% 6%;
+  grid-template-columns: 10% 17% 9% 9% 20% 20% 9% 6%;
   height: max-content;
   padding: 0.8rem 0.3rem;
   align-items: center;

@@ -1,11 +1,6 @@
 import { useState } from "react";
-import { BiObjectsHorizontalLeft, BiTask } from "react-icons/bi";
+import { BiTask } from "react-icons/bi";
 import { BsCart4 } from "react-icons/bs";
-import {
-  MdHourglassEmpty,
-  MdOutlineCancel,
-  MdOutlineDoneAll,
-} from "react-icons/md";
 import styles from "../../../../styles/admin/Orders.module.css";
 import AllOrders from "./subs/orders/allCustomerOrders";
 import AllTasks from "./subs/tasks/allAssignedTasks";

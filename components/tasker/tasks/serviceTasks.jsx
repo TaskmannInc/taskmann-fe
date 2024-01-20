@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BiObjectsHorizontalLeft } from "react-icons/bi";
-import { BsFunnel, BsLayers } from "react-icons/bs";
+import { BsFunnel, BsLayers, BsThreeDots } from "react-icons/bs";
 import {
   MdHourglassEmpty,
   MdOutlineAssignmentInd,
@@ -19,7 +19,8 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
-import { FaLongArrowAltRight } from "react-icons/fa";
+import { FaEye, FaLongArrowAltRight } from "react-icons/fa";
+import ViewTaskDetails from "../../admin/cms/ordermanagement/subs/tasks/viewTask";
 
 export default function AllServiceTasks() {
   const iconSize = 18;
@@ -56,6 +57,7 @@ export default function AllServiceTasks() {
   }, []);
 
   const [showAssignedTaskModal, setshowAssignedTaskModal] = useState(false);
+  const [showTaskDetail, setShowTaskDetail] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
   const [activeFilterBtn, setActiveFilterBtn] = useState("all");
@@ -65,6 +67,9 @@ export default function AllServiceTasks() {
 
   const [searchTasksInput, setSearchTasksInput] = useState("");
   var [allSystemTasks, setAllSystemTasks] = useState([]);
+  var [pendingTasks, setAllPendingTasks] = useState([]);
+  var [completedTasks, setAllCompletedTasks] = useState([]);
+  var [cancelledTasks, setAllCancelledTasks] = useState([]);
 
   // Pagination
   var itemsPerPage = 7;
@@ -76,9 +81,28 @@ export default function AllServiceTasks() {
     console.log("tasks error", response);
   };
 
-  const onTasksSuccess = (data) => {
-    console.log("all tasks", data?.data?.data);
-    setAllSystemTasks(data?.data?.data);
+  const onTasksSuccess = (response) => {
+    var allTaskersTasks = response?.data?.data;
+
+    //filter cancelled tasks
+    var cancelled = allTaskersTasks?.filter((item) => {
+      return item?.order?.task?.status == "CANCELLED";
+    });
+    setAllCancelledTasks(cancelled);
+
+    //filter pending tasks
+    var pending = allTaskersTasks?.filter((item) => {
+      return item?.order?.task?.status == "PENDING";
+    });
+    setAllPendingTasks(pending);
+
+    //filter completed tasks
+    var completed = allTaskersTasks?.filter((item) => {
+      return item?.order?.task?.status == "COMPLETED";
+    });
+    setAllCompletedTasks(completed);
+
+    setAllSystemTasks(response?.data?.data);
   };
 
   const {
@@ -123,10 +147,15 @@ export default function AllServiceTasks() {
     setItemOffset(newOffset);
   };
 
-  //modal hanlders
+  //modal handlers
   const viewAssignedTaskDetail = (task) => {
     setSelectedTask(task);
     setshowAssignedTaskModal(!showAssignedTaskModal);
+  };
+
+  const viewTaskDetail = (task) => {
+    setSelectedTask(task);
+    setShowTaskDetail(!showTaskDetail);
   };
 
   //--Material ui modal wrapper  styles--//
@@ -169,6 +198,7 @@ export default function AllServiceTasks() {
             </button>
           ))}
         </div>
+        {/*All tasks*/}
         {activeFilterBtn == "all" && (
           <>
             {isTasksLoading || refetchingTasks ? (
@@ -191,6 +221,9 @@ export default function AllServiceTasks() {
                         <span>Customer</span>
                         <span>Tasker</span>
                         <span className={styles.statusColumn}>Task status</span>
+                        <span className={styles.statusColumn}>
+                          <BsThreeDots size={25} />
+                        </span>
                       </div>
                       <div className={styles.tableBody}>
                         {allSystemTasks?.map((task, index) => (
@@ -209,8 +242,6 @@ export default function AllServiceTasks() {
                                   return (
                                     <small
                                       style={{
-                                        minHeight: "90%",
-                                        padding: "0.15rem 0.25rem",
                                         overflowY: "auto",
                                         fontSize: "0.85rem",
                                         fontWeight: "bolder",
@@ -220,25 +251,6 @@ export default function AllServiceTasks() {
                                       <>
                                         {service?.service_name ??
                                           service?.serviceName}
-                                      </>
-                                      <>
-                                        {service?.packageDetails?.map(
-                                          (pkg, _idx) => (
-                                            <i
-                                              key={_idx + 1}
-                                              style={{
-                                                display: "flex",
-                                                justifyContent: "flex-start",
-                                                alignItems: "center",
-                                                fontWeight: 500,
-                                              }}
-                                            >
-                                              {pkg?.title}&nbsp;&nbsp;
-                                              <FaLongArrowAltRight size={15} />
-                                              {pkg?.quantity}
-                                            </i>
-                                          )
-                                        )}
                                       </>
                                     </small>
                                   );
@@ -252,7 +264,7 @@ export default function AllServiceTasks() {
                                     {service?.service_date
                                       ? new Date(
                                           service?.service_date
-                                        )?.toLocaleDateString()
+                                        )?.toDateString()
                                       : "Unavailable"}{" "}
                                   </p>
                                 )
@@ -263,10 +275,10 @@ export default function AllServiceTasks() {
                                 (service, i) => (
                                   <p key={i + 1}>
                                     {service?.service_date
-                                      ? service?.service_date
-                                          ?.split("T")[1]
-                                          ?.split(".")[0]
-                                      : "Unavailable"}{" "}
+                                      ? new Date(
+                                          service?.service_date
+                                        )?.toLocaleTimeString()
+                                      : "Unavailable"}
                                   </p>
                                 )
                               )}
@@ -329,6 +341,18 @@ export default function AllServiceTasks() {
                               >
                                 {task?.status ?? "PENDING"}
                               </small>
+                            </span>
+                            <span className={styles.statusColumn}>
+                              <button
+                                title="Assign order to a tasker"
+                                className={styles.editButton}
+                                onClick={() => viewTaskDetail(task)}
+                              >
+                                <FaEye
+                                  size={25}
+                                  style={{ color: `var(--gold)` }}
+                                />
+                              </button>
                               &nbsp;&nbsp;
                               <button
                                 title="Assign order to a tasker"
@@ -376,6 +400,615 @@ export default function AllServiceTasks() {
             )}
           </>
         )}
+
+        {/*completed tasks*/}
+        {activeFilterBtn == "completed" && (
+          <>
+            {isTasksLoading || refetchingTasks ? (
+              <TableLoader />
+            ) : isTasksSuccess && completedTasks?.length > 0 ? (
+              <>
+                <section className={styles.tableVisualizers}>
+                  <div className={styles.taskOrders}>
+                    <h6>Completed tasks</h6>
+                    <div className={styles.taskOrdersTable}>
+                      <div className={styles.tableHeader}>
+                        <span>
+                          <BsLayers size={15} />
+                          &nbsp; ID
+                        </span>
+                        <span>Job</span>
+                        <span>Date</span>
+                        <span>Time</span>
+                        <span>Location</span>
+                        <span>Customer</span>
+                        <span>Tasker</span>
+                        <span className={styles.statusColumn}>Task status</span>
+                        <span className={styles.statusColumn}>
+                          <BsThreeDots size={25} />
+                        </span>
+                      </div>
+                      <div className={styles.tableBody}>
+                        {allSystemTasks?.map((task, index) => (
+                          <div key={index + 1} className={styles.tableRow}>
+                            <span>***{task?._id?.slice(23, 39)}</span>
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                padding: "0 0",
+                              }}
+                            >
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => {
+                                  return (
+                                    <small
+                                      style={{
+                                        overflowY: "auto",
+                                        fontSize: "0.85rem",
+                                        fontWeight: "bolder",
+                                      }}
+                                      key={i + 1}
+                                    >
+                                      <>
+                                        {service?.service_name ??
+                                          service?.serviceName}
+                                      </>
+                                    </small>
+                                  );
+                                }
+                              )}
+                            </span>
+                            <span>
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => (
+                                  <p key={i + 1}>
+                                    {service?.service_date
+                                      ? new Date(
+                                          service?.service_date
+                                        )?.toDateString()
+                                      : "Unavailable"}{" "}
+                                  </p>
+                                )
+                              )}
+                            </span>
+                            <span>
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => (
+                                  <p key={i + 1}>
+                                    {service?.service_date
+                                      ? new Date(
+                                          service?.service_date
+                                        )?.toLocaleTimeString()
+                                      : "Unavailable"}
+                                  </p>
+                                )
+                              )}
+                            </span>
+                            <span> {task?.order?.customer?.address} </span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <small
+                                style={{
+                                  fontSize: "0.8rem",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {task?.order?.customer?.first_name}&nbsp;
+                                {task?.order?.customer?.last_name}
+                              </small>
+                              <small>{task?.order?.customer?.phone}</small>
+                              <small>{task?.order?.customer?.email}</small>
+                            </span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <small
+                                style={{
+                                  fontSize: "0.8rem",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {task?.taskers?.first_name}&nbsp;
+                                {task?.taskers?.last_name} {"(You)"}
+                              </small>
+                              <small> {task?.taskers?.phone}</small>
+                              <small> {task?.taskers?.email}</small>
+                            </span>
+                            <span className={styles.statusColumn}>
+                              <small
+                                style={{
+                                  padding: "0.5rem 1rem",
+                                  textAlign: "center",
+                                  color: `var(--white)`,
+                                }}
+                                className={
+                                  task?.status == "PAID"
+                                    ? "pill-success"
+                                    : task?.status == "CANCELLED"
+                                    ? "pill-failure"
+                                    : "pill-other"
+                                }
+                              >
+                                {task?.status ?? "PENDING"}
+                              </small>
+                            </span>
+                            <span className={styles.statusColumn}>
+                              <button
+                                title="Assign order to a tasker"
+                                className={styles.editButton}
+                                onClick={() => viewTaskDetail(task)}
+                              >
+                                <FaEye
+                                  size={25}
+                                  style={{ color: `var(--gold)` }}
+                                />
+                              </button>
+                              &nbsp;&nbsp;
+                              <button
+                                title="Assign order to a tasker"
+                                className={styles.editButton}
+                                onClick={() => viewAssignedTaskDetail(task)}
+                              >
+                                <MdOutlineAssignmentInd
+                                  size={25}
+                                  style={{ color: `var(--green-dark)` }}
+                                />
+                              </button>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                {completedTasks?.length > 0 && (
+                  <div className="pagination-section">
+                    <div className="pagination-text">
+                      <p>
+                        Showing <strong>{currentDataItems?.length ?? 0}</strong>{" "}
+                        out of <strong>{totalDataSet ?? 0}</strong> items.
+                      </p>
+                    </div>
+                    <TablePaginationInstance
+                      pageCount={pageCount}
+                      changePage={handlePageClick}
+                    />
+                  </div>
+                )}
+              </>
+            ) : isTasksSuccess && completedTasks?.length == 0 ? (
+              <NoTableData />
+            ) : (
+              isTasksError && (
+                <NoTableData
+                  notification={
+                    tasksError?.error ??
+                    "An error occured while getting all system tasks, please try again later."
+                  }
+                />
+              )
+            )}
+          </>
+        )}
+
+        {/*pending tasks*/}
+        {activeFilterBtn == "pending" && (
+          <>
+            {isTasksLoading || refetchingTasks ? (
+              <TableLoader />
+            ) : isTasksSuccess && pendingTasks?.length > 0 ? (
+              <>
+                <section className={styles.tableVisualizers}>
+                  <div className={styles.taskOrders}>
+                    <h6>Pending tasks</h6>
+                    <div className={styles.taskOrdersTable}>
+                      <div className={styles.tableHeader}>
+                        <span>
+                          <BsLayers size={15} />
+                          &nbsp; ID
+                        </span>
+                        <span>Job</span>
+                        <span>Date</span>
+                        <span>Time</span>
+                        <span>Location</span>
+                        <span>Customer</span>
+                        <span>Tasker</span>
+                        <span className={styles.statusColumn}>Task status</span>
+                        <span className={styles.statusColumn}>
+                          <BsThreeDots size={25} />
+                        </span>
+                      </div>
+                      <div className={styles.tableBody}>
+                        {pendingTasks?.map((task, index) => (
+                          <div key={index + 1} className={styles.tableRow}>
+                            <span>***{task?._id?.slice(23, 39)}</span>
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                padding: "0 0",
+                              }}
+                            >
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => {
+                                  return (
+                                    <small
+                                      style={{
+                                        overflowY: "auto",
+                                        fontSize: "0.85rem",
+                                        fontWeight: "bolder",
+                                      }}
+                                      key={i + 1}
+                                    >
+                                      <>
+                                        {service?.service_name ??
+                                          service?.serviceName}
+                                      </>
+                                    </small>
+                                  );
+                                }
+                              )}
+                            </span>
+                            <span>
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => (
+                                  <p key={i + 1}>
+                                    {service?.service_date
+                                      ? new Date(
+                                          service?.service_date
+                                        )?.toDateString()
+                                      : "Unavailable"}{" "}
+                                  </p>
+                                )
+                              )}
+                            </span>
+                            <span>
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => (
+                                  <p key={i + 1}>
+                                    {service?.service_date
+                                      ? new Date(
+                                          service?.service_date
+                                        )?.toLocaleTimeString()
+                                      : "Unavailable"}
+                                  </p>
+                                )
+                              )}
+                            </span>
+                            <span> {task?.order?.customer?.address} </span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <small
+                                style={{
+                                  fontSize: "0.8rem",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {task?.order?.customer?.first_name}&nbsp;
+                                {task?.order?.customer?.last_name}
+                              </small>
+                              <small>{task?.order?.customer?.phone}</small>
+                              <small>{task?.order?.customer?.email}</small>
+                            </span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <small
+                                style={{
+                                  fontSize: "0.8rem",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {task?.taskers?.first_name}&nbsp;
+                                {task?.taskers?.last_name} {"(You)"}
+                              </small>
+                              <small> {task?.taskers?.phone}</small>
+                              <small> {task?.taskers?.email}</small>
+                            </span>
+                            <span className={styles.statusColumn}>
+                              <small
+                                style={{
+                                  padding: "0.5rem 1rem",
+                                  textAlign: "center",
+                                  color: `var(--white)`,
+                                }}
+                                className={
+                                  task?.status == "PAID"
+                                    ? "pill-success"
+                                    : task?.status == "CANCELLED"
+                                    ? "pill-failure"
+                                    : "pill-other"
+                                }
+                              >
+                                {task?.status ?? "PENDING"}
+                              </small>
+                            </span>
+                            <span className={styles.statusColumn}>
+                              <button
+                                title="Assign order to a tasker"
+                                className={styles.editButton}
+                                onClick={() => viewTaskDetail(task)}
+                              >
+                                <FaEye
+                                  size={25}
+                                  style={{ color: `var(--gold)` }}
+                                />
+                              </button>
+                              &nbsp;&nbsp;
+                              <button
+                                title="Assign order to a tasker"
+                                className={styles.editButton}
+                                onClick={() => viewAssignedTaskDetail(task)}
+                              >
+                                <MdOutlineAssignmentInd
+                                  size={25}
+                                  style={{ color: `var(--green-dark)` }}
+                                />
+                              </button>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                {pendingTasks?.length > 0 && (
+                  <div className="pagination-section">
+                    <div className="pagination-text">
+                      <p>
+                        Showing <strong>{currentDataItems?.length ?? 0}</strong>{" "}
+                        out of <strong>{totalDataSet ?? 0}</strong> items.
+                      </p>
+                    </div>
+                    <TablePaginationInstance
+                      pageCount={pageCount}
+                      changePage={handlePageClick}
+                    />
+                  </div>
+                )}
+              </>
+            ) : isTasksSuccess && pendingTasks?.length == 0 ? (
+              <NoTableData />
+            ) : (
+              isTasksError && (
+                <NoTableData
+                  notification={
+                    tasksError?.error ??
+                    "An error occured while getting all system tasks, please try again later."
+                  }
+                />
+              )
+            )}
+          </>
+        )}
+
+        {/*cancelled tasks*/}
+        {activeFilterBtn == "cancelled" && (
+          <>
+            {isTasksLoading || refetchingTasks ? (
+              <TableLoader />
+            ) : isTasksSuccess && cancelledTasks?.length > 0 ? (
+              <>
+                <section className={styles.tableVisualizers}>
+                  <div className={styles.taskOrders}>
+                    <h6>Cancelled tasks</h6>
+                    <div className={styles.taskOrdersTable}>
+                      <div className={styles.tableHeader}>
+                        <span>
+                          <BsLayers size={15} />
+                          &nbsp; ID
+                        </span>
+                        <span>Job</span>
+                        <span>Date</span>
+                        <span>Time</span>
+                        <span>Location</span>
+                        <span>Customer</span>
+                        <span>Tasker</span>
+                        <span className={styles.statusColumn}>Task status</span>
+                        <span className={styles.statusColumn}>
+                          <BsThreeDots size={25} />
+                        </span>
+                      </div>
+                      <div className={styles.tableBody}>
+                        {cancelledTasks?.map((task, index) => (
+                          <div key={index + 1} className={styles.tableRow}>
+                            <span>***{task?._id?.slice(23, 39)}</span>
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-start",
+                                alignItems: "center",
+                                padding: "0 0",
+                              }}
+                            >
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => {
+                                  return (
+                                    <small
+                                      style={{
+                                        overflowY: "auto",
+                                        fontSize: "0.85rem",
+                                        fontWeight: "bolder",
+                                      }}
+                                      key={i + 1}
+                                    >
+                                      <>
+                                        {service?.service_name ??
+                                          service?.serviceName}
+                                      </>
+                                    </small>
+                                  );
+                                }
+                              )}
+                            </span>
+                            <span>
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => (
+                                  <p key={i + 1}>
+                                    {service?.service_date
+                                      ? new Date(
+                                          service?.service_date
+                                        )?.toDateString()
+                                      : "Unavailable"}{" "}
+                                  </p>
+                                )
+                              )}
+                            </span>
+                            <span>
+                              {task?.order?.cart?.line_items?.map(
+                                (service, i) => (
+                                  <p key={i + 1}>
+                                    {service?.service_date
+                                      ? new Date(
+                                          service?.service_date
+                                        )?.toLocaleTimeString()
+                                      : "Unavailable"}
+                                  </p>
+                                )
+                              )}
+                            </span>
+                            <span> {task?.order?.customer?.address} </span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <small
+                                style={{
+                                  fontSize: "0.8rem",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {task?.order?.customer?.first_name}&nbsp;
+                                {task?.order?.customer?.last_name}
+                              </small>
+                              <small>{task?.order?.customer?.phone}</small>
+                              <small>{task?.order?.customer?.email}</small>
+                            </span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <small
+                                style={{
+                                  fontSize: "0.8rem",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {task?.taskers?.first_name}&nbsp;
+                                {task?.taskers?.last_name} {"(You)"}
+                              </small>
+                              <small> {task?.taskers?.phone}</small>
+                              <small> {task?.taskers?.email}</small>
+                            </span>
+                            <span className={styles.statusColumn}>
+                              <small
+                                style={{
+                                  padding: "0.5rem 1rem",
+                                  textAlign: "center",
+                                  color: `var(--white)`,
+                                }}
+                                className={
+                                  task?.status == "PAID"
+                                    ? "pill-success"
+                                    : task?.status == "CANCELLED"
+                                    ? "pill-failure"
+                                    : "pill-other"
+                                }
+                              >
+                                {task?.status ?? "PENDING"}
+                              </small>
+                            </span>
+                            <span className={styles.statusColumn}>
+                              <button
+                                title="Assign order to a tasker"
+                                className={styles.editButton}
+                                onClick={() => viewTaskDetail(task)}
+                              >
+                                <FaEye
+                                  size={25}
+                                  style={{ color: `var(--gold)` }}
+                                />
+                              </button>
+                              &nbsp;&nbsp;
+                              <button
+                                title="Assign order to a tasker"
+                                className={styles.editButton}
+                                onClick={() => viewAssignedTaskDetail(task)}
+                              >
+                                <MdOutlineAssignmentInd
+                                  size={25}
+                                  style={{ color: `var(--green-dark)` }}
+                                />
+                              </button>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                {cancelledTasks?.length > 0 && (
+                  <div className="pagination-section">
+                    <div className="pagination-text">
+                      <p>
+                        Showing <strong>{currentDataItems?.length ?? 0}</strong>{" "}
+                        out of <strong>{totalDataSet ?? 0}</strong> items.
+                      </p>
+                    </div>
+                    <TablePaginationInstance
+                      pageCount={pageCount}
+                      changePage={handlePageClick}
+                    />
+                  </div>
+                )}
+              </>
+            ) : isTasksSuccess && cancelledTasks?.length == 0 ? (
+              <NoTableData />
+            ) : (
+              isTasksError && (
+                <NoTableData
+                  notification={
+                    tasksError?.error ??
+                    "An error occured while getting all system tasks, please try again later."
+                  }
+                />
+              )
+            )}
+          </>
+        )}
       </div>
       {showAssignedTaskModal && (
         <Modal
@@ -393,6 +1026,27 @@ export default function AllServiceTasks() {
               <ViewAssignedTask
                 selectedTask={selectedTask}
                 closeModal={viewAssignedTaskDetail}
+              />
+            </Box>
+          </Fade>
+        </Modal>
+      )}
+      {showTaskDetail && (
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={viewTaskDetail}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={viewTaskDetail}>
+            <Box sx={ModalStyle}>
+              <ViewTaskDetails
+                selectedTask={selectedTask}
+                closeModal={viewTaskDetail}
               />
             </Box>
           </Fade>

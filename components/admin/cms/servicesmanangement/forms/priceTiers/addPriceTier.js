@@ -181,6 +181,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
             placeholder={"Pricing value"}
             type={"number"}
             name={"price"}
+            step={0.01}
             onChange={handleChange}
             validate={errors}
             readOnly={isLoading}
@@ -306,6 +307,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
                       onChange={(e) => parameterValueChanges(e, i)}
                       defaultValue={param?.duration}
                       min={0}
+                      step={0.01}
                       // value={param?.max?.[i]}
                       // validate={errors}
                       readOnly={isLoading}

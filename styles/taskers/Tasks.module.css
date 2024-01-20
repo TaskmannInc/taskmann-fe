@@ -110,7 +110,7 @@
 .taskOrdersTable .tableBody .tableRow {
   width: 100%;
   display: grid;
-  grid-template-columns: 10% 15% 6% 6% 16% 15% 14% 12% 6%;
+  grid-template-columns: 10% 15% 9% 9% 10% 15% 14% 12% 6%;
   height: max-content;
   padding: 0.8rem 0.3rem;
 }

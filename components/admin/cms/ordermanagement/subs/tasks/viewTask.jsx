@@ -1,18 +1,17 @@
 import Image from "next/image";
-import { FaArrowRight, FaFileInvoiceDollar } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { MdOutlineAssignmentInd } from "react-icons/md";
 import styles from "../../../../../../styles/admin/Forms.module.css";
-import { primaryCurrency } from "../../../../../utils/constants/constants";
 import { CloseButton } from "../../../../Globals/closeBtn";
 
-export default function ViewOrderDetails({ selectedOrder, closeModal }) {
-  console.log("selectedOrder", selectedOrder);
+export default function ViewTaskDetails({ selectedTask, closeModal }) {
   return (
     <div className={""} style={{ width: "100%" }}>
       <div className={styles.authForm}>
         <div className={styles.authFormHeader}>
           <div style={{ margin: "0.5rem 0" }}></div>
-          <FaFileInvoiceDollar size={25} />
-          <h4>Order invoice</h4>
+          <MdOutlineAssignmentInd size={25} />
+          <h4>Task details</h4>
           <CloseButton style={styles.closeBtn} closeFunc={closeModal} />
         </div>
         <div className={styles.invoiceContainer}>
@@ -25,54 +24,71 @@ export default function ViewOrderDetails({ selectedOrder, closeModal }) {
               className="admin-logo"
               loading="lazy"
             />
-            <h3>Invoice #&nbsp;{`***${selectedOrder?._id?.slice(23, 39)}`}</h3>
+            <h3>
+              Task #&nbsp;
+              {`***${selectedTask?.order?.task?._id?.slice(23, 39)}`}
+            </h3>
           </div>
           <div className={styles.customerDetail}>
             <h4>Customer Information</h4>
             <div className={styles.detailItem}>
               <label>Billed to</label>
               <span className={styles.detailInfo}>
-                {selectedOrder?.customer?.first_name}&nbsp;
-                {selectedOrder?.customer?.last_name}
+                {selectedTask?.order?.customer?.first_name}&nbsp;
+                {selectedTask?.order?.customer?.last_name}
               </span>
             </div>
             <div className={styles.detailItem}>
               <label>Phone / Mobile</label>
               <span className={styles.detailInfo}>
-                {selectedOrder?.customer?.phone}
+                {selectedTask?.order?.customer?.phone}
               </span>
             </div>
             <div className={styles.detailItem}>
               <label>E-mail address</label>
               <span className={styles.detailInfo}>
-                {selectedOrder?.customer?.email}
+                {selectedTask?.order?.customer?.email}
               </span>
             </div>
             <div className={styles.detailItem}>
-              <label>Billing address</label>
+              <label>Service location</label>
               <span className={styles.detailInfo}>
-                {selectedOrder?.customer?.address} -{" "}
-                {selectedOrder?.customer?.city}.
+                {selectedTask?.order?.customer?.address} -{" "}
+                {selectedTask?.order?.customer?.city}.
               </span>
             </div>
           </div>
           <div className={styles.orderDetail}>
-            <h4>Order service{"(s)"} information</h4>
+            <h4 style={{ fontSize: `var(--text-lg)` }}>
+              Task / Servicing Information
+            </h4>
             <div className={styles.detailItem}>
-              {selectedOrder?.cart?.line_items?.map((item, _idx) => (
+              {selectedTask?.order?.cart?.line_items?.map((item, _idx) => (
                 <span key={_idx + 1} className={styles.detailInfo}>
-                  <span style={{ fontWeight: 800 }}>{item?.service_name}</span>
+                  <span
+                    style={{
+                      fontSize: `var(--text-md)`,
+                      fontWeight: "700",
+                      alignItems: "center",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    {item?.service_name} &nbsp;
+                    <FaArrowRight size={15} />
+                    &nbsp;
+                    {new Date(item?.service_date)?.toDateString()},{" "}
+                    {new Date(item?.service_date)?.toLocaleTimeString()}
+                  </span>
                   {item?.packageDetails?.map((packItem, _i) => (
-                    <small key={_i + 1}>
+                    <small key={_i + 1} style={{ fontStyle: "italic" }}>
                       <li
                         style={{
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "flex-start",
-                          fontStyle: "italic",
                         }}
                       >
-                        {packItem?.title} &nbsp; <FaArrowRight size={15} />
+                        {packItem?.title}&nbsp; <FaArrowRight size={15} />
                         &nbsp;
                         {packItem?.quantity}
                       </li>
@@ -83,11 +99,9 @@ export default function ViewOrderDetails({ selectedOrder, closeModal }) {
             </div>
           </div>
           <div className={styles.paymentAdvice}>
+            <span style={{ color: `var(--white)` }}>Task status</span>
             <span className={styles.paymentStatus}>
-              {selectedOrder?.payment?.status ?? "PENDING"}
-            </span>
-            <span className={styles.paymentAmount}>
-              {primaryCurrency}&nbsp;{selectedOrder?.cart?.total_price}
+              {selectedTask?.order?.task?.status}
             </span>
           </div>
         </div>
