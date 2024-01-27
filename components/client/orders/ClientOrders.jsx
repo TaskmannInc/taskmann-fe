@@ -237,8 +237,26 @@ export default function SessionOrders() {
               <span>Total items</span>
               <span>Cost</span>
               <span>Codes</span>
-              <span>Order status</span>
-              <span>Task status</span>
+              <span
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                Order status
+              </span>
+              <span
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                Task status
+              </span>
               <span style={{ textAlign: "center" }} title="Payment actions">
                 <BsThreeDots size={25} />
               </span>
@@ -345,13 +363,20 @@ export default function SessionOrders() {
                         {order?.cancellation_code ?? "none"}
                       </small>
                     </div>
-                    <div style={{ textAlign: "left" }}>
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       {order?.payment?.status == "PAID" ? (
                         <span
                           style={{
                             fontSize: `var(--text-sm)`,
                             width: "70%",
-                            textAlig: "center",
+                            textAlign: "center",
                             borderRadius: `var(--radius-min)`,
                             padding: "0.35rem 0.5rem",
                             background: `var(--success)`,
@@ -366,7 +391,7 @@ export default function SessionOrders() {
                           style={{
                             fontSize: `var(--text-sm)`,
                             width: "70%",
-                            textAlig: "center",
+                            textAlign: "center",
                             borderRadius: `var(--radius-min)`,
                             padding: "0.35rem 0.5rem",
                             background: `var(--danger)`,
@@ -401,17 +426,26 @@ export default function SessionOrders() {
                         </Link>
                       )}
                     </div>
-                    <div>
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <span
                         style={{
                           fontSize: `var(--text-sm)`,
                           width: "70%",
-                          textAlig: "center",
+                          textAlign: "center",
                           borderRadius: `var(--radius-min)`,
                           padding: "0.35rem 0.5rem",
                           backgroundColor: `${
                             order?.status == "PENDING"
                               ? "var(--dark-2)"
+                              : order?.status == "COMPLETED"
+                              ? "var(--success)"
                               : order?.status == "ASSIGNED"
                               ? "var(--black-2)"
                               : order?.status == "CANCELLED"
