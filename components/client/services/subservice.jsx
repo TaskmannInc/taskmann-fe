@@ -62,7 +62,15 @@ export default function SubServiceDetails() {
           </Link>
         </section>
       ) : isSuccess ? (
-        <section className={styles.servicesBanner}>
+        <section
+          className={styles.servicesBanner}
+          style={{
+            backgroundImage: selectedSubServiceData?.subservice_image?.[0]
+              ?.image_url
+              ? `url(${selectedSubServiceData?.subservice_image?.[0]?.image_url})`
+              : `url("/assets/backgrounds/pexels-jean-van-der-meulen-1457841.jpg")`,
+          }}
+        >
           <h2 className={styles.servicesHeading}>
             {selectedSubServiceData?.sub_service_name ?? "Sub services offered"}
           </h2>
