@@ -204,91 +204,94 @@ export default function OrderPackage() {
             </span>
             {mutableParameters?.map((param, i) => {
               return (
-                <span
-                  className={`${styles.serviceParamater} ${styles.serviceParamaterMobile}`}
-                  key={i + 1}
-                >
-                  <span className={styles.parameterLabel}>
-                    <input
-                      type="checkbox"
-                      defaultValue={allSelectedOptions.includes(param)}
-                      // value={param}
-                      className={``}
-                      style={{
-                        width: "1rem",
-                        height: "1rem",
-                      }}
-                      onChange={(e) => handleSelectOption(e, param)}
-                    />
-                    &nbsp;&nbsp;
-                    {param?.name} &nbsp; <FiArrowRight size={22} />
-                  </span>
-                  <span className={styles.parameter}>
-                    {allSelectedOptions?.some(
-                      (optionexist) => optionexist?.name == param?.name
-                    ) ? (
-                      <button
-                        title="Decrease"
-                        type="button"
-                        className="action-btn"
-                        onClick={() =>
-                          handleChangeParamQty(param?.name, "decrease")
-                        }
-                        disabled={allSelectedOptions?.some(
-                          (optionexist) =>
-                            optionexist?.name == param?.name &&
-                            optionexist?.quantity == param?.min
-                        )}
-                      >
-                        <FaMinusCircle size={80} color="red" />
-                      </button>
-                    ) : (
-                      <button
-                        title="Decrease"
-                        type="button"
-                        className="action-btn"
-                        onClick={() =>
-                          handleChangeParamQty(param?.name, "decrease")
-                        }
-                        disabled={true}
-                      >
-                        <FaMinusCircle size={80} color="red" />
-                      </button>
-                    )}
-                    <span></span>
-                    {allSelectedOptions?.some(
-                      (optionexist) => optionexist?.name == param?.name
-                    ) ? (
-                      <button
-                        title="Increase"
-                        type="button"
-                        className="action-btn"
-                        onClick={() =>
-                          handleChangeParamQty(param?.name, "increase")
-                        }
-                        disabled={allSelectedOptions?.some(
-                          (optionexist) =>
-                            optionexist?.name == param?.name &&
-                            optionexist?.quantity == param?.max
-                        )}
-                      >
-                        <BsPlusCircleFill size={80} color="green" />
-                      </button>
-                    ) : (
-                      <button
-                        title="Increase"
-                        type="button"
-                        className="action-btn"
-                        onClick={() =>
-                          handleChangeParamQty(param?.name, "increase")
-                        }
-                        disabled={true}
-                      >
-                        <BsPlusCircleFill size={80} color="green" />
-                      </button>
-                    )}
-                  </span>
-                </span>
+                <div key={i + 1} className={styles.parameterWrapper}>
+                  <input
+                    type="checkbox"
+                    defaultValue={allSelectedOptions.includes(param)}
+                    // value={param}
+                    className={``}
+                    style={{
+                      width: "1rem",
+                      height: "1rem",
+                    }}
+                    onChange={(e) => handleSelectOption(e, param)}
+                  />
+                  <span
+                    className={`${styles.serviceParamater} ${styles.serviceParamaterMobile}`}
+                  >
+                    <span className={styles.parameterLabel}>
+                      &nbsp;&nbsp;
+                      {param?.name}
+                    </span>
+                    <span className={styles.incrementDecrementWrapper}>
+                      {allSelectedOptions?.some(
+                        (optionexist) => optionexist?.name == param?.name
+                      ) ? (
+                        <button
+                          title="Decrease"
+                          type="button"
+                          className={`action-btn ${styles.incrementDecrementBtns}`}
+                          onClick={() =>
+                            handleChangeParamQty(param?.name, "decrease")
+                          }
+                          disabled={allSelectedOptions?.some(
+                            (optionexist) =>
+                              optionexist?.name == param?.name &&
+                              optionexist?.quantity == param?.min
+                          )}
+                        >
+                          <FaMinusCircle size={80} color="red" />
+                        </button>
+                      ) : (
+                        <button
+                          title="Decrease"
+                          type="button"
+                          className={`action-btn ${styles.incrementDecrementBtns}`}
+                          onClick={() =>
+                            handleChangeParamQty(param?.name, "decrease")
+                          }
+                          disabled={true}
+                        >
+                          <FaMinusCircle size={80} color="red" />
+                        </button>
+                      )}
+
+                      <span></span>
+
+                      {allSelectedOptions?.some(
+                        (optionexist) => optionexist?.name == param?.name
+                      ) ? (
+                        <button
+                          title="Increase"
+                          type="button"
+                          className={`action-btn ${styles.incrementDecrementBtns}`}
+                          onClick={() =>
+                            handleChangeParamQty(param?.name, "increase")
+                          }
+                          disabled={allSelectedOptions?.some(
+                            (optionexist) =>
+                              optionexist?.name == param?.name &&
+                              optionexist?.quantity == param?.max
+                          )}
+                        >
+                          <BsPlusCircleFill size={80} color="green" />
+                        </button>
+                      ) : (
+                        <button
+                          title="Increase"
+                          type="button"
+                          className={`action-btn ${styles.incrementDecrementBtns}`}
+                          onClick={() =>
+                            handleChangeParamQty(param?.name, "increase")
+                          }
+                          disabled={true}
+                        >
+                          <BsPlusCircleFill size={80} color="green" />
+                        </button>
+                      )}
+                    </span>
+                  </span>{" "}
+                </div>
               );
             })}
           </div>

@@ -141,6 +141,7 @@ input[type="checkbox"] {
   border-radius: var(--radius-circular);
   border: var(--black);
   color: var(--gold);
+  background-color: var(--gray);
 }
 
 input[type="number"]::-webkit-inner-spin-button,
