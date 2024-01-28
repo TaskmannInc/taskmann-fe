@@ -215,11 +215,17 @@
 
   .teamMembersContainer {
     width: 100%;
+    height: max-content;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     column-gap: 0;
     row-gap: 1rem;
+  }
+
+  .teamMember {
+    width: 100%;
+    height: max-content;
   }
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { AiOutlineFieldTime } from "react-icons/ai";
-import { FaArrowCircleRight } from "react-icons/fa";
+import { FaArrowCircleRight, FaUserCircle } from "react-icons/fa";
 import { GiReceiveMoney } from "react-icons/gi";
 import { MdOutlineScatterPlot } from "react-icons/md";
 
@@ -27,9 +27,21 @@ export default function CareerAdsSection({ styles }) {
         </div>
       </div>
       <div className={styles.rightSection}>
-        <Link href={"staff/auth/onboarding"} className={styles.taskerAuthLink}>
+        <Link
+          href={"/company/taskers"}
+          className={styles.taskerAuthLink}
+          style={{ backgroundColor: `var(--white)`, color: `var(--black)` }}
+        >
           Earn Money As a Tasker &nbsp;
           <FaArrowCircleRight size={30} />
+        </Link>
+        <Link
+          href={"/staff/auth/onboarding"}
+          className={styles.taskerAuthLink}
+          style={{ backgroundColor: `var(--black)`, color: `var(--white)` }}
+        >
+          <FaUserCircle size={30} />
+          &nbsp;Login as tasker
         </Link>
       </div>
     </div>
