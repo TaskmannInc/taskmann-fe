@@ -76,9 +76,9 @@
   padding: 0.8rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  row-gap: 0.2rem;
+  justify-content: center;
+  align-items: flex-end;
+  row-gap: 2rem;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -92,30 +92,33 @@
 .featuredSection .featuredPost h4 {
   height: 15%;
   width: 100%;
-  font-size: var(--text-heading-1);
+  font-size: var(--text-heading-3);
   text-align: left;
 }
 
 .featuredSection .featuredPost .previewDescription {
-  padding: 0.15rem 0.5rem;
   text-align: left;
-  font-size: var(--text-md);
-  height: 45%;
-  width: 100%;
+  background-color: none;
   border-radius: var(--radius-md);
-  color: var(--white);
-  background-color: var(--white);
-  /* overflow-y: hidden; */
+  padding: 0.15rem 1rem;
+  text-align: left;
+  font-size: var(--text-sm);
+  height: 40%;
+  width: 100%;
+  overflow-y: hidden; /* overflow-y: hidden; */
 }
 
 .featuredSection .featuredPost .readMoreLink {
+  display: flex;
+  justify-self: flex-end;
   width: max-content;
   height: max-content;
   font-size: var(--text-sm);
   text-align: center;
   background-color: var(--green-darker);
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 2rem;
   border-radius: var(--radius-rounded);
+  opacity: 0.85;
 }
 
 .featuredSection .featuredPost .readMoreLink:hover,
@@ -159,7 +162,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
   row-gap: 1.2rem;
   background-repeat: no-repeat;
   background-position: center;
@@ -181,19 +184,19 @@
 
 .posts .postCard .previewDescription {
   text-align: left;
-  background-color: #e6e6e676;
-  border-radius: var(--radius-md);
+  background-color: #b6b6b6c8;
   padding: 0.5rem 2.5rem;
   text-align: left;
   font-size: var(--text-sm);
-  height: 65%;
+  height: 80%;
   width: 100%;
   overflow-y: hidden;
+  border-bottom: 3pt dashed var(--white);
 }
 
 .posts .postCard .readMoreLink {
   font-size: var(--text-sm);
-  padding: 0.25rem 1rem;
+  padding: 0.75rem 1.5rem;
   text-align: center;
   color: var(--black);
   border-radius: var(--radius-rounded);
@@ -274,15 +277,15 @@
   font-size: var(--text-md);
 }
 
+.postBanner {
+  height: max-content;
+}
+
 .postRead {
-  padding: 1rem 4rem;
+  padding: 1rem 1rem;
   width: 98%;
   min-height: 25rem;
   height: max-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   align-self: center;
   background-color: var(--white);
   box-shadow: var(--text-shadow-4);
@@ -296,4 +299,63 @@
   line-height: 1.5rem;
   font-size: var(--text-md);
   margin-bottom: 2.5rem;
+}
+
+@media (min-width: 250px) and (max-width: 720px) {
+  .featuredSection {
+    grid-template-columns: 100%;
+  }
+
+  /*Main blog*/
+
+  .mainBlog {
+    background-color: var(--gray-2);
+  }
+
+  .mainBlog h4 {
+    padding: 0.6rem;
+    border-bottom: 1px solid var(--gray-2);
+  }
+
+  .mainBlog .posts,
+  .mainBlog .postsLoading {
+    grid-template-columns: 100%;
+    column-gap: 1.5%;
+    row-gap: 1.5rem;
+  }
+}
+
+/*Phablets --<>-- Tablets*/
+@media (min-width: 724px) and (max-width: 1024px) {
+  /*Main blog section*/
+
+  .titleSection,
+  .mainBlog {
+    display: flex;
+    width: 100%;
+    row-gap: 1rem;
+    padding: 1.5rem 1.2rem;
+  }
+
+  .featuredSection {
+    grid-template-columns: 48% 48%;
+  }
+
+  /*Main blog*/
+
+  .mainBlog {
+    background-color: var(--gray-2);
+  }
+
+  .mainBlog h4 {
+    padding: 0.6rem;
+    border-bottom: 1px solid var(--gray-2);
+  }
+
+  .mainBlog .posts,
+  .mainBlog .postsLoading {
+    grid-template-columns: 48% 48%;
+    column-gap: 1.5%;
+    row-gap: 1.5rem;
+  }
 }

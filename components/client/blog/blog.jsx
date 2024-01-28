@@ -79,18 +79,12 @@ export default function BlogSite() {
                   }}
                 >
                   <h4 style={{ textTransform: "capitalize" }}>
-                    {item?.title?.length > 50
-                      ? item?.title?.slice(0, 50) + "..."
+                    {item?.title?.length > 100
+                      ? item?.title?.slice(0, 100) + "..."
                       : item?.title}
                   </h4>
-                  <p
-                    className={styles.previewDescription}
-                    dangerouslySetInnerHTML={sanitizedData(
-                      item?.content?.length > 200
-                        ? `${item?.content?.slice(0, 200)}...`
-                        : item?.content
-                    )}
-                  ></p>
+                  <p className={styles.previewDescription}></p>
+
                   <Link
                     href={`/blog/article?i=${item?._id}`}
                     className={styles.readMoreLink}
@@ -147,8 +141,8 @@ export default function BlogSite() {
                   <p
                     className={styles.previewDescription}
                     dangerouslySetInnerHTML={sanitizedData(
-                      item?.content?.length > 250
-                        ? `${item?.content?.slice(0, 200)}...`
+                      item?.content?.length > 150
+                        ? `${item?.content?.slice(0, 150)}...`
                         : item?.content
                     )}
                   ></p>

@@ -191,14 +191,8 @@ export default function BlogDetails() {
                       }}
                     >
                       <h4>{item?.title}</h4>
-                      <p
-                        className={styles.previewDescription}
-                        dangerouslySetInnerHTML={sanitizedData(
-                          item?.content?.length > 150
-                            ? `${item?.content?.slice(0, 150)}...`
-                            : item?.content
-                        )}
-                      ></p>
+                      <p className={styles.previewDescription}></p>
+
                       <Link
                         href={`/blog/article?i=${item?._id}`}
                         className={styles.readMoreLink}
