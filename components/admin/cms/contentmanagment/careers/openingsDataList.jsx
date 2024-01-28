@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import Link from "next/link";
 import {
   FaCaretDown,
@@ -16,6 +17,9 @@ export const CareerPostList = ({
   copyToClipBoard,
 }) => {
   var iconSize = 18;
+  const sanitizedData = (param) => ({
+    __html: DOMPurify.sanitize(param),
+  });
   return (
     <tbody>
       {currentDataItems?.map((item, index) => (
@@ -33,12 +37,13 @@ export const CareerPostList = ({
                 ? `${item?.location?.slice(0, 20)}...`
                 : item?.location}
             </td>
-            <td>
-              {" "}
-              {item?.description?.length > 45
-                ? `${item?.description?.slice(0, 45)}...`
-                : item?.description}
-            </td>
+            <td
+              dangerouslySetInnerHTML={sanitizedData(
+                item?.description?.length > 45
+                  ? `${item?.description?.slice(0, 45)}...`
+                  : item?.description
+              )}
+            ></td>
             <td>{item?.status == true ? "Open" : "Closed"}</td>
             <td>
               <Link
@@ -56,7 +61,6 @@ export const CareerPostList = ({
                 <MdLink size={25} />
               </button>
             </td>
-            <td>{item?.requirements ? "Yes" : "None"}</td>
             <td>
               <button
                 className={styles.viewButton}

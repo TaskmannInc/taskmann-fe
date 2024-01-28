@@ -64,9 +64,7 @@ export default function CareersManagementWarapper({ styles }) {
     console.log("error", response);
   };
 
-  const onSuccess = (response) => {
-    console.log("sucesss :", response);
-  };
+  const onSuccess = (response) => {};
 
   //get career openings <--> request
   const {
@@ -123,7 +121,7 @@ export default function CareersManagementWarapper({ styles }) {
       <Toaster reverseOrder={false} />
       <div className={styles.careersdataset}>
         <div className={styles.tableHeader}>
-          <h6>Showing results for all career openings</h6>
+          <h6>Showing results for all career</h6>
           <div className={styles.headerActions}>
             <span className={styles.searchContainer}>
               <FiSearch size={iconSize} />{" "}
@@ -157,7 +155,6 @@ export default function CareersManagementWarapper({ styles }) {
                   <th>Description</th>
                   <th>Status</th>
                   <th>Link</th>
-                  <th>Requirements</th>
                   <th>
                     <BsGear size={"20"} />
                   </th>

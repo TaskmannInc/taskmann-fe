@@ -204,12 +204,13 @@
   align-items: center;
 }
 
-/*Blog specific grid styles*/
+/*Careers specific grid styles*/
 .careersmanagementDashboard .tableData .dataTable thead tr,
 .careersmanagementDashboard .tableData .dataTable tbody tr {
   width: 100%;
   display: grid;
-  grid-template-columns: 5% 10% 15% 25% 15% 10% 10% 10%;
+  grid-template-columns: 5% 15% 15% 27% 15% 10% 10%;
+  column-gap: 0.5%;
   justify-items: flex-start;
   align-items: center;
 }

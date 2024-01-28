@@ -1,4 +1,4 @@
-import { FaBlogger } from "react-icons/fa";
+import { FaUserGraduate } from "react-icons/fa";
 import styles from "../../../../../styles/admin/Forms.module.css";
 import { DeleteCareerOpeningHook } from "../../../../utils/hooks/careerOpeningsMgmtHook";
 import { CloseButton } from "../../../Globals/closeBtn";
@@ -45,10 +45,14 @@ export default function DeleteCareerOpening({ closeForm }) {
     <div className={""} style={{ width: "100%" }}>
       <div className={styles.authForm}>
         <div className={styles.authFormHeader}>
-          <FaBlogger size={25} />
+          <FaUserGraduate size={25} />
           <h4>Delete opening</h4>
           <CloseButton style={styles.closeBtn} closeFunc={closeForm} />
         </div>
+        <span style={{ textAlign: "center" }}>
+          Are you sure you want to delete <em>{__selected_data?.position}</em>{" "}
+          from the list of openings?
+        </span>
         <form className={styles.formContainer} onSubmit={handleSubmit}>
           <div className={"grid-col-2"}>
             <button

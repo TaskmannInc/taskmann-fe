@@ -14,6 +14,9 @@ import { CloseButton } from "../../../Globals/closeBtn";
 import RichTextEditor from "../../../../ui-fragments/textEditor.jsx";
 
 export default function UpdateCareerOpening({ closeForm }) {
+  //get base url
+  var baseURL = window.location;
+
   //get selected row data
   var __selected_data, __storageItem;
 
@@ -33,7 +36,6 @@ export default function UpdateCareerOpening({ closeForm }) {
     location: __selected_data?.location,
     status: __selected_data?.status,
     link: __selected_data?.link,
-    requirements: __selected_data?.requirements,
   });
   const [formattedContent, setFormattedContent] = useState(
     __selected_data?.description
@@ -43,9 +45,8 @@ export default function UpdateCareerOpening({ closeForm }) {
   const schema = {
     position: Joi.string().required(),
     location: Joi.string().required(),
-    status: Joi.string().required(),
+    status: Joi.boolean().required(),
     link: Joi.optional().allow(null),
-    requirements: Joi.optional().allow(null),
   };
 
   //Form inputs event handler
@@ -60,7 +61,6 @@ export default function UpdateCareerOpening({ closeForm }) {
     status:
       formData?.status == true || formData?.status == "true" ? true : false,
     link: `https://${baseURL?.host}/about/careerpage`,
-    requirements: formData?.requirements,
     id: __selected_data?._id,
   };
 
@@ -190,18 +190,6 @@ export default function UpdateCareerOpening({ closeForm }) {
           <small className="field-validation">
             {errors.link && "Job url must be a valid url"}
           </small>
-
-          <GeneralTextInput
-            label={"Requirements"}
-            placeholder={"Role pre-requisites goes here"}
-            type={"text"}
-            name={"requirements"}
-            onChange={handleChange}
-            validate={errors}
-            defaultValue={formData?.requirements}
-            readOnly={isLoading}
-            required
-          />
 
           <button
             type="submit"

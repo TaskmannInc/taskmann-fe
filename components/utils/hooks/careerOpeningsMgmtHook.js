@@ -25,7 +25,7 @@ const getAllCareerOpenings = () => {
 };
 
 export const GetCareerOpeningsHook = (onSuccess, onError) => {
-  return useQuery("allcareeropenings", getAllCareerOpenings, {
+  return useQuery(["allcareeropenings"], getAllCareerOpenings, {
     onSuccess,
     onError,
     staleTime: Infinity,
@@ -49,7 +49,7 @@ export const GetSelectedCareerOpeningHook = (onSuccess, onError, id) => {
     () => getSelectedCareerOpening(id),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries("allcareeropenings");
+        queryClient.invalidateQueries(["allcareeropenings"]);
       },
       onError,
     }
@@ -69,8 +69,8 @@ const addCareerOpening = (servicedata) => {
 export const AddCareerOpeningHook = (onAddSuccess, onError) => {
   const queryClient = useQueryClient();
   return useMutation(addCareerOpening, {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries("allcareeropenings");
+    onSuccess: () => {
+      queryClient.invalidateQueries(["allcareeropenings"]);
     },
     onAddSuccess,
     onError,
@@ -88,13 +88,13 @@ const updateCareerOpening = (data) => {
   return axios.patch(url, data, { headers: headers });
 };
 
-export const UpdateCareerOpeningHook = (onSuccess, onError) => {
+export const UpdateCareerOpeningHook = (onUpdateSuccess, onError) => {
   const queryClient = useQueryClient();
   return useMutation(updateCareerOpening, {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries("allcareeropenings");
+    onSuccess: () => {
+      queryClient.invalidateQueries(["allcareeropenings"]);
     },
-    onSuccess,
+    onUpdateSuccess,
     onError,
   });
 };
@@ -109,12 +109,13 @@ const deleteCareerOpening = (id) => {
   return axios.delete(url, { headers: headers });
 };
 
-export const DeleteCareerOpeningHook = (onSuccess, onError) => {
+export const DeleteCareerOpeningHook = (onDeleteSuccess, onError) => {
   const queryClient = useQueryClient();
   return useMutation(deleteCareerOpening, {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries("allcareeropenings");
+    onSuccess: () => {
+      queryClient.invalidateQueries(["allcareeropenings"]);
     },
+    onDeleteSuccess,
     onError,
   });
 };

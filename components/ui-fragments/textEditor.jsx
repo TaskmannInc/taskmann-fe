@@ -43,7 +43,6 @@ export default function RichTextEditor({
       quill.clipboard.dangerouslyPasteHTML(formattedContent ?? null);
       quill.on("text-change", () => {
         var typedContent = quill.root.innerHTML;
-        console.info("typed", typedContent);
         setFormattedContent(typedContent);
       });
     }

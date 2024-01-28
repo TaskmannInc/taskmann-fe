@@ -1,10 +1,11 @@
-import { FaBlogger } from "react-icons/fa";
+import { FaBlogger, FaUserGraduate } from "react-icons/fa";
 import styles from "../../../../../styles/admin/Forms.module.css";
 import {
   GeneralTextAreaInput,
   GeneralTextInput,
 } from "../../../../ui-fragments/input.jsx";
 import { CloseButton } from "../../../Globals/closeBtn";
+import DOMPurify from "dompurify";
 
 export default function ViewCareerOpening({ closeForm }) {
   //get selected row data
@@ -19,12 +20,16 @@ export default function ViewCareerOpening({ closeForm }) {
     console.log(null);
   }
 
+  const sanitizedData = (param) => ({
+    __html: DOMPurify.sanitize(param),
+  });
+
   return (
     <div className={""} style={{ width: "100%" }}>
       <div className={styles.authForm}>
         <div className={styles.authFormHeader}>
-          <FaBlogger size={25} />
-          <h6>Viewing blog details</h6>
+          <FaUserGraduate size={25} />
+          <h6>Viewing opening details</h6>
           <CloseButton style={styles.closeBtn} closeFunc={closeForm} />
         </div>
         <div className={styles.formContainer}>
@@ -44,19 +49,16 @@ export default function ViewCareerOpening({ closeForm }) {
             defaultValue={__selected_data?.location ?? "Unavailable"}
           />
 
-          <GeneralTextAreaInput
-            label={"Role description"}
-            placeholder={"Role description goes here"}
-            type={"text"}
-            name={"description"}
-            defaultValue={__selected_data?.description ?? "Unavailable"}
-          />
-
           <GeneralTextInput
             label={"Opening status"}
             name={"active"}
             type={"text"}
-            defaultValue={__selected_data?.active == true ? "Open" : "Closed"}
+            defaultValue={
+              __selected_data?.status == true ||
+              __selected_data?.status == "true"
+                ? "Open"
+                : "Closed"
+            }
           />
 
           <GeneralTextInput
@@ -74,6 +76,20 @@ export default function ViewCareerOpening({ closeForm }) {
             name={"requirements"}
             defaultValue={__selected_data?.requirements ?? "Unavailable"}
           />
+
+          <span
+            className="mini-card"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              padding: "1rem 2rem",
+            }}
+            dangerouslySetInnerHTML={sanitizedData(
+              __selected_data?.description
+            )}
+          ></span>
         </div>
       </div>
     </div>

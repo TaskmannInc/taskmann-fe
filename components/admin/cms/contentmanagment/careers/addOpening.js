@@ -24,7 +24,6 @@ export default function AddCareerOpening({ closeForm, modalEvents }) {
     location: "",
     status: "",
     link: "",
-    requirements: "",
   });
 
   const [formattedContent, setFormattedContent] = useState(null);
@@ -35,7 +34,6 @@ export default function AddCareerOpening({ closeForm, modalEvents }) {
     location: Joi.string().required(),
     status: Joi.string().required(),
     link: Joi.optional().allow(null),
-    requirements: Joi.optional().allow(null),
   };
 
   //Form inputs event handler
@@ -50,7 +48,6 @@ export default function AddCareerOpening({ closeForm, modalEvents }) {
     status:
       formData?.status == true || formData?.status == "true" ? true : false,
     link: `https://${baseURL?.host}/about/careerpage`,
-    requirements: formData?.requirements,
   };
   //function to submit form data
   const handleSubmit = (e) => {
@@ -154,7 +151,7 @@ export default function AddCareerOpening({ closeForm, modalEvents }) {
             onChange={handleChange}
             validate={errors}
             disabled={isLoading}
-            required
+            required={true}
           />
           <small className="field-validation">
             {errors.status && "Role status is required"}
@@ -172,15 +169,6 @@ export default function AddCareerOpening({ closeForm, modalEvents }) {
           <small className="field-validation">
             {errors.link && "Job url must be a valid url"}
           </small>
-          <GeneralTextInput
-            label={"Requirements"}
-            placeholder={"Role pre-requisites goes here"}
-            type={"text"}
-            name={"requirements"}
-            onChange={handleChange}
-            validate={errors}
-            readOnly={isLoading}
-          />
 
           <button type="submit" className={styles.submitBtn}>
             {isLoading ? "Processing..." : "Add opening"}
