@@ -111,3 +111,90 @@ export const CancelSessionUserOrderHook = (onUpdateSuccess, onError) => {
     onError,
   });
 };
+
+//<==== CUSTOM REQUESTS RELATED HOOKS ===>
+
+//--> call back function to get session user's custom requests ==> HOOKS
+const getSessionRequest = () => {
+  const url = baseURL + ENDPOINTS.customrequests;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${userSession?.accessAuth}`,
+  };
+  return axios.get(url, { headers: headers });
+};
+
+export const GetLoggedInUserRequest = (onSuccess, onError) => {
+  return useQuery(["sessionCustomOrders"], () => getSessionRequest(), {
+    onSuccess,
+    onError,
+    staleTime: Infinity,
+    keepPreviousData: true,
+  });
+};
+
+//--> call back function to get specific custom request ==> HOOKS
+const getSelectedCustomRequest = (id) => {
+  const url = baseURL + ENDPOINTS.customrequests + `/${id}`;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${userSession?.accessAuth}`,
+  };
+  return axios.get(url, { headers: headers });
+};
+
+export const GetSelectedCustomRequestHook = (onSuccess, onError, id) => {
+  return useQuery(
+    ["selectedCustomRequest", id],
+    () => getSelectedCustomRequest(id),
+    {
+      onSuccess,
+      onError,
+      staleTime: Infinity,
+    }
+  );
+};
+
+//--> call back function to make a custom request ==>HOOKS
+const requestCustomService = (data) => {
+  const url = baseURL + ENDPOINTS.customrequests;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${userSession?.accessAuth}`,
+  };
+  return axios.post(url, data, { headers: headers });
+};
+
+export const RequestCustomServiceHook = (onRequestSuccess, onError) => {
+  const queryClient = useQueryClient();
+  return useMutation(requestCustomService, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["sessionCustomOrders"]);
+    },
+    onRequestSuccess,
+    onError,
+  });
+};
+
+//update user's existing custom request ==>HOOKS
+const updateCustomRequest = (data) => {
+  const url = baseURL + ENDPOINTS.order + `/cancel/${data?.id}`;
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${userSession?.accessAuth}`,
+  };
+  delete data.id;
+  return axios.patch(url, data, { headers: headers });
+};
+
+export const UpdateCustomRequestHook = (onUpdateSuccess, onError) => {
+  const queryClient = useQueryClient();
+  return useMutation(updateCustomRequest, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["sessionCustomOrders"]);
+    },
+    onUpdateSuccess,
+    onError,
+  });
+};

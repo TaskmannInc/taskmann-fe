@@ -19,6 +19,7 @@ export const ENDPOINTS = {
   cart: "api/v1/cart",
   order: "api/v1/order",
   payment: "api/v1/payment_link",
+  customrequests: "api/v1/customrequest",
 
   //staff
   registerstaff: "api/v1/staff/register",
@@ -55,6 +56,7 @@ export const ENDPOINTS = {
   aboutus: "api/v1/about_us",
   contact: "api/v1/contacts",
   adminorders: "api/v1/admin/orders",
+  admincustomorders: "api/v1/admin/customrequest",
   taskerstasks: "api/v1/tasks",
   tasks: "api/v1/admin/task",
   alltasks: "api/v1/admin/tasks",

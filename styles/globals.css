@@ -454,8 +454,11 @@ textarea:read-only {
 }
 
 .formGroup label {
-  font-size: var(--text-normal);
+  font-size: var(--text-md);
   font-weight: 600;
+}
+label {
+  font-size: var(--text-md);
 }
 
 .formGroup input {
@@ -1378,6 +1381,8 @@ p {
   }
 
   .footer-sections {
+    grid-template-columns: 49.5% 49.5%;
+
     width: 100%;
     padding: 0 0 1rem 0;
   }

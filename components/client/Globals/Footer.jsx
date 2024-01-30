@@ -24,6 +24,8 @@ export default function Footer() {
     onSuccess,
     onError
   );
+
+  const copyrightYear = new Date()?.getFullYear();
   return (
     <div className="footer">
       <div className={"footer-sections"}>
@@ -124,7 +126,9 @@ export default function Footer() {
         </Link>
       </span>
       <div className={"bottomFooter"}>
-        <span className="copyright">Taskmann ©️ All rights reserved.</span>
+        <span className="copyright">
+          Taskmann ©️ {copyrightYear}. All rights reserved.
+        </span>
       </div>
     </div>
   );

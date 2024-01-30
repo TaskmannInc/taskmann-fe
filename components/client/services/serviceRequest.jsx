@@ -5,7 +5,9 @@ import { MdOutlineCleaningServices } from "react-icons/md";
 import styles from "../../../styles/client/Services.module.css";
 import validation from "../../utils/helpers/validation.js";
 
-import { RequestServiceHook } from "../../utils/hooks/orderHooks";
+import { StatusNotification } from "../../ui-fragments/notification.jsx";
+import { primaryCurrency } from "../../utils/constants/constants.js";
+import { RequestCustomServiceHook } from "../../utils/hooks/orderHook.js";
 
 export default function ServiceRequest() {
   //get selected service to book
@@ -26,36 +28,29 @@ export default function ServiceRequest() {
   var queryParams = router?.query?.sv;
 
   //state objects
-  const [stepOne, setStepOne] = useState(true);
-  const [stepTwo, setStepTwo] = useState(false);
+  var [contacts, setContacts] = useState([]);
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    phone: "",
-    email: "",
-    // province: "",
-    address: "",
-    city: "",
+  var [formData, setFormData] = useState({
+    firstname: requestBio?.first_name,
+    lastname: requestBio?.last_name,
+    phone: requestBio?.phone,
+    email: requestBio?.email,
+    service_date_time: "",
+    end_date: "",
+    budget: "",
+    description: "",
   });
-
-  const showStepOne = () => {
-    setStepOne(true);
-    setStepTwo(false);
-  };
-  const showStepTwo = () => {
-    setStepOne(false);
-    setStepTwo(true);
-  };
 
   //defined validation schema
   const schema = {
-    first_name: Joi.string().required(),
-    last_name: Joi.string().required(),
+    firstname: Joi.string().required(),
+    lastname: Joi.string().required(),
     phone: Joi.string().required(),
     email: Joi.string().required().email(),
-    address: Joi.string().required(),
-    city: Joi.string().required(),
+    service_date_time: Joi.string().required(),
+    end_date: Joi.string().required(),
+    budget: Joi.string().required(),
+    description: Joi.string().required(),
   };
 
   //Form inputs event handler
@@ -63,14 +58,36 @@ export default function ServiceRequest() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleModifyContactModes = (e, option) => {
+    const isChecked = e.target?.checked;
+    let checked_options = [...contacts];
+    if (isChecked) {
+      // add to array if it is not there are already
+      if (!checked_options.includes(option)) {
+        checked_options.push(option);
+      }
+    } else {
+      checked_options.splice(
+        checked_options.findIndex((cj) => cj == option),
+        1
+      );
+    }
+    console.log("checked==>", checked_options);
+    // formData.contactModes == checked_options;
+    setContacts(checked_options);
+  };
+  // 2024-02-03T02:30:00.000Z
   const serviceRequestBody = {
-    first_name: formData.first_name,
-    last_name: formData.last_name,
+    firstname: formData.firstname,
+    lastname: formData.lastname,
     phone: formData.phone,
     email: formData.email,
-    country: "Canada",
-    address: formData.address,
-    city: formData.city,
+    service_date_time: formData.service_date_time,
+    end_date: formData.end_date,
+    budget: formData?.budget,
+    description: `${formData?.description}; Contact modes: ${Object.values(
+      contacts
+    )}`,
   };
 
   //function to submit form data
@@ -78,9 +95,7 @@ export default function ServiceRequest() {
     e.preventDefault();
     const errors = validation(formData, schema);
     setErrors(errors || {});
-    if (!errors) {
-      console.log("data", userData);
-      // return;
+    if (Object.values(serviceRequestBody).some((x) => x !== null && x !== "")) {
       sendRequest(serviceRequestBody);
     } else {
       console.log(errors);
@@ -97,11 +112,10 @@ export default function ServiceRequest() {
   const {
     mutate: sendRequest,
     isLoading,
-    data: submissionResponse,
     isError,
     error,
     isSuccess,
-  } = RequestServiceHook(onSuccess, onError);
+  } = RequestCustomServiceHook(onSuccess, onError);
 
   return (
     <>
@@ -130,197 +144,219 @@ export default function ServiceRequest() {
           </h5>
           <MdOutlineCleaningServices size={40} />
 
-          {stepOne && (
-            <>
-              <form className={styles.requestForm} onSubmit={handleSubmit}>
-                <div className={"grid-col-2"}>
-                  <div className={styles.serviceInputWrapper}>
-                    <label>First name</label>
-                    <input
-                      placeholder={"Please enter your first name"}
-                      type={"text"}
-                      name={"first_name"}
-                      onChange={handleChange}
-                      className={styles.input}
-                      defaultValue={requestBio?.first_name ?? ""}
-                    />
-                    <small className="field-validation-contrast">
-                      {errors.first_name && "Your first name is required"}
-                    </small>{" "}
-                  </div>
-                  <div className={styles.serviceInputWrapper}>
-                    <label>Last name</label>
-                    <input
-                      placeholder={"Please enter your last name"}
-                      type={"text"}
-                      name={"last_name"}
-                      onChange={handleChange}
-                      className={styles.input}
-                      defaultValue={requestBio?.last_name ?? ""}
-                    />
-                    <small className="field-validation-contrast">
-                      {errors.last_name && "Your last name is required"}
-                    </small>
-                  </div>
-                </div>
-                <div className={"grid-col-2"}>
-                  <div className={styles.serviceInputWrapper}>
-                    <label>Email</label>
-                    <input
-                      placeholder={"Please enter your mail address"}
-                      type={"email"}
-                      name={"email"}
-                      onChange={handleChange}
-                      className={styles.input}
-                      defaultValue={requestBio?.email ?? ""}
-                    />
-                    <small className="field-validation-contrast">
-                      {errors.email && "A vaild email is required"}
-                    </small>{" "}
-                  </div>
-                  <div className={styles.serviceInputWrapper}>
-                    <label>Mobile / Telephone</label>
-                    <input
-                      placeholder={
-                        "Please enter your contact phone /telephone number"
-                      }
-                      type={"phone"}
-                      name={"phone"}
-                      onChange={handleChange}
-                      className={styles.input}
-                      defaultValue={requestBio?.phone ?? ""}
-                    />
-                    <small className="field-validation-contrast">
-                      {errors.phone && "A vaild phone number is required"}
-                    </small>{" "}
-                  </div>
-                </div>
-                <div className={"grid-col-2"}>
-                  <div className={styles.serviceInputWrapper}>
-                    <label>Service start date</label>
-                    <input
-                      type={"date"}
-                      name={"service_date"}
-                      onChange={handleChange}
-                      className={styles.input}
-                    />
-                    <small className="field-validation-contrast">
-                      {errors.service_date && "Service date is required"}
-                    </small>{" "}
-                  </div>
-                  <div className={styles.serviceInputWrapper}>
-                    <label>Service start time</label>
-                    <input
-                      type={"time"}
-                      name={"service_time"}
-                      onChange={handleChange}
-                      className={styles.input}
-                    />
-                    <small className="field-validation-contrast">
-                      {errors.service_time && "Service time is required"}
-                    </small>{" "}
-                  </div>
-                </div>
-                <div className={"grid-col-2"}>
-                  <div className={styles.serviceInputWrapper}>
-                    <label>Service location</label>
-                    <input
-                      type={"text"}
-                      placeholder={"Please enter the service request location"}
-                      name={"service_location"}
-                      onChange={handleChange}
-                      className={styles.input}
-                    />
-                    <small className="field-validation-contrast">
-                      {errors.service_location &&
-                        "A service_location is required"}
-                    </small>{" "}
-                  </div>
-                  <div className={styles.serviceInputWrapper}>
-                    <label>Budgeted cost</label>
-                    <input
-                      type={"number"}
-                      min={0}
-                      placeholder={"Estimated costs"}
-                      name={"service_budget"}
-                      onChange={handleChange}
-                      className={styles.input}
-                    />
-                    <small className="field-validation-contrast">
-                      {errors.service_budget && "A budgeted cost is required"}
-                    </small>{" "}
-                  </div>
-                </div>
-                <div className={styles.serviceTextAreaWrapper}>
-                  <label>Service description</label>
-                  <textarea
+          <>
+            <form className={styles.requestForm} onSubmit={handleSubmit}>
+              <div className={"grid-col-2"}>
+                <div className={styles.serviceInputWrapper}>
+                  <label>First name</label>
+                  <input
+                    readOnly={isLoading}
+                    placeholder={"Please enter your first name"}
                     type={"text"}
-                    placeholder={
-                      "Please type in a vivid description of the service you are requesting..."
-                    }
-                    name={"service_description"}
+                    name={"firstname"}
                     onChange={handleChange}
-                    validate={errors}
-                    className={styles.textarea}
+                    className={styles.input}
+                    defaultValue={formData?.firstname ?? ""}
                   />
                   <small className="field-validation-contrast">
-                    {errors.service_description && "Service description"}
+                    {errors.firstname && "Your first name is required"}
                   </small>{" "}
                 </div>
-                <div className={styles.contactMode}>
-                  <label>Preferred mode of contact</label>
-                  <div className={styles.contactOptions}>
-                    <div className={styles.contactcheckWrapper}>
-                      <label>Email</label>&nbsp;
-                      <input
-                        type={"checkbox"}
-                        name={"contact_mode"}
-                        defaultChecked={"email"}
-                        onChange={handleChange}
-                        style={{
-                          width: "1rem",
-                          height: "1rem",
-                        }}
-                        // className={styles.checker}
-                      />
-                    </div>
-                    <div className={styles.contactcheckWrapper}>
-                      <label>Phone call</label>&nbsp;
-                      <input
-                        type={"checkbox"}
-                        name={"contact_mode"}
-                        defaultChecked={"phone_call"}
-                        onChange={handleChange}
-                        style={{
-                          width: "1rem",
-                          height: "1rem",
-                        }}
-                        // className={styles.checker}
-                      />
-                    </div>
-                    <div className={styles.contactcheckWrapper}>
-                      <label>Text message</label>&nbsp;
-                      <input
-                        type={"checkbox"}
-                        name={"contact_mode"}
-                        defaultChecked={"text_message"}
-                        onChange={handleChange}
-                        style={{
-                          width: "1rem",
-                          height: "1rem",
-                        }}
-                        // className={styles.checker}
-                      />
-                    </div>
-                  </div>
+                <div className={styles.serviceInputWrapper}>
+                  <label>Last name</label>
+                  <input
+                    readOnly={isLoading}
+                    placeholder={"Please enter your last name"}
+                    type={"text"}
+                    name={"lastname"}
+                    onChange={handleChange}
+                    className={styles.input}
+                    defaultValue={formData?.lastname ?? ""}
+                  />
                   <small className="field-validation-contrast">
-                    {errors.contact_mode && "Contact mode"}
+                    {errors.lastname && "Your last name is required"}
+                  </small>
+                </div>
+              </div>
+              <div className={"grid-col-2"}>
+                <div className={styles.serviceInputWrapper}>
+                  <label>Email</label>
+                  <input
+                    readOnly={isLoading}
+                    placeholder={"Please enter your mail address"}
+                    type={"email"}
+                    name={"email"}
+                    onChange={handleChange}
+                    className={styles.input}
+                    defaultValue={formData?.email ?? ""}
+                  />
+                  <small className="field-validation-contrast">
+                    {errors.email && "A vaild email is required"}
                   </small>{" "}
                 </div>
-                <button className={styles.submitBtn}>Send request</button>
-              </form>
-            </>
-          )}
+                <div className={styles.serviceInputWrapper}>
+                  <label>Mobile / Telephone</label>
+                  <input
+                    readOnly={isLoading}
+                    placeholder={
+                      "Please enter your contact phone /telephone number"
+                    }
+                    type={"phone"}
+                    name={"phone"}
+                    onChange={handleChange}
+                    className={styles.input}
+                    defaultValue={formData?.phone ?? ""}
+                  />
+                  <small className="field-validation-contrast">
+                    {errors.phone && "A vaild phone number is required"}
+                  </small>{" "}
+                </div>
+              </div>
+
+              <div className={"grid-col-2"}>
+                <div className={styles.serviceInputWrapper}>
+                  <label>Service start date/time</label>
+                  <input
+                    min={new Date().getDate()}
+                    readOnly={isLoading}
+                    type={"datetime-local"}
+                    name={"service_date_time"}
+                    onChange={handleChange}
+                    className={styles.input}
+                  />
+                  <small className="field-validation-contrast">
+                    {errors.service_date_time &&
+                      "Service date and time are required"}
+                  </small>{" "}
+                </div>
+                <div className={styles.serviceInputWrapper}>
+                  <label>Proposed service end date</label>
+                  <input
+                    min={new Date().getDate()}
+                    readOnly={isLoading}
+                    type={"date"}
+                    name={"end_date"}
+                    onChange={handleChange}
+                    className={styles.input}
+                  />
+                  <small className="field-validation-contrast">
+                    {errors.end_date && "Service end date is required"}
+                  </small>
+                </div>
+                <div className={styles.serviceInputWrapper}>
+                  <label>Budgeted cost</label>
+                  <input
+                    readOnly={isLoading}
+                    type={"number"}
+                    min={0}
+                    placeholder={`${primaryCurrency}Estimated cost`}
+                    name={"budget"}
+                    onChange={handleChange}
+                    className={styles.input}
+                  />
+                  <small className="field-validation-contrast">
+                    {errors.budget && "A budgeted cost is required"}
+                  </small>{" "}
+                </div>
+              </div>
+              <div className={styles.contactMode}>
+                <label>Preferred mode of contact</label>
+                <div className={styles.contactOptions}>
+                  <div className={styles.contactcheckWrapper}>
+                    <label>E-mail</label>&nbsp;
+                    <input
+                      readOnly={isLoading}
+                      type={"checkbox"}
+                      name={"contactMode"}
+                      onChange={handleChange}
+                      style={{
+                        width: "1rem",
+                        height: "1rem",
+                      }}
+                      onClick={(e) => handleModifyContactModes(e, "email")}
+                    />
+                  </div>
+                  <div className={styles.contactcheckWrapper}>
+                    <label>Call</label>&nbsp;
+                    <input
+                      readOnly={isLoading}
+                      type={"checkbox"}
+                      name={"contactMode"}
+                      onChange={handleChange}
+                      style={{
+                        width: "1rem",
+                        height: "1rem",
+                      }}
+                      onClick={(e) => handleModifyContactModes(e, "phone")}
+                    />
+                  </div>
+                  <div className={styles.contactcheckWrapper}>
+                    <label>SMS</label>&nbsp;
+                    <input
+                      readOnly={isLoading}
+                      type={"checkbox"}
+                      name={"contactMode"}
+                      onChange={handleChange}
+                      style={{
+                        width: "1rem",
+                        height: "1rem",
+                      }}
+                      onClick={(e) => handleModifyContactModes(e, "sms")}
+                    />
+                  </div>
+                </div>
+                <small className="field-validation-contrast">
+                  {contacts?.length == 0 &&
+                    "Please select at least one mode of contact"}
+                </small>{" "}
+              </div>
+              <div className={styles.serviceTextAreaWrapper}>
+                <label>
+                  Service description {`(Including the service location)`}
+                </label>
+                <textarea
+                  readOnly={isLoading}
+                  type={"text"}
+                  placeholder={
+                    "Please type in a vivid description of the service you are requesting. Also, include the location of service in this section..."
+                  }
+                  name={"description"}
+                  onChange={handleChange}
+                  validate={errors}
+                  className={styles.textarea}
+                />
+                <small className="field-validation-contrast">
+                  {!formData.description &&
+                    "A detail description of your custom service is required"}
+                </small>{" "}
+              </div>
+              <button
+                className={styles.submitBtn}
+                type="submit"
+                disabled={
+                  isLoading ||
+                  isSuccess ||
+                  contacts?.length == 0 ||
+                  !formData.description
+                }
+              >
+                {isLoading ? "Submitting ..." : "Send request"}
+              </button>
+              {isSuccess ? (
+                <StatusNotification
+                  type={"success"}
+                  message={
+                    "Your request has been submitted successfully. The team will be in touch shortly..."
+                  }
+                />
+              ) : isError ? (
+                <StatusNotification
+                  type={"error"}
+                  message={error?.response?.data?.error ?? error?.message}
+                />
+              ) : null}
+            </form>
+          </>
         </div>
       </div>
     </>

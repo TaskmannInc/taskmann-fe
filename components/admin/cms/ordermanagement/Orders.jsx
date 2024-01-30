@@ -4,6 +4,8 @@ import { BsCart4 } from "react-icons/bs";
 import styles from "../../../../styles/admin/Orders.module.css";
 import AllOrders from "./subs/orders/allCustomerOrders";
 import AllTasks from "./subs/tasks/allAssignedTasks";
+import { FcCustomerSupport } from "react-icons/fc";
+import AllSpecialOrders from "./subs/orders/allSpecialOrders";
 
 export default function AllSystemOrders() {
   const iconSize = 18;
@@ -11,12 +13,16 @@ export default function AllSystemOrders() {
   //tab buttons
   const tabButtons = [
     {
-      icon: <BsCart4 size={iconSize} color="var(--green-dark)" />,
+      icon: <BsCart4 size={iconSize} color="var(--dark-gray)" />,
       title: "Orders",
     },
     {
-      icon: <BiTask size={iconSize} color="green" />,
+      icon: <BiTask size={iconSize} color="var(--dark-gray)" />,
       title: "Tasks",
+    },
+    {
+      icon: <FcCustomerSupport size={iconSize} />,
+      title: "Custom requests",
     },
   ];
 
@@ -32,7 +38,7 @@ export default function AllSystemOrders() {
 
   return (
     <div className={styles.allserviceTasksLayout}>
-      <h4 className={styles.title}>Tasks and Orders</h4>
+      <h4 className={styles.title}>Orders, Tasks, Custom requests.</h4>
       <div className={styles.buttonsWrapper}>
         {/*Tabs*/}
         <div className={styles.tabButtonsWrapper}>
@@ -57,6 +63,9 @@ export default function AllSystemOrders() {
         <AllOrders styles={styles} iconSize={iconSize} />
       )}
       {activeTab == "Tasks" && <AllTasks styles={styles} iconSize={iconSize} />}
+      {activeTab == "Custom requests" && (
+        <AllSpecialOrders styles={styles} iconSize={iconSize} />
+      )}
     </div>
   );
 }

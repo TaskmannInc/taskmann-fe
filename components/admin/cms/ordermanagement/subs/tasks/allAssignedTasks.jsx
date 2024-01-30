@@ -90,7 +90,7 @@ export default function AllTasks({ styles, iconSize }) {
             readOnly={isTasksLoading || refetchingTasks}
             type="search"
             className={styles.searchinput}
-            placeholder="Search tasks..."
+            placeholder="Search task assignments..."
             disabled={!allSystemTasks}
             onChange={handleTasksSearchChange}
           />

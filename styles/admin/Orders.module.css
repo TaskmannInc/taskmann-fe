@@ -274,3 +274,93 @@
   width: 100%;
   text-align: center;
 }
+
+/*Special requests*/
+
+.selectedCustomRequestItem {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 1.5rem;
+}
+
+.selectedCustomRequestItem .requestDetail,
+.selectedCustomRequestItem .requestDetail .requestAddress,
+.selectedCustomRequestItem .requestDetail .otherDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.selectedCustomRequestItem .requestDetail {
+  row-gap: 1rem;
+}
+.selectedCustomRequestItem .requestDetail h4 {
+  color: var(--dark-2);
+  font-size: var(--text-heading-1);
+  font-weight: 900;
+}
+.selectedCustomRequestItem .requestDetail .requestAddress {
+  border: 1pt solid var(--dark-2);
+  padding: 1rem 0.75rem;
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 0.45rem;
+}
+.selectedCustomRequestItem .requestDetail .requestAddress .requestItem {
+  width: 100%;
+  height: max-content;
+  display: grid;
+  grid-template-columns: 40% 58%;
+  column-gap: 2%;
+  justify-items: flex-start;
+  align-items: center;
+  font-size: var(--text-md);
+  opacity: 0.8;
+}
+
+.selectedCustomRequestItem
+  .requestDetail
+  .requestAddress
+  .requestItem
+  .leftSection,
+.selectedCustomRequestItem
+  .requestDetail
+  .requestAddress
+  .requestItem
+  .rightSection {
+  width: 100%;
+  height: max-content;
+}
+
+.selectedCustomRequestItem
+  .requestDetail
+  .requestAddress
+  .requestItem
+  .leftSection {
+  border-right: 1pt solid var(--gray);
+  font-weight: 800;
+  font-size: var(--text-md);
+}
+.selectedCustomRequestItem
+  .requestDetail
+  .requestAddress
+  .requestItem
+  .rightSection {
+  height: max-content;
+  font-weight: 800;
+  font-size: var(--text-sm);
+  background-color: var(--black);
+  color: var(--white);
+  padding: 0.65rem 0.5rem;
+  border-radius: var(--radius-min);
+}

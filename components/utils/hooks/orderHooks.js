@@ -3,23 +3,6 @@ import { ENDPOINTS } from "../constants/endpoints";
 import { useMutation } from "react-query";
 var baseURL = process.env.NEXT_PUBLIC_APP_URL;
 
-//call back function to submit service request
-const requestService = (requestdata) => {
-  const headers = {
-    "Content-Type": "application/json",
-  };
-  const url = baseURL + "api/v1/service-request";
-  return axios.post(url, requestdata, { headers: headers });
-};
-
-//submit service request
-export const RequestServiceHook = (onSuccess, onError) => {
-  return useMutation(requestService, {
-    onSuccess,
-    onError,
-  });
-};
-
 //call back function to signup user
 const AuthenticateCustomer = (signupdata) => {
   const headers = {

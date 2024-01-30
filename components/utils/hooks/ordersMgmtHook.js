@@ -14,7 +14,7 @@ if (typeof window != "undefined") {
     : (ACCESS_TOKEN = undefined);
 }
 
-//--> call back function to get all services
+//--> call back function to get all admin orders
 const getAdminOrderList = () => {
   const url = baseURL + ENDPOINTS.adminorders;
   const headers = {
@@ -26,6 +26,25 @@ const getAdminOrderList = () => {
 
 export const GetAdminOrderListHook = (onSuccess, onError) => {
   return useQuery(["adminOrderList"], getAdminOrderList, {
+    onSuccess,
+    onError,
+    keepPreviousData: true,
+    staleTime: Infinity,
+  });
+};
+
+//--> call back function to get all admin special requests
+const getAdminSpecialRequestListing = () => {
+  const url = baseURL + ENDPOINTS.admincustomorders;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${ACCESS_TOKEN}`,
+  };
+  return axios.get(url, { headers: headers });
+};
+
+export const GetAdminSpecialRequestListingsHook = (onSuccess, onError) => {
+  return useQuery(["adminSpecialRequestList"], getAdminSpecialRequestListing, {
     onSuccess,
     onError,
     keepPreviousData: true,
@@ -84,6 +103,52 @@ export const GetTaskersTask = (onSuccess, onError) => {
     onError,
     keepPreviousData: true,
     staleTime: Infinity,
+  });
+};
+
+//--> call back function to make a custom request ==>HOOKS
+const AdminRequestCustomService = (data) => {
+  const url = baseURL + ENDPOINTS.admincustomorders + `/${data?.id}`;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${ACCESS_TOKEN}`,
+  };
+  delete data?.id;
+  return axios.post(url, data, { headers: headers });
+};
+
+export const AdminRequestCustomServiceHook = (onRequestSuccess, onError) => {
+  const queryClient = useQueryClient();
+  return useMutation(AdminRequestCustomService, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["sessionCustomOrders"]);
+      queryClient.invalidateQueries(["adminSpecialRequestList"]);
+    },
+    onRequestSuccess,
+    onError,
+  });
+};
+
+//--> call back function to make a custom request ==>HOOKS
+const updateAdminCustomService = (data) => {
+  const url = baseURL + ENDPOINTS.admincustomorders + `/${data?.id}`;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${ACCESS_TOKEN}`,
+  };
+  delete data?.id;
+  return axios.patch(url, data, { headers: headers });
+};
+
+export const UpdateAdminCustomRequestHook = (onRequestSuccess, onError) => {
+  const queryClient = useQueryClient();
+  return useMutation(updateAdminCustomService, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["sessionCustomOrders"]);
+      queryClient.invalidateQueries(["adminSpecialRequestList"]);
+    },
+    onRequestSuccess,
+    onError,
   });
 };
 

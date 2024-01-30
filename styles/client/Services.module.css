@@ -417,7 +417,7 @@
   width: 100%;
   border-radius: 10px;
   height: max-content;
-  padding: 1.2rem 0.4rem;
+  padding: 2rem 0.4rem;
   font-family: var(--global-font);
   resize: none;
 }
