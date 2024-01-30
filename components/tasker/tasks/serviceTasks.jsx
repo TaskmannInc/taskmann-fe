@@ -52,7 +52,7 @@ export default function AllServiceTasks() {
 
   useEffect(() => {
     window
-      .matchMedia("(min-width: 2500px) and (max-width: 720px)")
+      .matchMedia("(min-width: 250px) and (max-width: 720px)")
       .addEventListener("change", (e) => setScreenWidthMobile(e.matches));
   }, []);
 
@@ -326,20 +326,25 @@ export default function AllServiceTasks() {
                             </span>
                             <span className={styles.statusColumn}>
                               <small
+                                className={"pill-other"}
                                 style={{
                                   padding: "0.5rem 1rem",
                                   textAlign: "center",
                                   color: `var(--white)`,
+                                  backgroundColor: `${
+                                    task?.status == "PENDING"
+                                      ? "var(--dark-2)"
+                                      : task?.status == "COMPLETED"
+                                      ? "var(--success)"
+                                      : task?.status == "ASSIGNED"
+                                      ? "var(--black-2)"
+                                      : task?.status == "CANCELLED"
+                                      ? "var(--danger)"
+                                      : "var(--dark-gray)"
+                                  }`,
                                 }}
-                                className={
-                                  task?.status == "PAID"
-                                    ? "pill-success"
-                                    : task?.status == "CANCELLED"
-                                    ? "pill-failure"
-                                    : "pill-other"
-                                }
                               >
-                                {task?.status ?? "PENDING"}
+                                {task?.status}
                               </small>
                             </span>
                             <span className={styles.statusColumn}>
