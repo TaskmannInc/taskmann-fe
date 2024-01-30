@@ -234,7 +234,7 @@ export default function UpdateExistingCustomOrder({
                 min={new Date().getDate()}
                 readOnly={isLoading}
                 type={"datetime-local"}
-                name={"service_date_time"}
+                name={"start_date_time"}
                 onChange={handleChange}
                 className={styles.input}
               />
