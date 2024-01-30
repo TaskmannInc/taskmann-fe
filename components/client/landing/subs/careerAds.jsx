@@ -36,7 +36,7 @@ export default function CareerAdsSection({ styles }) {
           <FaArrowCircleRight size={30} />
         </Link>
         <Link
-          href={"/staff/auth/onboarding"}
+          href={"/staff/auth/login"}
           className={styles.taskerAuthLink}
           style={{ backgroundColor: `var(--black)`, color: `var(--white)` }}
         >
