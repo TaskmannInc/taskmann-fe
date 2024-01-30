@@ -67,7 +67,7 @@ export default function UpdateServicePriceTier({
   //defined validation schema
   const schema = {
     tier_name: Joi.string().required(),
-    price: Joi.number().integer().min(1),
+    price: Joi.string().required(),
     active: Joi.boolean().required(),
     subservice: Joi.string().required(),
   };
@@ -188,8 +188,9 @@ export default function UpdateServicePriceTier({
           <GeneralTextInput
             label={"Base pricing value"}
             placeholder={"Pricing value"}
-            type={"number"}
+            type={"text"}
             name={"price"}
+            step={0.01}
             onChange={handleChange}
             defaultValue={formData?.price}
             validate={errors}

@@ -60,7 +60,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
   //defined validation schema
   const schema = {
     tier_name: Joi.string().required(),
-    price: Joi.number().integer().min(1),
+    price: Joi.string().required(),
     active: Joi.boolean().required(),
     subservice: Joi.string().required(),
   };
@@ -179,7 +179,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
           <GeneralTextInput
             label={"Base pricing value"}
             placeholder={"Pricing value"}
-            type={"number"}
+            type={"text"}
             name={"price"}
             step={0.01}
             onChange={handleChange}
