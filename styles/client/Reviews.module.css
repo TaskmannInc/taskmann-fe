@@ -255,7 +255,7 @@
   border: 2px solid var(--green-darker);
 }
 
-@media (min-width: 240px) and (max-width: 420px) {
+@media (min-width: 250px) and (max-width: 720px) {
   .reviewsBanner .reviewsHeading {
     font-size: var(--text-heading-1);
   }
