@@ -288,3 +288,120 @@
     height: max-content;
   }
 }
+
+@media (min-width: 422px) and (max-width: 900px) {
+  .taskersBanner .taskersHeading {
+    font-size: var(--text-heading-3);
+    text-align: center;
+    width: 100%;
+  }
+
+  .taskersBanner .tagLine {
+    width: 95%;
+  }
+
+  .sectionHeading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 0.75rem;
+  }
+
+  .sectionHeading h3 {
+    width: 100%;
+    font-size: var(--text-heading-2);
+    text-align: center;
+  }
+
+  .taskerAuthLink {
+    width: 80%;
+    padding: 0.75rem 1.2rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-normal);
+    border: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    font-weight: 600;
+    box-shadow: var(--tamed-shadows);
+  }
+
+  .policiesSection h3 {
+    font-size: var(--text-lg);
+    line-height: 1.5rem;
+  }
+  .policiesSection h3 i {
+    font-size: var(--text-md);
+  }
+
+  .policiesAccordionsContainer {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: center;
+    background-color: var(--gray-2);
+    border-radius: var(--radius-min);
+  }
+
+  .accordianItem {
+    height: max-content;
+    border-radius: var(--radius-lg);
+    border-bottom: 1px solid var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    padding: 0.65rem 0.8rem;
+  }
+
+  .accordianItem:hover {
+    transform: scale(1.01);
+  }
+
+  .accordianItem .heading {
+    font-size: var(--text-lg);
+  }
+  .accordianItem .icon {
+    color: var(--dark);
+  }
+
+  .accordianContent {
+    /* letter-spacing: 0.5rem; */
+    word-spacing: 0.4rem;
+    line-height: 1.5rem;
+    font-size: var(--text-md);
+    background-color: var(--white);
+    color: #0e0e0e;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .teamMembersContainer {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 0;
+    row-gap: 1rem;
+  }
+
+  .teamMember {
+    width: 100%;
+    height: max-content;
+  }
+}
