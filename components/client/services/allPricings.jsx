@@ -132,7 +132,7 @@ export default function ServicePricing() {
                   </span>
                   <span className={styles.priceFooter}>
                     <Link
-                      href={`/services/service-pricing?sv=${service?._id}`}
+                      href={`/services/service-pricing?sv=${subs?._id}`}
                       className={styles.getStartedLink}
                     >
                       {" "}
