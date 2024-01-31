@@ -18,6 +18,7 @@
   font-size: 3rem;
   color: var(--white);
   text-shadow: var(--text-shadow-2);
+  text-align: center;
 }
 
 .taskersBanner .tagLine {
@@ -41,8 +42,37 @@
   row-gap: 2rem;
 }
 
-.policiesSection h3 {
+.sectionHeading {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionHeading h3 {
+  width: 50%;
   font-size: var(--text-heading-2);
+}
+
+.taskerAuthLink {
+  width: 30%;
+  padding: 0.75rem 1.2rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-normal);
+  border: 1px solid var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  font-weight: 600;
+  box-shadow: var(--tamed-shadows);
+}
+.taskerAuthLink:hover {
+  border: none;
+  background-color: var(--white);
+  color: var(--black);
+  font-weight: 700;
 }
 .policiesSection h4 {
   font-size: var(--text-md);
@@ -153,6 +183,35 @@
     width: 95%;
   }
 
+  .sectionHeading {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 0.75rem;
+  }
+
+  .sectionHeading h3 {
+    width: 100%;
+    font-size: var(--text-heading-2);
+    text-align: center;
+  }
+
+  .taskerAuthLink {
+    width: 80%;
+    padding: 0.75rem 1.2rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-normal);
+    border: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    font-weight: 600;
+    box-shadow: var(--tamed-shadows);
+  }
+
   .policiesSection h3 {
     font-size: var(--text-lg);
     line-height: 1.5rem;
@@ -208,8 +267,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     padding: 0.5rem 0.75rem;
   }
 

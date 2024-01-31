@@ -9,6 +9,9 @@ import styles from "../../../styles/client/Taskers.module.css";
 import { PrimaryPolicies } from "../../utils/data/PoliciesData";
 import { GetPoliciesHook } from "../../utils/hooks/policiesHook";
 import { GetTaskTeamMembersHook } from "../../utils/hooks/taskersHook";
+import { GetAboutContentHook } from "../../utils/hooks/aboutHook";
+import Link from "next/link";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function TaskersUsagePolicies() {
   //clean up html data
@@ -19,6 +22,7 @@ export default function TaskersUsagePolicies() {
   //component states
   const [clicked, setClicked] = useState(false);
   const [allPolicies, setPolicies] = useState([]);
+  const [allValues, setValues] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
 
   const toggle = (index) => {
@@ -39,6 +43,15 @@ export default function TaskersUsagePolicies() {
     setPolicies(policies);
   };
 
+  const onValuesError = (error) => {
+    console.log("fetch error", error);
+  };
+
+  const onValuesSuccess = (data) => {
+    const values = data?.data?.result;
+    setValues(values);
+  };
+
   const onTeamFetchError = (error) => {
     console.log("fetch error", error);
   };
@@ -54,6 +67,13 @@ export default function TaskersUsagePolicies() {
     isSuccess: IsPolicesSuccess,
     error: policiesError,
   } = GetPoliciesHook(onPoliciesSuccess, onPoliciesError);
+
+  const {
+    isLoading: isValuesLoading,
+    isError: isValuesError,
+    isSuccess: IsValuesSuccess,
+    error: ValuesError,
+  } = GetAboutContentHook(onValuesSuccess, onValuesError);
 
   const {
     isLoading: isMembersLoading,
@@ -75,7 +95,17 @@ export default function TaskersUsagePolicies() {
       </section>
 
       <div className={styles.policiesSection}>
-        <h3>Taskers guidelines and Virtues</h3>
+        <div className={styles.sectionHeading}>
+          <h3>Taskers guidelines and Virtues</h3>
+          <Link
+            href={"/staff/auth/login"}
+            className={styles.taskerAuthLink}
+            style={{ backgroundColor: `var(--black)`, color: `var(--white)` }}
+          >
+            <FaUserCircle size={30} />
+            &nbsp;Login as tasker
+          </Link>
+        </div>
         <h4>
           Please note that <i>Taskmann Services, Inc.</i> may be referred as
           <i>Taskmann</i> for simplicity throughout the taskers guidlines
@@ -83,7 +113,7 @@ export default function TaskersUsagePolicies() {
         </h4>
 
         {/*Taskers policies*/}
-        {isPoliciesLoading ? (
+        {/* {isPoliciesLoading ? (
           <div
             className={styles.policiesAccordionsContainer}
             style={{ filter: "blur(10px)" }}
@@ -153,8 +183,77 @@ export default function TaskersUsagePolicies() {
               })}
             </div>
           )
-        )}
+        )} */}
 
+        {isValuesLoading ? (
+          <div
+            className={styles.policiesAccordionsContainer}
+            style={{ filter: "blur(10px)" }}
+          >
+            {PrimaryPolicies?.map((item, index) => {
+              return (
+                <>
+                  <div
+                    className={styles.accordianItem}
+                    onClick={() => toggle(index)}
+                    key={index}
+                  >
+                    <span className={styles.heading}>{item.question}</span>{" "}
+                    &nbsp;
+                    <span className={styles.icon}>
+                      {clicked === index ? (
+                        <BsFillArrowUpCircleFill size={20} />
+                      ) : (
+                        <BsFillArrowDownCircleFill size={20} />
+                      )}
+                    </span>
+                  </div>
+                  {clicked === index ? (
+                    <div className={styles.accordianContent}>
+                      <p
+                        dangerouslySetInnerHTML={sanitizedData(item?.answer)}
+                      ></p>
+                    </div>
+                  ) : null}
+                </>
+              );
+            })}
+          </div>
+        ) : (
+          IsValuesSuccess &&
+          allValues?.length > 0 && (
+            <div className={styles.policiesAccordionsContainer}>
+              {allValues?.map((val, _idx) => {
+                return (
+                  <>
+                    <div
+                      className={styles.accordianItem}
+                      onClick={() => toggle(_idx)}
+                      key={_idx}
+                    >
+                      <span className={styles.heading}>{val.header}</span>{" "}
+                      &nbsp;
+                      <span className={styles.icon}>
+                        {clicked === _idx ? (
+                          <BsFillArrowUpCircleFill size={20} />
+                        ) : (
+                          <BsFillArrowDownCircleFill size={20} />
+                        )}
+                      </span>
+                    </div>
+                    {clicked === _idx ? (
+                      <div className={styles.accordianContent}>
+                        <p
+                          dangerouslySetInnerHTML={sanitizedData(val?.content)}
+                        ></p>
+                      </div>
+                    ) : null}
+                  </>
+                );
+              })}
+            </div>
+          )
+        )}
         {/*Taskers*/}
         <h3 style={{ marginTop: "1.5rem" }}>Some of our taskers</h3>
 
