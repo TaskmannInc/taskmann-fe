@@ -136,7 +136,7 @@ export default function ServiceRequest() {
           <h5 style={{ fontWeight: "500" }}>
             Kindly fill out the form below to request{" "}
             <i style={{ fontWeight: "800" }}>
-              {customServiceData
+              {queryParams && customServiceData
                 ? `the ${customServiceData?.sub_service_name} `
                 : "an unlisted "}{" "}
             </i>

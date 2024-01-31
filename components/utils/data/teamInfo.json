@@ -2,16 +2,22 @@
     {
         "id": 1,
         "topic": "Varish",
-        "image": "/others/varish.jpeg"
+        "image": "/others/varish.jpeg",
+        "position": "Co-founder",
+        "bio": "Varish is an excellent worker who consistently exceeds expectations. He is reliable, punctual, and always willing to go the extra mile to ensure that tasks are completed to the highest standard. Varish is a team player, and his positive attitude and strong work ethic make him a valuable asset to any organization. "
     },
     {
         "id": 2,
         "topic": "James",
-        "image": "/others/james.jpeg"
+        "image": "/others/james.jpeg",
+        "position": "Co-founder",
+        "bio": "Elvin possess a strong track record of success and a proven ability to deliver high-quality results on time, making him a reliable and valuable asset for any task or project."
     },
     {
         "id": 3,
         "topic": "Shaun Ni",
-        "image": "/others/shaun-profile pic.jpg"
+        "image": "/others/shaun-profile pic.jpg",
+        "position": "Co-founder",
+        "bio": "I believe in delivering exceptional work and going above and beyond to ensure that every task is completed to the highest standard. Hire me for your tasks and you can trust that I will bring my best effort and dedication to every project."
     }
 ]

@@ -50,7 +50,7 @@ export default function TaskmannWebCustomServices() {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: screenWidthMobile ? "90%" : screenWidthTablet ? "95%" : 800,
-    maxHeight: screenWidthMobile ? "80vh" : screenWidthTablet ? "90vh" : "70vh",
+    maxHeight: screenWidthMobile ? "90vh" : screenWidthTablet ? "90vh" : "70vh",
     overflowY: "auto",
     bgcolor: `var(--white)`,
     border: "none",

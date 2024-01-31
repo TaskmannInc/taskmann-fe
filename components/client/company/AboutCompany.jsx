@@ -53,7 +53,10 @@ export default function AboutCompany() {
               Read about our {"team’s"} commitment to provide everyone on our
               platform with services to better help our community.{" "}
             </p>
-            <Link href={`/blog?123`} className={styles.founderBlogLink}>
+            <Link
+              href={`/blog/article?i=bf498d8f-5d1a-40ce-8b80-119c81e50845`}
+              className={styles.founderBlogLink}
+            >
               Read {"Varish's"} Letter
             </Link>
           </div>
@@ -157,6 +160,8 @@ export default function AboutCompany() {
                     alt="Member"
                   />
                   <h4>{member?.topic}</h4>
+                  <span>{`(${member?.position})`}</span>
+                  <p>{member?.bio}</p>
                 </div>
               );
             })}

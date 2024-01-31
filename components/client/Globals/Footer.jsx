@@ -72,7 +72,11 @@ export default function Footer() {
             {popularServices?.length > 0 ? (
               <>
                 {popularServices?.map((pop, _idx) => (
-                  <Link key={_idx + 1} href={"/"} className="footerLinkItem">
+                  <Link
+                    key={_idx + 1}
+                    href={`/services/service-pricing?sv=${pop?._id}`}
+                    className="footerLinkItem"
+                  >
                     {pop?.service_name}
                   </Link>
                 ))}

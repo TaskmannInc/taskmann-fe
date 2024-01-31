@@ -1,10 +1,11 @@
-import { FaGraduationCap, FaInfoCircle } from "react-icons/fa";
-import { CloseButton } from "../../../admin/Globals/closeBtn.jsx";
-import styles from "../../../../styles/client/Form.module.css";
-import { TbMapPinPin } from "react-icons/tb";
 import DOMPurify from "dompurify";
-import { MdKeyboardCommandKey } from "react-icons/md";
 import Link from "next/link.js";
+import { FaGraduationCap } from "react-icons/fa";
+import { GoDotFill } from "react-icons/go";
+import { MdKeyboardCommandKey } from "react-icons/md";
+import { TbMapPinPin } from "react-icons/tb";
+import styles from "../../../../styles/client/Form.module.css";
+import { CloseButton } from "../../../admin/Globals/closeBtn.jsx";
 
 export default function ViewCareerOpening({
   screenWidthMobile,
@@ -66,7 +67,7 @@ export default function ViewCareerOpening({
             </small>
           </span>
           <span className="mini-card">
-            <FaInfoCircle size={20} />
+            <GoDotFill size={20} />
             &nbsp;&nbsp;
             {__selected_data?.position}
           </span>
@@ -94,17 +95,19 @@ export default function ViewCareerOpening({
             </span>
           )}
         </div>
-        <Link
-          href={"mailto:taskmann@hotmail.com"}
-          className={"submitBtn"}
-          style={{
-            backgroundColor: `var(--green-primary)`,
-            color: `var(--white)`,
-            borderRadius: `var(--radius-md)`,
-          }}
-        >
-          Apply
-        </Link>
+        {__selected_data?.status == true && (
+          <Link
+            href={"mailto:taskmann@hotmail.com"}
+            className={"submitBtn"}
+            style={{
+              backgroundColor: `var(--green-primary)`,
+              color: `var(--white)`,
+              borderRadius: `var(--radius-md)`,
+            }}
+          >
+            Apply
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -228,6 +228,7 @@ export default function SessionCart() {
                           item?.created_at?.split("T"[0])
                         ).toLocaleDateString()}
                       </small>
+                      &nbsp;&nbsp;
                       <small>
                         {new Date(
                           item?.created_at?.split("T"[1])

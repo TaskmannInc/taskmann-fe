@@ -135,3 +135,219 @@
   object-fit: fill;
   border-radius: var(--radius-min);
 }
+
+@media (min-width: 250px) and (max-width: 720px) {
+  /*safety banner*/
+  .safetyBanner {
+    height: max-content;
+    padding: 2rem 0.75rem;
+  }
+
+  .safetyBanner .safetyHeading {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .safetyBanner .tagLine {
+    width: 95%;
+  }
+
+  /*safety content*/
+  .safetyContent {
+    height: max-content;
+    padding: 2rem 0 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* safety notices */
+  .safetyInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+    padding: 2.5rem 0.5rem;
+  }
+
+  .safetyInfo .infoItems {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .safetyInfo .infoItems .infoItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1.5rem;
+  }
+
+  .infoItem .infoImage {
+    object-fit: fill;
+    border-radius: var(--radius-min);
+  }
+
+  .safetyInfo .infoItems .infoItem h4 {
+    text-align: center;
+  }
+  .safetyInfo .infoItems .infoItem p {
+    width: 80%;
+    font-size: var(--text-md);
+    line-height: 1.2rem;
+    text-align: left;
+  }
+
+  /**Safety assurances*/
+  .safetyAssurances {
+    padding: 0.5rem 1.5rem;
+  }
+
+  .safetyAssurances .assuranceContainer {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .safetyAssurances .assuranceContainer .leftSection,
+  .safetyAssurances .assuranceContainer .rightSection {
+    padding: 1.5rem 0.5rem;
+    width: 98%;
+  }
+
+  .safetyAssurances .assuranceContainer .leftSection h2,
+  .safetyAssurances .assuranceContainer .rightSection h2 {
+    font-size: 1.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--gray-2);
+    margin-bottom: 0.5rem;
+  }
+
+  .safetyAssurances .assuranceContainer .leftSection p,
+  .safetyAssurances .assuranceContainer .rightSection p {
+    font-size: var(--text-lg);
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .illustrationImage {
+    object-fit: fill;
+    border-radius: var(--radius-min);
+  }
+}
+
+@media (min-width: 724px) and (max-width: 1024px) {
+  /*safety banner*/
+  .safetyBanner {
+    height: max-content;
+    padding: 2rem 0.75rem;
+  }
+
+  .safetyBanner .safetyHeading {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .safetyBanner .tagLine {
+    width: 95%;
+  }
+
+  /*safety content*/
+  .safetyContent {
+    height: max-content;
+    padding: 2rem 0 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* safety notices */
+  .safetyInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+    padding: 2.5rem 0.5rem;
+  }
+
+  .safetyInfo .infoItems {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .safetyInfo .infoItems .infoItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1.5rem;
+  }
+
+  .infoItem .infoImage {
+    object-fit: fill;
+    border-radius: var(--radius-min);
+  }
+
+  .safetyInfo .infoItems .infoItem h4 {
+    text-align: center;
+  }
+  .safetyInfo .infoItems .infoItem p {
+    width: 80%;
+    font-size: var(--text-md);
+    line-height: 1.2rem;
+    text-align: left;
+  }
+
+  /**Safety assurances*/
+  .safetyAssurances {
+    padding: 0.5rem 1.5rem;
+  }
+
+  .safetyAssurances .assuranceContainer {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .safetyAssurances .assuranceContainer .leftSection,
+  .safetyAssurances .assuranceContainer .rightSection {
+    padding: 1.5rem 0.5rem;
+    width: 98%;
+  }
+
+  .safetyAssurances .assuranceContainer .leftSection h2,
+  .safetyAssurances .assuranceContainer .rightSection h2 {
+    font-size: 1.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--gray-2);
+    margin-bottom: 0.5rem;
+  }
+
+  .safetyAssurances .assuranceContainer .leftSection p,
+  .safetyAssurances .assuranceContainer .rightSection p {
+    font-size: var(--text-lg);
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .illustrationImage {
+    object-fit: fill;
+    border-radius: var(--radius-min);
+  }
+}

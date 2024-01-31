@@ -252,7 +252,19 @@
 
 .teamInfo .teamMembers .teamMember h4 {
   width: 80%;
+  font-size: var(--text-lg);
+  line-height: 1.2rem;
+  text-align: center;
+}
+.teamInfo .teamMembers .teamMember span {
+  width: 80%;
   font-size: var(--text-md);
+  line-height: 1.2rem;
+  text-align: center;
+}
+.teamInfo .teamMembers .teamMember p {
+  width: 80%;
+  font-size: var(--text-sm);
   line-height: 1.2rem;
   text-align: center;
 }

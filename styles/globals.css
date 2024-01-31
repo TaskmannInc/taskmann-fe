@@ -1421,6 +1421,9 @@ p {
 
   .grid-col-2 {
     width: 99%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.75rem;
   }
   label {
     font-size: var(--text-md) !important;

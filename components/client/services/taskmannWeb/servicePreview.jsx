@@ -37,8 +37,8 @@ export default function WebServicePreview({
               "/assets/trademarks/taskmann-logo.png"
             }
             alt={service?.service_name}
-            width={100}
-            height={100}
+            width={service?.subservice_image?.[0]?.image_url ? 100 : 80}
+            height={service?.subservice_image?.[0]?.image_url ? 100 : 80}
             className={styles.webServiceDetailImage}
           />
           <Link
