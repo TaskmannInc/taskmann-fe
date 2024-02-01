@@ -232,6 +232,7 @@ export default function AllServiceTasks() {
                             <span
                               style={{
                                 display: "flex",
+                                flexDirection: "column",
                                 justifyContent: "flex-start",
                                 alignItems: "center",
                                 padding: "0 0",
@@ -338,6 +339,8 @@ export default function AllServiceTasks() {
                                       ? "var(--success)"
                                       : task?.status == "ASSIGNED"
                                       ? "var(--black-2)"
+                                      : task?.status == "INPROGRESS"
+                                      ? "var(--green-primary)"
                                       : task?.status == "CANCELLED"
                                       ? "var(--danger)"
                                       : "var(--dark-gray)"

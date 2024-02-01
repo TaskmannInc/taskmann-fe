@@ -44,7 +44,6 @@ export default function ServicePricing() {
     data: subServices,
   } = GetSubServicesHook(onSuccess, onError);
   const allSystemSubServices = subServices?.data?.result;
-  console.log("selected", allSystemSubServices);
 
   return (
     <>

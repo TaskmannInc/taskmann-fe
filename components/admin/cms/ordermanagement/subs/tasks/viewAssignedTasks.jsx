@@ -63,6 +63,10 @@ export default function ViewAssignedTask({ selectedTask, closeModal }) {
     isSuccess: isUpdatingSuccess,
     error: updateError,
   } = UpdateTaskersTasks(onUpdateTaskSuccess, onUpdateTaskError);
+
+  if (isUpdatingSuccess) {
+    closeModal();
+  }
   return (
     <div className={""} style={{ width: "100%" }}>
       <div className={styles.authForm}>

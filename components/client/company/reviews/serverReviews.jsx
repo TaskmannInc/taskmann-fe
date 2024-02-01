@@ -17,7 +17,7 @@ export default function ServerReviewPreview({
       />
       <h3 className={styles.reviewer}>{review.name}</h3>
       <div className={styles.reviewRating}>
-        {[...Array(5)].map((_, i) => (
+        {[...Array(review?.rating ?? 0)].map((_, i) => (
           <ImStarFull key={i} size={20} />
         ))}
       </div>
