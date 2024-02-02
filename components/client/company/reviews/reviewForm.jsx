@@ -35,6 +35,8 @@ export default function ReviewForm({ onAddReview, styles, closeForm }) {
 
   const requestBody = {
     name: `${formdata?.firstname} ${formdata?.lastname}`,
+    email: formdata?.email,
+    rating: formdata?.rating,
     statement: formdata.statement,
   };
 
