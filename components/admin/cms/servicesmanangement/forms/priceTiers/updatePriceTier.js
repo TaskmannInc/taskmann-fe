@@ -8,7 +8,10 @@ import { StatusNotification } from "../../../../../ui-fragments/notification";
 import { GeneralSelectInput } from "../../../../../ui-fragments/select";
 import RichTextEditor from "../../../../../ui-fragments/textEditor";
 import validation from "../../../../../utils/helpers/validation";
-import { AddPriceTierHook } from "../../../../../utils/hooks/serviceMgmtHook";
+import {
+  AddPriceTierHook,
+  UpdatePricingHook,
+} from "../../../../../utils/hooks/serviceMgmtHook";
 import { CloseButton } from "../../../../Globals/closeBtn";
 
 export default function UpdateServicePriceTier({
@@ -16,6 +19,7 @@ export default function UpdateServicePriceTier({
   subServices,
   closeForm,
 }) {
+  console.log(__selected_tier);
   //get selected row data
 
   //form states
@@ -24,7 +28,6 @@ export default function UpdateServicePriceTier({
     tier_name: __selected_tier?.tier_name,
     price: __selected_tier?.price,
     active: __selected_tier?.active,
-    subservice: __selected_tier?.subservice,
   });
   const [formattedContent, setFormattedContent] = useState(
     __selected_tier?.description
@@ -69,7 +72,6 @@ export default function UpdateServicePriceTier({
     tier_name: Joi.string().required(),
     price: Joi.string().required(),
     active: Joi.boolean().required(),
-    subservice: Joi.string().required(),
   };
 
   //Form inputs event handler
@@ -78,11 +80,11 @@ export default function UpdateServicePriceTier({
   };
 
   const requestBody = {
+    id: __selected_tier?._id,
     tier_name: formData?.tier_name,
     description: formattedContent,
     price: formData?.price,
     active: Boolean(formData?.active),
-    subservice: formData?.subservice,
     cost_parameters: costParameters,
   };
 
@@ -114,7 +116,7 @@ export default function UpdateServicePriceTier({
     isError,
     error,
     isSuccess,
-  } = AddPriceTierHook(onSuccess, onError);
+  } = UpdatePricingHook(onSuccess, onError);
 
   if (isSuccess) {
     closeForm();
@@ -214,19 +216,6 @@ export default function UpdateServicePriceTier({
           />
           <small className="field-validation">
             {errors.active && "Status is required"}
-          </small>
-
-          <GeneralSelectInput
-            label={"Related sub service"}
-            name={"subservice"}
-            defaultValue={formData?.subservice}
-            disabledDescription={"a sub service"}
-            options={subServices ?? []}
-            onChange={handleChange}
-            validate={errors}
-          />
-          <small className="field-validation">
-            {errors.subservice && "Related sub service is required"}
           </small>
 
           {/*Cost paramaters*/}
@@ -350,7 +339,7 @@ export default function UpdateServicePriceTier({
             className={styles.submitBtn}
             disabled={isLoading}
           >
-            {isLoading ? "Updating price tier price tier..." : "Add pricing"}
+            {isLoading ? "Updating price tier price tier..." : "Update pricing"}
           </button>
         </form>
       </div>
