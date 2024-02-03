@@ -17,7 +17,6 @@ export default function TaskerDashboard() {
 
   const onTasksSuccess = (response) => {
     var allTaskersTasks = response?.data?.data;
-    console.log("response ==>", allTaskersTasks);
 
     //filter cancelled tasks
     var cancelled = allTaskersTasks?.filter((item) => {

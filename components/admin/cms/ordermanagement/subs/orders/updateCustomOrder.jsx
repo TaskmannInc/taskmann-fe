@@ -54,7 +54,7 @@ export default function UpdateExistingCustomOrder({
       new Date(selectedSpecialRequest.start_date_time).toUTCString(),
     end_date: formData.end_date ?? selectedSpecialRequest.end_date,
     budget: formData?.budget,
-    status: formData.status,
+    status: formData.status ?? selectedSpecialRequest.status,
     id: selectedSpecialRequest?._id,
   };
 
@@ -104,7 +104,7 @@ export default function UpdateExistingCustomOrder({
             disabled={isLoading}
             label={"Order status"}
             name={"status"}
-            defaultValue={formData.status}
+            defaultValue={null}
             disabledDescription={"Order status"}
             options={[
               { val: "requested", name: "Accept" },
