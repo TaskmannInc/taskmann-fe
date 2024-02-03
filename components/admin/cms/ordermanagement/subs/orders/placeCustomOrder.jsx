@@ -32,7 +32,7 @@ export default function PlaceCustomServiceOrder({ closeModal }) {
     lastname: "Requested",
     phone: "",
     email: "",
-    service_date_time: "",
+    start_date_time: "",
     end_date: "",
     budget: "",
     description: "",
@@ -44,7 +44,7 @@ export default function PlaceCustomServiceOrder({ closeModal }) {
     lastname: Joi.string().required(),
     phone: Joi.string().required(),
     email: Joi.string().required().email(),
-    service_date_time: Joi.string().required(),
+    start_date_time: Joi.string().required(),
     end_date: Joi.string().required(),
     budget: Joi.string().required(),
     description: Joi.string().required(),
@@ -79,7 +79,7 @@ export default function PlaceCustomServiceOrder({ closeModal }) {
     lastname: formData.lastname,
     phone: formData.phone,
     email: formData.email,
-    service_date_time: formData.service_date_time,
+    start_date_time: formData.start_date_time,
     end_date: formData.end_date,
     budget: formData?.budget,
     description: `${formData?.description}; Contact modes: ${Object.values(
@@ -292,13 +292,12 @@ export default function PlaceCustomServiceOrder({ closeModal }) {
                 min={new Date().getDate()}
                 readOnly={isLoading}
                 type={"datetime-local"}
-                name={"service_date_time"}
+                name={"start_date_time"}
                 onChange={handleChange}
                 className={styles.input}
               />
               <small className="field-validation-contrast">
-                {errors.service_date_time &&
-                  "Service date and time are required"}
+                {errors.start_date_time && "Service date and time are required"}
               </small>{" "}
             </div>
             <div

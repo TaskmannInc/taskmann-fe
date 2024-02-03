@@ -50,7 +50,8 @@ export default function UpdateExistingCustomOrder({
     phone: formData.phone,
     email: formData.email,
     start_date_time:
-      formData.start_date_time ?? selectedSpecialRequest.start_date_time,
+      new Date(formData.start_date_time).toUTCString() ??
+      new Date(selectedSpecialRequest.start_date_time).toUTCString(),
     end_date: formData.end_date ?? selectedSpecialRequest.end_date,
     budget: formData?.budget,
     status: formData.status,
