@@ -95,9 +95,7 @@ export default function AddSystemSubService({ closeForm }) {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

@@ -35,13 +35,11 @@ export default function UpdateUserStatus({ closeForm, selectedUser }) {
     setErrors(errors || {});
     if (!errors) {
       updateStatusMutation(formData);
-      console.log("data", formData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
+  const onSuccess = () => {
     () => closeForm();
   };
 

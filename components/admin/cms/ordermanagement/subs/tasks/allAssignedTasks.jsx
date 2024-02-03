@@ -24,7 +24,6 @@ export default function AllTasks({ styles, iconSize }) {
   };
 
   const onTasksSuccess = (data) => {
-    console.log("all tasks", data?.data?.data);
     setAllSystemTasks(data?.data?.data);
   };
 

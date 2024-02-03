@@ -102,7 +102,6 @@ export default function OrderPackage() {
       return paramItem;
     });
     setSelectedOptions(paramsOnOp);
-    console.log("setSelectedOptions", paramsOnOp);
     return;
   };
 

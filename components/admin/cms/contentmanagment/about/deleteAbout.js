@@ -24,9 +24,7 @@ export default function DeleteAboutUs({ closeForm }) {
     deleteRequest(__selected_data?._id);
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

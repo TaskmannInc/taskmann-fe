@@ -49,9 +49,7 @@ export default function ContactMessagesManagementWrapper({ styles }) {
     console.log("error", response);
   };
 
-  const onSuccess = (response) => {
-    console.log("sucesss :", response);
-  };
+  const onSuccess = () => {};
 
   //get data <--> request
   const {

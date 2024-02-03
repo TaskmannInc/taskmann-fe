@@ -21,7 +21,6 @@ const getTeamMembers = () => {
     "Content-Type": "application/json",
     Authorization: `Bearer ${ACCESS_TOKEN}`,
   };
-  // console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 

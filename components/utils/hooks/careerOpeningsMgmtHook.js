@@ -20,7 +20,6 @@ const getAllCareerOpenings = () => {
   const headers = {
     "Content-Type": "application/json",
   };
-  // console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 

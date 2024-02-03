@@ -44,7 +44,6 @@ export default function StaffPasswordSettings({ styles, session }) {
     e.preventDefault();
     const errors = validation(formData, schema);
     setErrors(errors || {});
-    console.log("formData", requestBody);
     if (!errors) {
       passwordUpdate(requestBody);
     } else {

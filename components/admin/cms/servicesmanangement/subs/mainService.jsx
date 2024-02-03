@@ -109,9 +109,7 @@ export default function MainServiceManagement({ styles }) {
     console.log("error", response);
   };
 
-  const onSuccess = (response) => {
-    // console.log("sucesss :", response);
-  };
+  const onSuccess = () => {};
 
   const {
     isLoading,
@@ -141,7 +139,6 @@ export default function MainServiceManagement({ styles }) {
 
   if (searchInput.length > 0) {
     currentDataItems = currentDataItems?.filter((result) => {
-      console.log("result", result);
       return (
         result?.service_name?.match(new RegExp(searchInput, "i")) ||
         result?.description?.match(new RegExp(searchInput, "i")) ||

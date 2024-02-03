@@ -14,15 +14,12 @@ if (typeof window != "undefined") {
     : (ACCESS_TOKEN = undefined);
 }
 
-// console.log("actok", ACCESS_TOKEN);
-
 //--> call back function to get all services
 const getAllServices = () => {
   const url = baseURL + ENDPOINTS.services;
   const headers = {
     "Content-Type": "application/json",
   };
-  // console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 
@@ -40,7 +37,6 @@ const getSelectedService = (data) => {
   const headers = {
     "Content-Type": "application/json",
   };
-  // console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 

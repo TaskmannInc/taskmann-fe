@@ -64,9 +64,7 @@ export default function FAQsManagementWrapper({ styles }) {
     console.log("error", response);
   };
 
-  const onSuccess = (response) => {
-    console.log("sucesss :", response);
-  };
+  const onSuccess = () => {};
 
   //get all faqs <--> request
   const {

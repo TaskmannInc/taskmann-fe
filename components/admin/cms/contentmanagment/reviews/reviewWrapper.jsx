@@ -64,9 +64,7 @@ export default function ReviewsManagementWarapper({ styles }) {
     console.log("error", response);
   };
 
-  const onSuccess = (response) => {
-    console.log("sucesss :", response);
-  };
+  const onSuccess = () => {};
 
   //get career openings <--> request
   const {

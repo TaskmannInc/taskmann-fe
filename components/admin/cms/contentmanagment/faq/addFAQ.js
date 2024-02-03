@@ -56,8 +56,7 @@ export default function AddFAQs({ closeForm, modalEvents }) {
     }
   };
 
-  const onSuccess = (data) => {
-    // console.log(data);
+  const onSuccess = () => {
     () => closeForm();
   };
 

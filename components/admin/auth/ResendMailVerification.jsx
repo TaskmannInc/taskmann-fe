@@ -41,15 +41,11 @@ export default function ResendStaffVerification() {
     setErrors(errors || {});
     if (!errors) {
       VerificationResend(formData);
-      console.log("data", formData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
-    // cookie.set("TM_AD_USR", data?.data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

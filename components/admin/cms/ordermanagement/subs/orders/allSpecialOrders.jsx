@@ -65,7 +65,6 @@ export default function AllSpecialOrders({ styles, iconSize }) {
   };
 
   const onOrderSuccess = (data) => {
-    console.log("allorder====>", data?.data?.data);
     setallSpecialCustomerOrders(data?.data?.data);
   };
 

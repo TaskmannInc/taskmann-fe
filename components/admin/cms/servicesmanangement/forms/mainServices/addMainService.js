@@ -37,7 +37,6 @@ export default function AddSystemService({ closeForm }) {
 
   //Form inputs event handler
   const handleChange = (e) => {
-    console.log("option", e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -76,7 +75,6 @@ export default function AddSystemService({ closeForm }) {
   const handleSubmit = (e) => {
     selectedImage == null && delete requestBody.upload;
     e.preventDefault();
-    console.log("Req body", requestBody);
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (!errors || formattedContent) {
@@ -85,9 +83,7 @@ export default function AddSystemService({ closeForm }) {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

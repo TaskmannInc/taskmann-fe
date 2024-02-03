@@ -23,9 +23,7 @@ export default function DeletePolicies({ closeForm }) {
     deleteRequest(__selected_policy?._id);
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

@@ -48,14 +48,11 @@ export default function AddSystemService({ viewAddititonModal }) {
     setErrors(errors || {});
     if (!errors) {
       mainServiceAdditionRequest(formData);
-      console.log("data", formData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

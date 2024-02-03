@@ -33,19 +33,15 @@ export default function AddSystemService({ closeForm, modalEvents }) {
   //function to submit form data
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("-->", formData);
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (!errors) {
       mainServiceAdditionRequest(formData);
-      console.log("data", formData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

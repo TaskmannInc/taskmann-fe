@@ -68,8 +68,7 @@ export default function UpdateFAQs({ closeForm }) {
     }
   };
 
-  const onSuccess = (data) => {
-    // console.log(data);
+  const onSuccess = () => {
     () => closeForm();
   };
 

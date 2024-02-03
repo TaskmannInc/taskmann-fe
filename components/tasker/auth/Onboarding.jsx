@@ -76,14 +76,13 @@ export default function OnboardTaskerStaff() {
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (!errors) {
-      console.log("data", userData);
       // return;
       SignupRequest(userData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
+  const onSuccess = () => {
     setTimeout(() => router.push("/staff/auth/login"), 6000);
   };
 

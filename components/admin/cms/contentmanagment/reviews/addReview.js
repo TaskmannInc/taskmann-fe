@@ -49,9 +49,7 @@ export default function AddReviews({ closeForm, modalEvents }) {
     }
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

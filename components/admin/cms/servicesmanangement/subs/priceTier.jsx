@@ -100,9 +100,7 @@ export default function PriceTierManagement({ styles }) {
     console.log("error", response);
   };
 
-  const onSuccess = (response) => {
-    // console.log("sucesss :", response);
-  };
+  const onSuccess = () => {};
 
   //get sub service <--> request
   const {

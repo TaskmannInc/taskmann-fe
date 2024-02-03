@@ -23,7 +23,6 @@ export default function ServicePricing() {
   const router = useRouter();
 
   var queryParams = router?.query?.sv;
-  console.log("query", queryParams);
   const [selectedService, setSelectedService] = useState([]);
 
   //--get main service <--> request--//
@@ -33,7 +32,6 @@ export default function ServicePricing() {
 
   const onSuccess = (response) => {
     setSelectedService(response?.data?.result);
-    console.log("sucesss :", response);
   };
 
   const {

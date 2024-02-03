@@ -22,7 +22,6 @@ export default function ChangeUserRole({ closeForm, selectedUser }) {
 
   //Form inputs event handler
   const handleChange = (e) => {
-    console.log(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -41,7 +40,6 @@ export default function ChangeUserRole({ closeForm, selectedUser }) {
     }
   };
   const onSuccess = (data) => {
-    console.log(data);
     () => closeForm();
   };
 

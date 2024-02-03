@@ -38,13 +38,11 @@ export default function ResendCustomerVerification() {
     setErrors(errors || {});
     if (!errors) {
       VerificationResend(formData);
-      console.log("data", formData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
+  const onSuccess = () => {
     cookie.set("TM_AD_USR", data?.data);
   };
 

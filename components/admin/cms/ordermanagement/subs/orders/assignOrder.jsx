@@ -19,7 +19,6 @@ export default function AssignTaskOrder({ selectedOrder, closeModal }) {
   //Form inputs event handler
   const handleChange = (param) => {
     setSelectedTasker(param);
-    console.log("param", param);
   };
 
   const submitAssignmentData = (e) => {
@@ -34,7 +33,6 @@ export default function AssignTaskOrder({ selectedOrder, closeModal }) {
       setErrors(null);
       assignTaskToTasker(requestBody);
     }
-    console.log(requestBody);
   };
 
   //response statuses

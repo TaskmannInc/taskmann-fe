@@ -23,9 +23,7 @@ export default function DeleteBlogPost({ closeForm }) {
     deletePostRequest(__selected_data?._id);
   };
 
-  const onSuccess = (data) => {
-    // console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

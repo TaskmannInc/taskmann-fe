@@ -24,9 +24,7 @@ export default function DeleteSystemService({ closeForm }) {
 
     deleteServiceRequst(__selected_service?._id);
   };
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

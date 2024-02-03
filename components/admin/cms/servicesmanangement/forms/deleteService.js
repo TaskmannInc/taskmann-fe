@@ -39,14 +39,11 @@ export default function DeleteSystemService({ closeForm }) {
     setErrors(errors || {});
     if (!errors) {
       SignupRequest(formData);
-      console.log("data", formData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

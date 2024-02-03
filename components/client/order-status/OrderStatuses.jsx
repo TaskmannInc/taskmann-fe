@@ -20,7 +20,6 @@ export default function OrderPaymentStatus() {
   const router = useRouter();
   const sessionAuth = cookie.get("TM_AC_TK");
   const pathQuery = router?.query?.q;
-  console.log(pathQuery);
   const [orderStatus, setOrderStatus] = useState("");
 
   //redirect to login on unauthorization.
@@ -40,7 +39,6 @@ export default function OrderPaymentStatus() {
   const onGetOrderSuccess = (data) => {
     setOrderInfo(data?.data?.data);
     setOrderItem(data?.data?.data);
-    console.info("orders", data?.data?.data);
   };
 
   const onGetOrderError = (error) => {

@@ -19,7 +19,6 @@ if (typeof window != "undefined") {
 //====>get staff profile by token
 //--> call back function to get all logged in user profile
 const getSummaryData = () => {
-  console.log("TOKEN", ACCESS_TOKEN);
   const url = baseURL + ENDPOINTS.getstaffprofile;
 
   const headers = {

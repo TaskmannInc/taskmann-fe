@@ -105,7 +105,6 @@ export default function CareersManagementWarapper({ styles }) {
   //copy job url to clipboard
   //copy to clipboard
   const copyToClipBoard = (param) => {
-    console.log(param);
     navigator.clipboard.writeText(param);
     toast(`Link copied`, {
       position: "top-center",

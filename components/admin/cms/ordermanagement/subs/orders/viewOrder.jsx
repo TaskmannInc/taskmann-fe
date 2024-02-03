@@ -5,7 +5,6 @@ import { primaryCurrency } from "../../../../../utils/constants/constants";
 import { CloseButton } from "../../../../Globals/closeBtn";
 
 export default function ViewOrderDetails({ selectedOrder, closeModal }) {
-  console.log("selectedOrder", selectedOrder);
   return (
     <div className={""} style={{ width: "100%" }}>
       <div className={styles.authForm}>

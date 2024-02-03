@@ -57,7 +57,6 @@ export default function AllOrders({ styles, iconSize }) {
   };
 
   const onOrderSuccess = (data) => {
-    console.log("allorder", data?.data?.data);
     setAllCustomerOrders(data?.data?.data);
   };
 

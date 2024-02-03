@@ -81,7 +81,6 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
   //function to submit form data
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("-->", requestBody);
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (!errors) {
@@ -92,9 +91,7 @@ export default function AddServicePriceTier({ closeForm, subServices }) {
   };
 
   //add price tier
-  const onSuccess = (data) => {
-    // console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

@@ -19,7 +19,6 @@ export default function UpdateServicePriceTier({
   subServices,
   closeForm,
 }) {
-  console.log(__selected_tier);
   //get selected row data
 
   //form states
@@ -32,8 +31,6 @@ export default function UpdateServicePriceTier({
   const [formattedContent, setFormattedContent] = useState(
     __selected_tier?.description
   );
-
-  console.log(__selected_tier?.cost_parameters);
 
   const [costParameters, setCostParameters] = useState(
     __selected_tier?.cost_parameters
@@ -102,9 +99,7 @@ export default function UpdateServicePriceTier({
   };
 
   //add price tier
-  const onSuccess = (data) => {
-    // console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

@@ -69,7 +69,6 @@ export default function PlaceCustomServiceOrder({ closeModal }) {
         1
       );
     }
-    console.log("checked==>", checked_options);
     // formData.contactModes == checked_options;
     setContacts(checked_options);
   };
@@ -93,7 +92,6 @@ export default function PlaceCustomServiceOrder({ closeModal }) {
     e.preventDefault();
     const errors = validation(formData, schema);
 
-    console.log(serviceRequestBody);
     setErrors(errors || {});
     if (Object.values(serviceRequestBody).some((x) => x !== null && x !== "")) {
       sendRequest(serviceRequestBody);
@@ -113,9 +111,7 @@ export default function PlaceCustomServiceOrder({ closeModal }) {
     setCustomers(response?.data?.result);
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = (data) => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

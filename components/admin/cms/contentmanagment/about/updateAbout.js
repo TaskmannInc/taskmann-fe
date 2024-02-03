@@ -94,9 +94,7 @@ export default function UpdateAboutUs({ closeForm }) {
     }
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

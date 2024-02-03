@@ -22,9 +22,7 @@ export default function DeleteSystemSubService({ closeForm }) {
     e.preventDefault();
     deleteSubServiceRequst(__selected_sub_service?._id);
   };
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

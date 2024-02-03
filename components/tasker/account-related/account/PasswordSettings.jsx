@@ -44,7 +44,6 @@ export default function StaffPasswordSettings({ styles, session }) {
     e.preventDefault();
     const errors = validation(formData, schema);
     setErrors(errors || {});
-    console.log("formData", requestBody);
     if (!errors) {
       passwordUpdate(requestBody);
     } else {
@@ -52,7 +51,6 @@ export default function StaffPasswordSettings({ styles, session }) {
     }
   };
   const onSuccess = (response) => {
-    console.info(response);
     var notifImage, notifType, notifTitle, notifMessage;
     notifImage = "";
     notifType = "success";

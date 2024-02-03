@@ -72,7 +72,6 @@ export default function ServiceRequest() {
         1
       );
     }
-    console.log("checked==>", checked_options);
     // formData.contactModes == checked_options;
     setContacts(checked_options);
   };
@@ -101,9 +100,7 @@ export default function ServiceRequest() {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

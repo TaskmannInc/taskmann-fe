@@ -107,7 +107,6 @@ export default function TaskmannWebCustomServices() {
           "taskmann Web"
       );
     });
-    console.log("filter web services", filterWebServices);
     setAllServices(filterWebServices[0]?.subservice);
   };
 

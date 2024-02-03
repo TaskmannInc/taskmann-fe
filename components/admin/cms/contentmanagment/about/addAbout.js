@@ -83,9 +83,7 @@ export default function AddAboutData({ closeForm }) {
     }
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = (data) => {};
 
   const onError = (error) => {
     console.log("error: ", error.content);

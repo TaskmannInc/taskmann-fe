@@ -17,7 +17,6 @@ export default function UserDataList({
   allUsers,
   modalEvents,
 }) {
-  console.log("all", allUsers);
   var iconSize = 18;
   var totalDataSet = allUsers?.length;
   return (

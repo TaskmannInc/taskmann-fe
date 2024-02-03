@@ -33,7 +33,6 @@ const getSessionCart = () => {
     "Content-Type": "application/json",
     Authorization: `Bearer ${userSession?.accessAuth}`,
   };
-  // console.log("headers", headers);
   return axios.get(url, { headers: headers });
 };
 

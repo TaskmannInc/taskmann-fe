@@ -52,21 +52,17 @@ export default function ResetPassword() {
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (errors) {
-      console.log("data", formData);
     }
     if (!resetToken) {
       setTokenError(true);
     }
     if (!errors && resetToken) {
       resetRequest(passwordResetBody);
-      console.log("data", passwordResetBody);
     }
   };
 
   //API request
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

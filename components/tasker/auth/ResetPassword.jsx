@@ -51,7 +51,6 @@ export default function TaskerResetPassword() {
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (errors) {
-      console.log("data", formData);
     }
     if (!resetToken) {
       setTokenError(true);

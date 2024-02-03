@@ -46,9 +46,7 @@ export default function AddPolicies({ closeForm }) {
     }
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

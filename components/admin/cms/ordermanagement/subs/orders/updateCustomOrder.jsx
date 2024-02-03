@@ -63,7 +63,6 @@ export default function UpdateExistingCustomOrder({
     e.preventDefault();
     const errors = validation(formData, schema);
     setErrors(errors || {});
-    console.log(serviceRequestBody);
     if (Object.values(serviceRequestBody).some((x) => x !== null && x !== "")) {
       sendRequest(serviceRequestBody);
     } else {
@@ -71,9 +70,7 @@ export default function UpdateExistingCustomOrder({
     }
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = (data) => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);
@@ -100,9 +97,12 @@ export default function UpdateExistingCustomOrder({
           <CloseButton style={styles.closeBtn} closeFunc={closeAdminModal} />
         </div>
         <div className="select-container formGroup">
+          <small>
+            Order status is currently {selectedSpecialRequest?.status}
+          </small>
           <GeneralSelectInput
             disabled={isLoading}
-            label={"Order status"}
+            label={`Update status`}
             name={"status"}
             defaultValue={null}
             disabledDescription={"Order status"}

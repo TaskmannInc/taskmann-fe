@@ -62,7 +62,6 @@ export default function UsersManagement() {
 
   //---->Modal event triggers<------//
   const viewRoleUpdate = (param) => {
-    console.log(param);
     setSelectedUser(param);
     setshowRoleUpdate(!showRoleUpdate);
   };
@@ -91,14 +90,12 @@ export default function UsersManagement() {
     const filterTaskers = response?.data?.result?.filter(function (item) {
       return item?.roles?.[0] == "TASKER";
     });
-    console.log("filtered taskers", filterTaskers);
     setTaskerUsers(filterTaskers);
 
     //filter admin users
     const filterAdmins = response?.data?.result?.filter(function (item) {
       return item?.roles?.[0] == "ADMIN";
     });
-    console.log("filtered Admins", filterAdmins);
     setAdminUsers(filterAdmins);
   };
 

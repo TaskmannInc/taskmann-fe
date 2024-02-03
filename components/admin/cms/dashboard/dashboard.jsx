@@ -8,23 +8,31 @@ import {
 
 import Statistics from "./subs/statistics";
 import SummaryTables from "./subs/summaryTables";
-import { GetAdminOrderListHook } from "../../../utils/hooks/ordersMgmtHook";
+import {
+  GetAdminOrderListHook,
+  GetAdminTaskListHook,
+} from "../../../utils/hooks/ordersMgmtHook";
 export default function AdminDashboard() {
   const [allCustomerOrders, setAllCustomerOrders] = useState([]);
+  const [recentOrders, setRecentORders] = useState([]);
+  const [summaryTasks, setSummaryTasks] = useState([]);
   const [staffUsers, setStaffUsers] = useState([]);
   const [adminUsers, setAdminUsers] = useState([]);
   const [taskerUsers, setTaskerUsers] = useState([]);
   const [customerUsers, setCustomerUsers] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
 
-  //--get orders and tasks error, success <--> on during, after, request--//
+  //===========>ORDERS<==============
   const onOrderError = (response) => {
     console.log("orders error", response);
   };
 
   const onOrderSuccess = (data) => {
-    console.log("allorder", data?.data?.data);
     setAllCustomerOrders(data?.data?.data);
+    var recent = data?.data?.data?.sort(function (a, b) {
+      return new Date(b?.date_of_birth) - new Date(a?.date_of_birth);
+    });
+    setRecentORders(recent?.splice(0, 4));
   };
 
   const {
@@ -35,15 +43,37 @@ export default function AdminDashboard() {
     refetch: refetchOrders,
     isRefetching: refetchingOrders,
   } = GetAdminOrderListHook(onOrderSuccess, onOrderError);
+  //===========>ORDERS<==============
 
-  //--get main service <--> request--//
+  //===========>TASKS<==============
+  const onTasksError = (response) => {
+    console.log("tasks error", response);
+  };
+
+  const onTasksSuccess = (data) => {
+    //filter pending tasks
+    var pending = data?.data?.data?.filter((item) => {
+      return item?.order?.task?.status == "PENDING";
+    });
+    setSummaryTasks(pending?.splice(0, 4));
+  };
+
+  const {
+    isLoading: isTasksLoading,
+    isError: isTasksError,
+    isSuccess: isTasksSuccess,
+    error: tasksError,
+    refetch: refetchTasks,
+    isRefetching: refetchingTasks,
+  } = GetAdminTaskListHook(onTasksSuccess, onTasksError);
+  //===========>TASKS<==============
+
+  //===========>SERVICES<==============
   const onServiceError = (response) => {
     console.log("error", response);
   };
 
-  const onServiceSuccess = (response) => {
-    // console.log("sucesss :", response);
-  };
+  const onServiceSuccess = () => {};
 
   const {
     isLoading,
@@ -53,10 +83,10 @@ export default function AdminDashboard() {
     data: serviceData,
   } = GetServicesHook(onServiceSuccess, onServiceError);
   const allMainServices = serviceData?.data?.result;
+  //===========>SERVICES<==============
 
-  //get all staff members
+  //===========>USERS <==============
   const onStaffError = (response) => {
-    console.log("error", response);
     setStaffUsers([]);
   };
 
@@ -67,14 +97,12 @@ export default function AdminDashboard() {
     const filterTaskers = response?.data?.result?.filter(function (item) {
       return item?.roles?.[0] == "TASKER";
     });
-    console.log("filtered taskers", filterTaskers);
     setTaskerUsers(filterTaskers);
 
     //filter admin users
     const filterAdmins = response?.data?.result?.filter(function (item) {
       return item?.roles?.[0] == "ADMIN";
     });
-    console.log("filtered Admins", filterAdmins);
     setAdminUsers(filterAdmins);
   };
 
@@ -115,6 +143,9 @@ export default function AdminDashboard() {
   useEffect(() => {
     concatenateUsers();
   }, [staffData, customerData]);
+
+  //===========>USERS <==============
+
   return (
     <div className={styles.adminDashboard}>
       <h4 className={styles.title}>Dashboard Overview</h4>
@@ -126,7 +157,13 @@ export default function AdminDashboard() {
           allUsers={allUsers}
           allCustomerOrders={allCustomerOrders}
         />
-        {/* <SummaryTables styles={styles} /> */}
+        <SummaryTables
+          styles={styles}
+          recentOrders={recentOrders}
+          summaryTasks={summaryTasks}
+          isOrdersLoading={isOrdersLoading}
+          isTasksLoading={isTasksLoading}
+        />
       </div>
     </div>
   );

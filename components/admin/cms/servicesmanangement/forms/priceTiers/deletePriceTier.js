@@ -22,9 +22,7 @@ export default function DeleteServicePriceTier({ closeForm }) {
     deletePriceTierRequest(__selected_tier?._id);
   };
 
-  const onSuccess = (data) => {
-    // console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log(error.message);

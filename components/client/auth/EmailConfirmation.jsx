@@ -13,7 +13,6 @@ export default function EmailConfirmation() {
 
   //get email confirmation code
   let confirmationCode = router?.query?.code;
-  console.log("confirmationCode", confirmationCode);
 
   //function to submit form data
   const handleSubmit = (e) => {

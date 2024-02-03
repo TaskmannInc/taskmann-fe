@@ -41,7 +41,6 @@ export default function ViewAssignedTask({ selectedTask, closeModal }) {
       delete requestBody.code;
     if (!errors) {
       updateTaskStatus(requestBody);
-      console.log("data", formData);
     } else {
       console.log(errors);
     }

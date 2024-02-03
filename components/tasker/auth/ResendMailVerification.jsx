@@ -41,13 +41,11 @@ export default function ResendTaskerStaffVerification() {
     setErrors(errors || {});
     if (!errors) {
       VerificationResend(formData);
-      console.log("data", formData);
     } else {
       console.log(errors);
     }
   };
-  const onSuccess = (data) => {
-    console.log(data);
+  const onSuccess = () => {
     // cookie.set("TM_TSK_USR", data?.data);
   };
 

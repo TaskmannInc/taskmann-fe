@@ -67,7 +67,6 @@ export default function UpdateCareerOpening({ closeForm }) {
   //function to submit form data
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("requestBody", requestBody);
     const errors = validation(formData, schema);
     setErrors(errors || {});
     if (!errors) {
@@ -77,9 +76,7 @@ export default function UpdateCareerOpening({ closeForm }) {
     }
   };
 
-  const onSuccess = (data) => {
-    console.log(data);
-  };
+  const onSuccess = () => {};
 
   const onError = (error) => {
     console.log("error: ", error.message);

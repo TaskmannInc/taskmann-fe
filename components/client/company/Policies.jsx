@@ -34,8 +34,6 @@ export default function ServiceUsagePolicies() {
 
   const onSuccess = (data) => {
     const policies = data?.data?.result;
-    console.log(data?.data?.result);
-    console.log(policies);
     setPolicies(policies);
   };
 

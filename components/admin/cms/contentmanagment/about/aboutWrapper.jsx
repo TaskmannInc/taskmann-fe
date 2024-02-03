@@ -65,9 +65,7 @@ export default function AboutManagementWrapper({ styles }) {
     console.log("error", response);
   };
 
-  const onSuccess = (response) => {
-    // console.log("sucesss :", response);
-  };
+  const onSuccess = () => {};
 
   //get career faqs <--> request
   const {
