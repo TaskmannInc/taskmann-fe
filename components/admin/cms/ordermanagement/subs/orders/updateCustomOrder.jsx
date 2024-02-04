@@ -98,7 +98,7 @@ export default function UpdateExistingCustomOrder({
         </div>
         <div className="select-container formGroup">
           <small>
-            Order status is currently {selectedSpecialRequest?.status}
+            Order status is currently: {selectedSpecialRequest?.status}
           </small>
           <GeneralSelectInput
             disabled={isLoading}
@@ -107,9 +107,9 @@ export default function UpdateExistingCustomOrder({
             defaultValue={null}
             disabledDescription={"Order status"}
             options={[
-              { val: "requested", name: "Accept" },
-              { val: "accepted", name: "Reject" },
-              { val: "inprogress", name: "In-progress" },
+              { val: "accepted", name: "Accept" },
+              { val: "rejected", name: "Reject" },
+              { val: "in progress", name: "In-progress" },
               { val: "completed", name: "Completed" },
               { val: "cancelled", name: "Cancelled" },
             ]}
