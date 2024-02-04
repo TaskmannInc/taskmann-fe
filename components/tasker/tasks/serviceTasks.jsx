@@ -249,8 +249,8 @@ export default function AllServiceTasks() {
                               style={{
                                 display: "flex",
                                 flexDirection: "column",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
                                 padding: "0 0",
                               }}
                             >
@@ -274,7 +274,14 @@ export default function AllServiceTasks() {
                                 }
                               )}
                             </span>
-                            <span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
+                              }}
+                            >
                               {task?.order?.cart?.line_items?.map(
                                 (service, i) => (
                                   <p key={i + 1}>
@@ -287,7 +294,14 @@ export default function AllServiceTasks() {
                                 )
                               )}
                             </span>
-                            <span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
+                              }}
+                            >
                               {task?.order?.cart?.line_items?.map(
                                 (service, i) => (
                                   <p key={i + 1}>
@@ -453,14 +467,15 @@ export default function AllServiceTasks() {
                         </span>
                       </div>
                       <div className={styles.tableBody}>
-                        {allSystemTasks?.map((task, index) => (
+                        {completedTasks?.map((task, index) => (
                           <div key={index + 1} className={styles.tableRow}>
                             <span>***{task?._id?.slice(23, 39)}</span>
                             <span
                               style={{
                                 display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
                                 padding: "0 0",
                               }}
                             >
@@ -535,7 +550,7 @@ export default function AllServiceTasks() {
                               style={{
                                 display: "flex",
                                 flexDirection: "column",
-                                justifyContent: "flex-start",
+                                justifyContent: "center",
                                 alignItems: "flex-start",
                               }}
                             >
@@ -557,16 +572,23 @@ export default function AllServiceTasks() {
                                   padding: "0.5rem 1rem",
                                   textAlign: "center",
                                   color: `var(--white)`,
+                                  backgroundColor: `${
+                                    task?.status == "PENDING"
+                                      ? "var(--dark-2)"
+                                      : task?.status == "COMPLETED"
+                                      ? "var(--success)"
+                                      : task?.status == "ASSIGNED"
+                                      ? "var(--black-2)"
+                                      : task?.status == "INPROGRESS"
+                                      ? "var(--green-primary)"
+                                      : task?.status == "CANCELLED"
+                                      ? "var(--danger)"
+                                      : "var(--dark-gray)"
+                                  }`,
+                                  borderRadius: `var(--radius-lg)`,
                                 }}
-                                className={
-                                  task?.status == "PAID"
-                                    ? "pill-success"
-                                    : task?.status == "CANCELLED"
-                                    ? "pill-failure"
-                                    : "pill-other"
-                                }
                               >
-                                {task?.status ?? "PENDING"}
+                                {task?.status}
                               </small>
                             </span>
                             <span className={styles.statusColumn}>
@@ -662,8 +684,9 @@ export default function AllServiceTasks() {
                             <span
                               style={{
                                 display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
                                 padding: "0 0",
                               }}
                             >
@@ -687,7 +710,14 @@ export default function AllServiceTasks() {
                                 }
                               )}
                             </span>
-                            <span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
+                              }}
+                            >
                               {task?.order?.cart?.line_items?.map(
                                 (service, i) => (
                                   <p key={i + 1}>
@@ -700,7 +730,14 @@ export default function AllServiceTasks() {
                                 )
                               )}
                             </span>
-                            <span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
+                              }}
+                            >
                               {task?.order?.cart?.line_items?.map(
                                 (service, i) => (
                                   <p key={i + 1}>
@@ -760,6 +797,19 @@ export default function AllServiceTasks() {
                                   padding: "0.5rem 1rem",
                                   textAlign: "center",
                                   color: `var(--white)`,
+                                  backgroundColor: `${
+                                    task?.status == "PENDING"
+                                      ? "var(--dark-2)"
+                                      : task?.status == "COMPLETED"
+                                      ? "var(--success)"
+                                      : task?.status == "ASSIGNED"
+                                      ? "var(--black-2)"
+                                      : task?.status == "INPROGRESS"
+                                      ? "var(--green-primary)"
+                                      : task?.status == "CANCELLED"
+                                      ? "var(--danger)"
+                                      : "var(--dark-gray)"
+                                  }`,
                                 }}
                                 className={
                                   task?.status == "PAID"
@@ -769,7 +819,7 @@ export default function AllServiceTasks() {
                                     : "pill-other"
                                 }
                               >
-                                {task?.status ?? "PENDING"}
+                                {task?.status}
                               </small>
                             </span>
                             <span className={styles.statusColumn}>
@@ -865,8 +915,9 @@ export default function AllServiceTasks() {
                             <span
                               style={{
                                 display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
                                 padding: "0 0",
                               }}
                             >
@@ -890,7 +941,14 @@ export default function AllServiceTasks() {
                                 }
                               )}
                             </span>
-                            <span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
+                              }}
+                            >
                               {task?.order?.cart?.line_items?.map(
                                 (service, i) => (
                                   <p key={i + 1}>
@@ -903,7 +961,14 @@ export default function AllServiceTasks() {
                                 )
                               )}
                             </span>
-                            <span>
+                            <span
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "flex-start",
+                              }}
+                            >
                               {task?.order?.cart?.line_items?.map(
                                 (service, i) => (
                                   <p key={i + 1}>

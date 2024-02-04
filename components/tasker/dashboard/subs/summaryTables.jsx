@@ -36,9 +36,11 @@ export default function SummaryTables({
                         <span
                           style={{
                             display: "flex",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "flex-start",
                             padding: "0 0",
+                            rowGap: "0.75rem",
                           }}
                         >
                           {task?.order?.cart?.line_items?.map((service, i) => {
@@ -55,7 +57,14 @@ export default function SummaryTables({
                             );
                           })}
                         </span>
-                        <span>
+                        <span
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "flex-start",
+                          }}
+                        >
                           {task?.order?.cart?.line_items?.map((service, i) => (
                             <p key={i + 1}>
                               {service?.service_date
@@ -66,7 +75,14 @@ export default function SummaryTables({
                             </p>
                           ))}
                         </span>
-                        <span>
+                        <span
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "flex-start",
+                          }}
+                        >
                           {task?.order?.cart?.line_items?.map((service, i) => (
                             <p key={i + 1}>
                               {service?.service_date
@@ -124,14 +140,21 @@ export default function SummaryTables({
                               padding: "0.5rem 1rem",
                               textAlign: "center",
                               color: `var(--white)`,
+                              backgroundColor: `${
+                                task?.status == "PENDING"
+                                  ? "var(--dark-2)"
+                                  : task?.status == "COMPLETED"
+                                  ? "var(--success)"
+                                  : task?.status == "ASSIGNED"
+                                  ? "var(--black-2)"
+                                  : task?.status == "INPROGRESS"
+                                  ? "var(--green-primary)"
+                                  : task?.status == "CANCELLED"
+                                  ? "var(--danger)"
+                                  : "var(--dark-gray)"
+                              }`,
+                              borderRadius: `var(--radius-lg)`,
                             }}
-                            className={
-                              task?.status == "PAID"
-                                ? "pill-success"
-                                : task?.status == "CANCELLED"
-                                ? "pill-failure"
-                                : "pill-other"
-                            }
                           >
                             {task?.status ?? "PENDING"}
                           </small>
