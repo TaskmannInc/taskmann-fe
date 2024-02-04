@@ -709,7 +709,8 @@ export default function SessionOrders() {
                               title="Cancel order"
                               disabled={
                                 order?.payment?.status !== "PAID" ||
-                                order?.status == "CANCELLED"
+                                order?.status == "CANCELLED" ||
+                                order?.status == "COMPLETED"
                               }
                             >
                               <TbShoppingCartCancel
