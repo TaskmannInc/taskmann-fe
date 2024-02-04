@@ -30,7 +30,7 @@ export default function AdminDashboard() {
   const onOrderSuccess = (data) => {
     setAllCustomerOrders(data?.data?.data);
     var recent = data?.data?.data?.sort(function (a, b) {
-      return new Date(b?.date_of_birth) - new Date(a?.date_of_birth);
+      return new Date(b?.created_at) - new Date(a?.created_at);
     });
     setRecentORders(recent?.splice(0, 4));
   };
@@ -55,7 +55,13 @@ export default function AdminDashboard() {
     var pending = data?.data?.data?.filter((item) => {
       return item?.order?.task?.status == "PENDING";
     });
-    setSummaryTasks(pending?.splice(0, 4));
+    setSummaryTasks(
+      pending
+        ?.sort(function (a, b) {
+          return new Date(b?.created_at) - new Date(a?.created_at);
+        })
+        ?.splice(0, 4)
+    );
   };
 
   const {

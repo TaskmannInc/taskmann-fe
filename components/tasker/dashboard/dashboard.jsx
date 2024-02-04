@@ -36,7 +36,13 @@ export default function TaskerDashboard() {
     });
     setAllCompletedTasks(completed);
 
-    setAllSystemTasks(allTaskersTasks?.splice(0, 5));
+    setAllSystemTasks(
+      allTaskersTasks
+        ?.sort(function (a, b) {
+          return new Date(b?.created_at) - new Date(a?.created_at);
+        })
+        ?.splice(0, 5)
+    );
   };
 
   const {

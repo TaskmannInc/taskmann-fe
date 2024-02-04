@@ -30,6 +30,7 @@ export default function OrderPackage() {
         : null,
     session: sessionStorage?.getItem("TM_AC_TK"),
   };
+  console.log("ordering state", orderingState?.subservice);
 
   const [mutableParameters, setMutableParameters] = useState(null);
 

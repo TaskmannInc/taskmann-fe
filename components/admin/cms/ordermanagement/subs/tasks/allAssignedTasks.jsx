@@ -24,7 +24,11 @@ export default function AllTasks({ styles, iconSize }) {
   };
 
   const onTasksSuccess = (data) => {
-    setAllSystemTasks(data?.data?.data);
+    setAllSystemTasks(
+      data?.data?.data?.sort(function (a, b) {
+        return new Date(b?.created_at) - new Date(a?.created_at);
+      })
+    );
   };
 
   const {

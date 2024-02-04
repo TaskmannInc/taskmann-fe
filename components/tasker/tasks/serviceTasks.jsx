@@ -88,21 +88,37 @@ export default function AllServiceTasks() {
     var cancelled = allTaskersTasks?.filter((item) => {
       return item?.order?.task?.status == "CANCELLED";
     });
-    setAllCancelledTasks(cancelled);
+    setAllCancelledTasks(
+      cancelled?.sort(function (a, b) {
+        return new Date(b?.created_at) - new Date(a?.created_at);
+      })
+    );
 
     //filter pending tasks
     var pending = allTaskersTasks?.filter((item) => {
       return item?.order?.task?.status == "PENDING";
     });
-    setAllPendingTasks(pending);
+    setAllPendingTasks(
+      pending?.sort(function (a, b) {
+        return new Date(b?.created_at) - new Date(a?.created_at);
+      })
+    );
 
     //filter completed tasks
     var completed = allTaskersTasks?.filter((item) => {
       return item?.order?.task?.status == "COMPLETED";
     });
-    setAllCompletedTasks(completed);
+    setAllCompletedTasks(
+      completed?.sort(function (a, b) {
+        return new Date(b?.created_at) - new Date(a?.created_at);
+      })
+    );
 
-    setAllSystemTasks(response?.data?.data);
+    setAllSystemTasks(
+      response?.data?.data?.sort(function (a, b) {
+        return new Date(b?.created_at) - new Date(a?.created_at);
+      })
+    );
   };
 
   const {

@@ -57,7 +57,11 @@ export default function AllOrders({ styles, iconSize }) {
   };
 
   const onOrderSuccess = (data) => {
-    setAllCustomerOrders(data?.data?.data);
+    setAllCustomerOrders(
+      data?.data?.data?.sort(function (a, b) {
+        return new Date(b?.created_at) - new Date(a?.created_at);
+      })
+    );
   };
 
   const {
