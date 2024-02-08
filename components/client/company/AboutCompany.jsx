@@ -54,7 +54,7 @@ export default function AboutCompany() {
               platform with services to better help our community.{" "}
             </p>
             <Link
-              href={`/blog/article?i=bf498d8f-5d1a-40ce-8b80-119c81e50845`}
+              href={`/blog/article?i=884681f9-8a1d-40b5-92ea-185d90651c5d`}
               className={styles.founderBlogLink}
             >
               Read {"Varish's"} Letter
